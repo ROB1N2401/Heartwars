@@ -727,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836fdbf07dbd1614b820edf1099cc2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseBorderTriggerOffset: 40
   movementSpeed: 5
   scrollSpeed: 500
   rotationSpeed: 100

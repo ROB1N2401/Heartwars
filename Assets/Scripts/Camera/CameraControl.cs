@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class CameraControl : MonoBehaviour
 {
-    [Header("Speed control")]
+    [Header("Mouse control")] 
+    [SerializeField] [Min(.1f)] private float mouseBorderTriggerOffset = 40f;
+
+    [Header("Speed")]
     [SerializeField] [Min(0)] private float movementSpeed = 5f;
     [SerializeField] [Min(0)] private float scrollSpeed = 500f;
     [SerializeField] [Min(0)] private float rotationSpeed = 30f;
@@ -10,7 +14,11 @@ public class CameraControl : MonoBehaviour
     [Header("Camera bounds")]
     public Vector3 lowestPositionForCamera;
     public Vector3 highestPositionForCamera;
-    
+
+    private Camera _camera;
+
+    private void Start() => _camera = GetComponent<Camera>();
+
     private void Update()
     {
         MoveCamera();
@@ -19,9 +27,21 @@ public class CameraControl : MonoBehaviour
     
     private void MoveCamera()
     {
+        float directionForward = 0, directionLeft = 0;
+        directionForward += Input.GetAxis("Vertical");
+        directionLeft += Input.GetAxis("Horizontal");
+        if (Input.mousePosition.x >= _camera.pixelWidth - mouseBorderTriggerOffset)
+            directionLeft += 1;
+        if (Input.mousePosition.x <= 0 + mouseBorderTriggerOffset)
+            directionLeft -= 1;
+        if (Input.mousePosition.y >= _camera.pixelHeight - mouseBorderTriggerOffset)
+            directionForward += 1;
+        if (Input.mousePosition.y <= 0 + mouseBorderTriggerOffset)
+            directionForward -= 1;
+
         var deltaZoom = Vector3.up * (-Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * Time.deltaTime);
-        var deltaForward = transform.forward * Input.GetAxis("Vertical");
-        var deltaLeft = transform.right * Input.GetAxis("Horizontal");
+        var deltaForward = transform.forward * directionForward;
+        var deltaLeft = transform.right * directionLeft;
         var deltaMovement = (deltaForward + deltaLeft) * (Time.deltaTime * movementSpeed);
         deltaMovement.y = 0;
 
