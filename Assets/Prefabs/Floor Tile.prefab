@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8801923018747124786}
   - component: {fileID: 5281225354827307882}
   - component: {fileID: 2875348953551667372}
+  - component: {fileID: 3935477539015720471}
   m_Layer: 9
   m_Name: Floor Tile
   m_TagString: Floor
@@ -112,3 +113,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5799194, y: 1.039231, z: 0.100000106}
   m_Center: {x: -0.009015827, y: -2.2307256e-10, z: 0.050000004}
+--- !u!114 &3935477539015720471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069068485134100718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9557a572760d6db4392d842b94507a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileData: {fileID: 11400000, guid: 2377d5981a6e87f4e85f668ecd332677, type: 2}
+  playerPositionOffset: {x: 0, y: 0.05, z: 0}

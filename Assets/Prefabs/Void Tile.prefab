@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9197151192610661106}
   - component: {fileID: 4879376512501744326}
   - component: {fileID: 3563931238264072081}
+  - component: {fileID: 6382733821574794440}
   m_Layer: 8
   m_Name: Void Tile
   m_TagString: Void
@@ -93,3 +94,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.59428775, y: 1.039231, z: 0.100000106}
   m_Center: {x: -0.007924795, y: -1.8143087e-10, z: 0.050000004}
+--- !u!114 &6382733821574794440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417522543189066578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9557a572760d6db4392d842b94507a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileData: {fileID: 11400000, guid: 53deb7692a77d0c49acc70ead6b55d13, type: 2}
+  playerPositionOffset: {x: 0, y: 0, z: 0}

@@ -11,12 +11,19 @@ public class Player : MonoBehaviour
     
     public int PointsForTurn => playerData.InitialNumberOfPoints + _playerInventory.TotalBonusPoints;
     public int PointsLeftForTheTurn => _pointsLeftForTheTurn;
+    public Tile SpawnPoint => spawnPoint;
+    public ESide Side => side;
 
     private int _pointsLeftForTheTurn = 0;
     private PlayerInventory _playerInventory;
     private Tile _attachedTile;
 
-    private void Start() => _playerInventory = GetComponent<PlayerInventory>();
+    private void Start()
+    {
+        _playerInventory = GetComponent<PlayerInventory>();
+        _attachedTile = spawnPoint;
+        _attachedTile.PlacePlayer(this);
+    }
 
     public void MoveTo(Tile tile)
     {
@@ -27,7 +34,7 @@ public class Player : MonoBehaviour
         _attachedTile.RemovePlayer();
         _attachedTile = tile;
         
-        gameObject.transform.position = transform.position + tile.PlayerPositionOffset;
+        gameObject.transform.position = tile.transform.position + tile.PlayerPositionOffset;
         
         SubtractActivePoints(playerData.PointsForMovementTaken);
     }
@@ -51,7 +58,6 @@ public class Player : MonoBehaviour
     }
 
     public void EndTurn() => _pointsLeftForTheTurn = PointsForTurn;
-    
-    public void KillPlayer() => throw  new NotImplementedException();
+    public void KillPlayer() => throw new NotImplementedException();
     public void PushOtherPlayer(Player player) => throw  new NotImplementedException();
 }

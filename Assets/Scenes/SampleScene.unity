@@ -285,6 +285,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3553784554131343581}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &253605907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253605906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1515315b12103bc449e4c2f12a1bde57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 4d7574f21a45d314487a32e809213bea, type: 2}
+  side: 4
+  spawnPoint: {fileID: 1607302842}
+--- !u!114 &253605908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253605906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec3c2545ff85744cbbccba6a840b194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &300716648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7024204346851997131, guid: 00d92c9babae9f64895ceb6c30873cd9,
@@ -433,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b1fd84763dcb746980c79b9ea4118a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 253605906}
+  _player: {fileID: 253605907}
 --- !u!114 &548298070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,6 +1021,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 24020551}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1607302842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3935477539015720471, guid: c5917d40fde89364781c02ac518dd064,
+    type: 3}
+  m_PrefabInstance: {fileID: 2135185799}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9557a572760d6db4392d842b94507a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1650910520
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,16 +1196,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7024204346851997131, guid: 00d92c9babae9f64895ceb6c30873cd9,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7024204346851997131, guid: 00d92c9babae9f64895ceb6c30873cd9,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7024204346851997131, guid: 00d92c9babae9f64895ceb6c30873cd9,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.55
       objectReference: {fileID: 0}
@@ -1249,16 +1278,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071197052619283197, guid: c5917d40fde89364781c02ac518dd064,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071197052619283197, guid: c5917d40fde89364781c02ac518dd064,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071197052619283197, guid: c5917d40fde89364781c02ac518dd064,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.55
       objectReference: {fileID: 0}
@@ -1312,11 +1331,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 8801923018747124786, guid: c5917d40fde89364781c02ac518dd064,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5a26de236ce89e94b963be8fa2b7ade6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5917d40fde89364781c02ac518dd064, type: 3}
 --- !u!4 &2122230258 stripped
@@ -1336,16 +1350,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071197052619283197, guid: c5917d40fde89364781c02ac518dd064,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071197052619283197, guid: c5917d40fde89364781c02ac518dd064,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6071197052619283197, guid: c5917d40fde89364781c02ac518dd064,
         type: 3}
