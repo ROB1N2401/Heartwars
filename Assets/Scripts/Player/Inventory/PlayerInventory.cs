@@ -9,4 +9,5 @@ public class PlayerInventory : MonoBehaviour
     public int TotalBonusPoints => _items.Sum(item => item.BonusPoints);
     
     public void AddItem(Item item) => _items.Add(item);
+    //todo add bonus item logic
 }
