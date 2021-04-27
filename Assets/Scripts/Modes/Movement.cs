@@ -24,6 +24,9 @@ public class Movement : MonoBehaviour
         //    Debug.Log(_adjacentTiles[i].name);
         //}
 
+        GetTileUnderneath();
+        GetAdjacentTiles();
+
         if (_adjacentTiles.Count > 0)
         {
             foreach (GameObject go in _adjacentTiles)
@@ -31,9 +34,6 @@ public class Movement : MonoBehaviour
                 go.transform.gameObject.GetComponent<Outline>().enabled = false;
             }
         }
-
-        GetTileUnderneath();
-        GetAdjacentTiles();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,6 +61,11 @@ public class Movement : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 0.1f))
         {
             _occupiedTile = hit.transform.gameObject;
+
+            if (_occupiedTile.GetComponent<Outline>().enabled)
+            {
+                _occupiedTile.GetComponent<Outline>().enabled = false;
+            }
             //Debug.Log(_occupiedTile.name);
         }
     }    
