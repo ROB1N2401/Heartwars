@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    private readonly List<Tile> _items = new List<Tile>();
+    public int TotalBonusPoints => _items.Sum(tile => tile.tileData.BonusPoints);
     
-    private readonly List<Item> _items = new List<Item>();
-    public int TotalBonusPoints => _items.Sum(item => item.BonusPoints);
-    
-    public void AddItem(Item item) => _items.Add(item);
-    //todo add bonus item logic
+    public void AddTile(Tile item) => _items.Add(item);
 }

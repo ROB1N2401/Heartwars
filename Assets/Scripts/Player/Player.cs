@@ -1,32 +1,57 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
 public class Player : MonoBehaviour
 {
     [SerializeField] [NotNull] private PlayerData playerData;
+    [SerializeField] private ESide side = ESide.Blue;
     [SerializeField] [NotNull] private Tile spawnPoint;
     
-    public int PointsForTurn => playerData.initialNumberOfPoints + _playerInventory.TotalBonusPoints;
+    public int PointsForTurn => playerData.InitialNumberOfPoints + _playerInventory.TotalBonusPoints;
     public int PointsLeftForTheTurn => _pointsLeftForTheTurn;
-    
+
+    private int _pointsLeftForTheTurn = 0;
     private PlayerInventory _playerInventory;
     private Tile _attachedTile;
-    private int _pointsLeftForTheTurn = 0;
 
-    private void Start()
-    {
-        _playerInventory = GetComponent<PlayerInventory>();
-    }
+    private void Start() => _playerInventory = GetComponent<PlayerInventory>();
 
-    public void MoveTo(Tile tile, int pointsTaken)
+    public void MoveTo(Tile tile)
     {
-        if (!tile.SetPlayer(this) || _pointsLeftForTheTurn >= pointsTaken)
+        if(!tile.IsFreeToPlacePlayer || _pointsLeftForTheTurn < playerData.PointsForMovementTaken)
             return;
-        
+
+        tile.PlacePlayer(this);
         _attachedTile.RemovePlayer();
         _attachedTile = tile;
-
-        _pointsLeftForTheTurn -= pointsTaken;
+        
+        gameObject.transform.position = transform.position + tile.PlayerPositionOffset;
+        
+        SubtractActivePoints(playerData.PointsForMovementTaken);
     }
+
+    public void DestroyAndAddTileToInventory(Tile tile)
+    {
+        if(!tile.IsPlayerAbleToDestroy(this))
+            return;
+        
+        _playerInventory.AddTile(tile);
+        tile.DestroyTile();
+    }
+
+    private void SubtractActivePoints(int pointsToSubtract)
+    {
+        pointsToSubtract = Mathf.Clamp(pointsToSubtract, 0, int.MaxValue);
+        if(_pointsLeftForTheTurn < pointsToSubtract)
+            return;
+
+        _pointsLeftForTheTurn -= pointsToSubtract;
+    }
+
+    public void EndTurn() => _pointsLeftForTheTurn = PointsForTurn;
+    
+    public void KillPlayer() => throw  new NotImplementedException();
+    public void PushOtherPlayer(Player player) => throw  new NotImplementedException();
 }
