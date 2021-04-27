@@ -1,9 +1,12 @@
 ﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] [Min(0)] private int bonusPoints;
-    
-    public int BonusPoints => bonusPoints;
+    [SerializeField] [NotNull] private ItemData itemData;
+    public int BonusPoints => itemData.bonusPoints;
+    public bool IsPlaceable => itemData.isPlaceable;
+    public int PlacingPoints => itemData.placingPoints;
+    public Sprite DisplaySprite => itemData.displaySprite;
 }
