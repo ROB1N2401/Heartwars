@@ -1,16 +1,17 @@
 ﻿using System;
-using JetBrains.Annotations;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] [NotNull] private PlayerData playerData;
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private ESide side = ESide.Blue;
-    [SerializeField] [NotNull] private Tile spawnPoint;
+    [SerializeField] private Tile spawnPoint;
     
     public int PointsForTurn => playerData.InitialNumberOfPoints + _playerInventory.TotalBonusPoints;
     public int PointsLeftForTheTurn => _pointsLeftForTheTurn;
+    public PlayerData PlayerData => playerData;
+
     public Tile SpawnPoint => spawnPoint;
     public ESide Side => side;
 
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
 
     public void MoveTo(Tile tile)
     {
-        if(!tile.IsFreeToPlacePlayer || _pointsLeftForTheTurn < playerData.PointsForMovementTaken)
+        if(tile.IsPlayerAbleToMove(this))
             return;
 
         tile.PlacePlayer(this);
@@ -50,11 +51,12 @@ public class Player : MonoBehaviour
 
     public void DestroyAndAddTileToInventory(Tile tile)
     {
-        if(!tile.IsPlayerAbleToDestroy(this))
+        var topTile = tile.GetHighestTileFromAbove();
+        if(!topTile.IsPlayerAbleToDestroy(this))
             return;
-        
-        _playerInventory.AddTile(tile);
-        tile.DestroyTile();
+
+        _playerInventory.AddTile(topTile);
+        topTile.DestroyTile();
     }
 
     public void EndTurn() => _pointsLeftForTheTurn = PointsForTurn;

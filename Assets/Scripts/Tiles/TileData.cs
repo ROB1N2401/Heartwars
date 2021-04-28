@@ -11,8 +11,9 @@ public class TileData : ScriptableObject
     [SerializeField] private bool isDestroyable = false;
     [SerializeField] [Range(0, 10)] private int pointsToDestroy = 0;
 
-    [Header("Placing options")] 
+    [Header("Building options")] 
     [SerializeField] private bool isPlaceable = false;
+    [SerializeField] private bool isAllowedToPlaceTilesAbove = false;
     [SerializeField] [Range(-10, 0)] private int pointsToPlace = 0;
 
     [Header("Inventory options")]
@@ -23,6 +24,7 @@ public class TileData : ScriptableObject
     public bool IsDestroyable => isDestroyable;
     public int PointsToDestroy => pointsToDestroy;
     public bool IsPlaceable => isPlaceable;
+    public bool IsAllowedToPlaceTilesAbove => isAllowedToPlaceTilesAbove;
     public int PointsToPlace => pointsToPlace;
     public int BonusPoints => bonusPoints;
 }
