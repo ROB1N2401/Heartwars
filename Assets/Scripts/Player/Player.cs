@@ -25,6 +25,15 @@ public class Player : MonoBehaviour
         _attachedTile.PlacePlayer(this);
     }
 
+    private void SubtractActivePoints(int pointsToSubtract)
+    {
+        pointsToSubtract = Mathf.Clamp(pointsToSubtract, 0, int.MaxValue);
+        if(_pointsLeftForTheTurn < pointsToSubtract)
+            return;
+
+        _pointsLeftForTheTurn -= pointsToSubtract;
+    }
+
     public void MoveTo(Tile tile)
     {
         if(!tile.IsFreeToPlacePlayer || _pointsLeftForTheTurn < playerData.PointsForMovementTaken)
@@ -46,15 +55,6 @@ public class Player : MonoBehaviour
         
         _playerInventory.AddTile(tile);
         tile.DestroyTile();
-    }
-
-    private void SubtractActivePoints(int pointsToSubtract)
-    {
-        pointsToSubtract = Mathf.Clamp(pointsToSubtract, 0, int.MaxValue);
-        if(_pointsLeftForTheTurn < pointsToSubtract)
-            return;
-
-        _pointsLeftForTheTurn -= pointsToSubtract;
     }
 
     public void EndTurn() => _pointsLeftForTheTurn = PointsForTurn;

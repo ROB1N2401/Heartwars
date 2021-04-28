@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4614965844420080551}
   - component: {fileID: 1384627708980612958}
   - component: {fileID: 2869046650059881447}
-  - component: {fileID: 6536476011450457998}
+  - component: {fileID: 1445883128}
+  - component: {fileID: 1822163298151239967}
   m_Layer: 9
   m_Name: Wall Tile
   m_TagString: Wall
@@ -94,13 +95,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!65 &6536476011450457998
-BoxCollider:
+--- !u!114 &1445883128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796004207678323586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9557a572760d6db4392d842b94507a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileData: {fileID: 11400000, guid: bd7bdf9402842c04d9f26c09bee659e1, type: 2}
+  playerPositionOffset: {x: 0, y: 0, z: 0}
+--- !u!64 &1822163298151239967
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,6 +124,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5798665, y: 1.039231, z: 0.100000106}
-  m_Center: {x: -0.009789303, y: 1.06385956e-10, z: 0.050000004}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: cbef8b077ec81e44fac34f9517163d67, type: 3}

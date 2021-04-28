@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
                 return;
             var outline = tile.GetComponent<Outline>();
 
-            if (_adjacentTiles.Contains(tile.gameObject))
+            if (tile.TileData.IsWalkable && _adjacentTiles.Contains(tile.gameObject))
             {
                 if(outline != null)
                     outline.enabled = true;
@@ -95,7 +95,6 @@ public class Movement : MonoBehaviour
                 _adjacentTiles.Add(hit.transform.gameObject);
         }
     }
-
 
     private void OnDrawGizmos()
     {

@@ -6,11 +6,10 @@ public class Tile : MonoBehaviour
     [SerializeField] [NotNull] private TileData tileData;
     [SerializeField] protected Vector3 playerPositionOffset;
 
-    public TileData TileData => tileData;
     public bool CanBeDestroyed => !IsPlayerOnTile && tileData.IsDestroyable;
     public bool IsFreeToPlacePlayer => !IsPlayerOnTile && tileData.IsWalkable;
     public bool IsPlayerOnTile => _player != null;
-    public Player Player => _player;
+    public TileData TileData => tileData;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
 
     protected Player _player;
