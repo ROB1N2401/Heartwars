@@ -5,25 +5,58 @@ using UnityEngine;
 public class Placement : MonoBehaviour
 {
     [SerializeField] GameObject _player;
+    [SerializeField] GameObject _tileBP;
+    [SerializeField] GameObject _tile;
 
+    readonly Vector3 _raycastOffset = new Vector3(0, -0.05f, 0);
     GameObject _occupiedTile;
+    GameObject _blueprint;
     List<GameObject> _adjacentTiles = new List<GameObject>();
 
     // Start is called before the first frame update
     void Awake()
     {
         GetVoidTileUnderneath();
-        CheckAdjacentTiles();
-        for (int i = 0; i < _adjacentTiles.Count; i++)
-        {
-            Debug.Log(_adjacentTiles[i].name);
-        }
+        GetAdjacentTiles();
+        //for (int i = 0; i < _adjacentTiles.Count; i++)
+        //{
+        //    Debug.Log(_adjacentTiles[i].name);
+        //}
+    }
+
+    void Start()
+    {
+        _blueprint = Instantiate(_tileBP) as GameObject;
+        _blueprint.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckAdjacentTiles();  
+        GetVoidTileUnderneath();
+        GetAdjacentTiles();
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (_adjacentTiles.Contains(hit.transform.gameObject))
+            {
+                _blueprint.transform.position = hit.transform.position - (_raycastOffset * 2);
+                _blueprint.SetActive(true);
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    var tile = Instantiate(_tile, _blueprint.transform.position, _blueprint.transform.rotation);
+                    _blueprint.SetActive(false);
+                }
+            }
+        }
+        else if (_blueprint.gameObject.activeSelf)
+        {
+            _blueprint.SetActive(false);
+        }
     }
 
     void GetVoidTileUnderneath()
@@ -38,7 +71,7 @@ public class Placement : MonoBehaviour
         }
     }
 
-    void CheckAdjacentTiles()
+    void GetAdjacentTiles()
     {
         _adjacentTiles.Clear();
         for (int i = 0; i < 6; i++)
@@ -72,15 +105,17 @@ public class Placement : MonoBehaviour
                     break;
             }
 
-            ray = new Ray(_occupiedTile.transform.position, direction);
-            Debug.DrawRay(_occupiedTile.transform.position, direction);
+
+            ray = new Ray(_occupiedTile.transform.position + _raycastOffset, direction);
+            //Debug.DrawRay(_occupiedTilePosition, direction);
 
             if (Physics.Raycast(ray, out hit, 1.0f))
             {
-                Debug.Log(hit.transform.name);
+                ray = new Ray(hit.transform.position + _raycastOffset, Vector3.up);
+                //Debug.Log(hit.transform.name);
+                //Debug.DrawRay(hit.transform.position, Vector3.up);
 
-                ray = new Ray(hit.transform.position, Vector3.up);
-                if (Physics.Raycast(ray, out hit, 1.0f))
+                if (!Physics.Raycast(ray, 1.0f))
                 {
                     _adjacentTiles.Add(hit.transform.gameObject);
                 }
