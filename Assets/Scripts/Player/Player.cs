@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     /// <param name="tileToPlaceOn"></param>
     public void PlaceTile(ETileType tileType) => throw new NotImplementedException();
 
+    /// <summary>Destroys given tile tile</summary>
+    /// <param name="tile">Tile that will be destroyed</param>
     public void DestroyTile(Tile tile)
     {
         var topTile = tile.HighestTileFromAbove;
@@ -58,8 +60,6 @@ public class Player : MonoBehaviour
         _playerInventory.AddTile(topTile);
         topTile.DestroyTile();
     }
-
-    public void PushOther(Player player) => throw new NotImplementedException();
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>
     public void StartTurn()
@@ -74,7 +74,9 @@ public class Player : MonoBehaviour
         _isTurnTime = false;
         _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
-    
+
+    public void PushOtherPlayer(Player player) => throw new NotImplementedException();
+
     public void Die()
     {
         _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
