@@ -7,51 +7,51 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerData playerData;
     [SerializeField] private ESide side = ESide.Blue;
     [SerializeField] private Tile spawnPoint;
-    
-    public int PointsForTurn => playerData.InitialNumberOfPoints + _playerInventory.TotalBonusPoints;
+
+    public int PointsAtTheBeginningOfTheTurn => playerData.InitialNumberOfPoints + _playerInventory.TotalBonusPoints;
     public int PointsLeftForTheTurn => _pointsLeftForTheTurn;
+    public bool IsTurnTime => _isTurnTime;
     public PlayerData PlayerData => playerData;
 
+    public Tile attachedTile;
     public Tile SpawnPoint => spawnPoint;
     public ESide Side => side;
 
+    private bool _isTurnTime = false;
     private int _pointsLeftForTheTurn = 0;
     private PlayerInventory _playerInventory;
-    private Tile _attachedTile;
 
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
-        _attachedTile = spawnPoint;
-        _attachedTile.PlacePlayer(this);
+        attachedTile = spawnPoint;
+        attachedTile.PlacePlayer(this);
+        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
-    private void SubtractActivePoints(int pointsToSubtract)
-    {
-        pointsToSubtract = Mathf.Clamp(pointsToSubtract, 0, int.MaxValue);
-        if(_pointsLeftForTheTurn < pointsToSubtract)
-            return;
-
-        _pointsLeftForTheTurn -= pointsToSubtract;
-    }
-
+    /// <summary>Moves player to the given tile</summary>
+    /// <param name="tile">Target tile where player will be moved</param>
     public void MoveTo(Tile tile)
     {
-        if(tile.IsPlayerAbleToMove(this))
+        if(!tile.IsPlayerAbleToMove(this))
             return;
 
+        attachedTile.RemovePlayer();
         tile.PlacePlayer(this);
-        _attachedTile.RemovePlayer();
-        _attachedTile = tile;
-        
+
         gameObject.transform.position = tile.transform.position + tile.PlayerPositionOffset;
         
         SubtractActivePoints(playerData.PointsForMovementTaken);
     }
 
-    public void DestroyAndAddTileToInventory(Tile tile)
+    /// <summary>Method that places tile by player</summary>
+    /// <param name="tileType"></param>
+    /// <param name="tileToPlaceOn"></param>
+    public void PlaceTile(ETileType tileType) => throw new NotImplementedException();
+
+    public void DestroyTile(Tile tile)
     {
-        var topTile = tile.GetHighestTileFromAbove();
+        var topTile = tile.HighestTileFromAbove;
         if(!topTile.IsPlayerAbleToDestroy(this))
             return;
 
@@ -59,7 +59,37 @@ public class Player : MonoBehaviour
         topTile.DestroyTile();
     }
 
-    public void EndTurn() => _pointsLeftForTheTurn = PointsForTurn;
-    public void KillPlayer() => throw new NotImplementedException();
-    public void PushOtherPlayer(Player player) => throw  new NotImplementedException();
+    public void PushOther(Player player) => throw new NotImplementedException();
+
+    /// <summary>Method that sets the conditions for player when its turn begins</summary>
+    public void StartTurn()
+    {
+        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+        _isTurnTime = true;
+    }
+
+    /// <summary>Method that sets the conditions for player when its turn begins</summary>
+    public void EndTurn()
+    {
+        _isTurnTime = false;
+        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+    }
+    
+    public void Die()
+    {
+        _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
+        
+        attachedTile.RemovePlayer();
+        MoveTo(spawnPoint);
+        EndTurn();
+    }
+
+    private void SubtractActivePoints(int pointsToSubtract)
+    {
+        pointsToSubtract = Mathf.Max(pointsToSubtract, 0);
+        if(_pointsLeftForTheTurn < pointsToSubtract)
+            return;
+
+        _pointsLeftForTheTurn -= pointsToSubtract;
+    }
 }

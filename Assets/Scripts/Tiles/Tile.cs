@@ -2,8 +2,9 @@
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] private TileData tileData;
+    [SerializeField] protected TileData tileData;
     [SerializeField] protected Vector3 playerPositionOffset;
+    [SerializeField] protected Vector3 tileAbovePositionOffset;
 
     public TileData TileData => tileData;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
@@ -13,10 +14,22 @@ public class Tile : MonoBehaviour
     protected Player _player;
     protected (Tile aboveTile, Tile underTile) neighbourTiles;
 
-    #region BuildManagement
-    public void PlaceTileAboveOtherTile(Tile baseTile) => baseTile.AddTileAbove(this);
+    /// <summary>Return the very top tile above this one. In case there is no tiles above, this tile will be returned</summary>
+    public Tile HighestTileFromAbove
+    {
+        get
+        {
+            if (neighbourTiles.aboveTile == null)
+                return this;
 
-    /// <summary>Destroys(if possible) the tile</summary>
+            var highest = this;
+            while (highest.neighbourTiles.aboveTile != null)
+                highest = highest.neighbourTiles.aboveTile;
+
+            return highest;
+        }
+    }
+
     public virtual void DestroyTile()
     {
         var tileAbove = neighbourTiles.aboveTile;
@@ -27,53 +40,57 @@ public class Tile : MonoBehaviour
 
         neighbourTiles.underTile = null;
         neighbourTiles.aboveTile = null;
-        
+
         gameObject.SetActive(false);
     }
+    
+    /// <summary>Checks if given player can step on this tile</summary>
+    /// <param name="player">Player for which condition will be checked</param>
+    /// <returns>Returns true if player can be moved to this tile. Otherwise returns false</returns>
+    public bool IsPlayerAbleToMove(Player player) =>
+        tileData.IsWalkable && !IsPlayerOnTile &&
+        player.PointsLeftForTheTurn >= player.PlayerData.PointsForMovementTaken;
+    /// <summary>Checks if given player able to place given tile above this one</summary>
+    /// <param name="tileToPlace">Tile player tries to place</param>
+    /// <param name="player">Player for which condition will be checked</param>
+    /// <returns>Returns true if player can place tile. Otherwise returns false</returns>
+    public bool IsPlayerAbleToPlaceTileAbove(Tile tileToPlace, Player player) =>
+        tileToPlace.TileData.IsPlaceable &&
+        tileData.IsAllowedToPlaceTilesAbove &&
+        !IsPlayerOnTile &&
+        player.PointsLeftForTheTurn >= tileToPlace.TileData.PointsToPlace;
+    /// <summary>Checks if given player able to destroy this tile</summary>
+    /// <param name="player">Player for which condition will be checked</param>
+    /// <returns>Returns true if player can destroy this tile. Otherwise returns false</returns>
+    public bool IsPlayerAbleToDestroy(Player player) => 
+        !IsPlayerOnTile && CanBeDestroyed && player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
 
-    protected void AddTileAbove(Tile tileToAdd)
+    /// <summary>Places tile above this tile</summary>
+    /// <param name="tileToAdd">Tile that will be placed above this tile</param>
+    public void PlaceTileAbove(Tile tileToAdd)
     {
         neighbourTiles.aboveTile = tileToAdd;
         tileToAdd.neighbourTiles.underTile = this;
+
+        tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
     }
     
-    public Tile GetHighestTileFromAbove()
+    public virtual void PlacePlayer(Player player)
     {
-        if (neighbourTiles.aboveTile == null)
-            return this;
-
-        var highest = this;
-        while (highest.neighbourTiles.aboveTile != null) 
-            highest = highest.neighbourTiles.aboveTile;
-
-        return highest;
+        if (TileData.Side != ESide.Neutral && tileData.Side != player.Side)
+        {
+            RemovePlayer();
+            player.Die();
+            return;
+        }
+        
+        _player = player;
+        player.attachedTile = this;
     }
 
-    public bool IsPlayerAbleToPlaceTileAbove(Tile tileToPlace, Player player) =>
-        tileToPlace.TileData.IsPlaceable && tileData.IsAllowedToPlaceTilesAbove &&
-        player.PointsLeftForTheTurn >= tileToPlace.TileData.PointsToPlace;
-    
-    /// <summary>Checks if player is able to destroy given tile</summary>
-    /// <param name="player">Player for which condition will be checked</param>
-    /// <returns>Returns true if player can destroy the tile</returns>
-    public bool IsPlayerAbleToDestroy(Player player) =>
-        player != null && CanBeDestroyed && player.PointsLeftForTheTurn < tileData.PointsToDestroy;
-    #endregion
-    
-    #region PlayerManagement
-    /// <summary>Method that binds player to the tile and moves player on it(tile)</summary>
-    /// <param name="player">Player that will be attached to this tile</param>
-    public virtual void PlacePlayer(Player player) => _player = player;
-
-    /// <summary>Removes and unbinds player from the tile</summary>
-    public virtual void RemovePlayer() => _player = null;
-    
-    /// <summary>Checks if player is able to move on this tile</summary>
-    /// <param name="player">Player for which condition will be checked</param>
-    /// <returns>Returns true if player can be moved to the tile</returns>
-    public bool IsPlayerAbleToMove(Player player) =>
-        tileData.IsWalkable &&
-        IsPlayerOnTile &&
-        player.PointsLeftForTheTurn >= player.PlayerData.PointsForMovementTaken;
-    #endregion
+    public void RemovePlayer()
+    {
+        _player.attachedTile = null;
+        _player = null;
+    }
 }
