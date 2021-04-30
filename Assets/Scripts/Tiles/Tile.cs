@@ -35,11 +35,17 @@ public class Tile : MonoBehaviour
         var tileAbove = neighbourTiles.aboveTile;
         var tileUnder = neighbourTiles.underTile;
 
-        tileAbove.neighbourTiles.underTile = tileUnder;
-        tileAbove.neighbourTiles.aboveTile = tileAbove;
+        if (tileAbove != null)
+        {
+            tileAbove.neighbourTiles.underTile = tileUnder;
+            tileAbove.neighbourTiles.aboveTile = tileAbove;
+        }
 
-        neighbourTiles.underTile = null;
-        neighbourTiles.aboveTile = null;
+        if (tileUnder != null)
+        {
+            neighbourTiles.underTile = null;
+            neighbourTiles.aboveTile = null;
+        }
 
         gameObject.SetActive(false);
     }
@@ -73,6 +79,7 @@ public class Tile : MonoBehaviour
         tileToAdd.neighbourTiles.underTile = this;
 
         tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
+        tileToAdd.gameObject.SetActive(true);
     }
     
     public virtual void PlacePlayer(Player player)

@@ -15,7 +15,7 @@ public class TileData : ScriptableObject
     [SerializeField] private ETileType tileType = ETileType.Floor;
     [SerializeField] private bool isPlaceable = false;
     [SerializeField] private bool isAllowedToPlaceTilesAbove = false;
-    [SerializeField] [Range(-10, 0)] private int pointsToPlace = 0;
+    [SerializeField] [Range(0, 10)] private int pointsToPlace = 0;
 
     [Header("Inventory options")]
     [SerializeField] [Range(0, 10)] private int bonusPoints = 0;

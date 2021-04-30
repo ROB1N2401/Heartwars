@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     private readonly Dictionary<ETileType, List<Tile>> _items = new Dictionary<ETileType, List<Tile>>();
+    public int NumberOfItems => _items.Sum(pair => pair.Value.Count);
     public int TotalBonusPoints => _items.Sum(pair => pair.Value.Sum(tile => tile.TileData.BonusPoints));
 
+    
     public int GetNumberOfGivenTilesInInventory(ETileType tileType)
     {
         if (!_items.ContainsKey(tileType))

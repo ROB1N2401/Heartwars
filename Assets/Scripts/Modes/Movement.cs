@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] Player _player;
+    [SerializeField] private Player _player;
 
     private Tile _occupiedTile;
     private List<GameObject> _adjacentTiles = new List<GameObject>();
@@ -98,6 +98,8 @@ public class Movement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!isActiveAndEnabled)
+            return;
         for (int i = 0; i < 6; i++)
         {
             Vector3 direction = new Vector3();

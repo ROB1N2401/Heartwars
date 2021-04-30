@@ -47,7 +47,15 @@ public class Player : MonoBehaviour
     /// <summary>Method that places tile by player</summary>
     /// <param name="tileType"></param>
     /// <param name="tileToPlaceOn"></param>
-    public void PlaceTile(ETileType tileType) => throw new NotImplementedException();
+    public void PlaceTile(ETileType tileType, Tile baseTile)
+    {
+        var tileToPlace = _playerInventory.DeleteAndGetTile(tileType);
+        if(tileToPlace == null || baseTile == null)
+            return;
+
+        baseTile = baseTile.HighestTileFromAbove;
+        baseTile.PlaceTileAbove(baseTile);
+    }
 
     /// <summary>Destroys given tile tile</summary>
     /// <param name="tile">Tile that will be destroyed</param>
@@ -59,6 +67,8 @@ public class Player : MonoBehaviour
 
         _playerInventory.AddTile(topTile);
         topTile.DestroyTile();
+
+        SubtractActivePoints(topTile.TileData.PointsToDestroy);
     }
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>
