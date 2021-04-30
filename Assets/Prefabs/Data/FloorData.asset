@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: FloorData
   m_EditorClassIdentifier: 
   isWalkable: 1
-  tileSide: 0
+  side: 0
   isDestroyable: 1
   pointsToDestroy: 1
+  tileType: 0
   isPlaceable: 1
-  pointsToPlace: -1
+  isAllowedToPlaceTilesAbove: 0
+  pointsToPlace: 0
   bonusPoints: 0

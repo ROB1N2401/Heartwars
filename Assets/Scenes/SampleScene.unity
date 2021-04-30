@@ -1825,6 +1825,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 4d7574f21a45d314487a32e809213bea, type: 2}
   side: 4
   spawnPoint: {fileID: 1607302842}
+  attachedTile: {fileID: 0}
 --- !u!114 &253605908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3904,7 +3905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ff9aba75e947b44904dcc1d8ea6fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 253605906}
+  _player: {fileID: 253605907}
 --- !u!114 &548298068
 MonoBehaviour:
   m_ObjectHideFlags: 0
