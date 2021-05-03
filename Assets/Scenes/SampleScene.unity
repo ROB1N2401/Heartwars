@@ -3920,8 +3920,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 253605907}
-  blueprintToShow: {fileID: 0}
   raycastOffset: {x: 0, y: -0.02, z: 0}
+  blueprints:
+  - blueprintPrefab: {fileID: 7069068485134100718, guid: c5917d40fde89364781c02ac518dd064,
+      type: 3}
+    tileType: 1
+    keyThatSelectsTile: 257
+  - blueprintPrefab: {fileID: 796004207678323586, guid: af8fc6cfce337bf4395dfe53f2a6f97f,
+      type: 3}
+    tileType: 2
+    keyThatSelectsTile: 258
 --- !u!114 &548298069
 MonoBehaviour:
   m_ObjectHideFlags: 0
