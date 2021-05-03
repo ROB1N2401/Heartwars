@@ -14,7 +14,7 @@ public class Destruction : Mode
         }
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 50000f, (1 << 9), QueryTriggerInteraction.Ignore))
         {
@@ -28,6 +28,7 @@ public class Destruction : Mode
                 if(outline != null)
                     tile.GetComponent<Outline>().enabled = true;
                 
+                //todo reduce hardcode
                 if (Input.GetMouseButtonDown(0))
                     player.DestroyTopTile(tile);
             }

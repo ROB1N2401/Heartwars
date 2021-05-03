@@ -3922,11 +3922,11 @@ MonoBehaviour:
   player: {fileID: 253605907}
   raycastOffset: {x: 0, y: -0.02, z: 0}
   blueprints:
-  - blueprintPrefab: {fileID: 7069068485134100718, guid: c5917d40fde89364781c02ac518dd064,
+  - blueprintPrefab: {fileID: 7069068485134100718, guid: 7d26199aa0308d347b44466ce9b99d04,
       type: 3}
     tileType: 1
     keyThatSelectsTile: 257
-  - blueprintPrefab: {fileID: 796004207678323586, guid: af8fc6cfce337bf4395dfe53f2a6f97f,
+  - blueprintPrefab: {fileID: 796004207678323586, guid: f753e2118c9397a44bde6ec3e9590e28,
       type: 3}
     tileType: 2
     keyThatSelectsTile: 258

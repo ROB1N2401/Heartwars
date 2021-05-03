@@ -49,16 +49,18 @@ public class Placement : Mode
             {
                 DrawSelectedBlueprint(selectedTile);
                 
-                //todo replace hardcode
+                //todo reduce hardcode
                 if (Input.GetMouseButtonDown(0) && player.HasSuchItemInInventory(_selectedBlueprintEntry.tileType))
                 {
-                    //todo remove hardcode
+                    //todo reduce hardcode
                     player.PlaceTile(_selectedBlueprintEntry.tileType, selectedTile);
                 }
             }
         }
     }
     
+    /// <summary>Shows tile preview that will be placed</summary>
+    /// <param name="baseTile">Tile upon which preview will be shown</param>
     private void DrawSelectedBlueprint(Tile baseTile)
     {
         foreach (var blueprintEntry in blueprints)

@@ -13,8 +13,8 @@ public class Movement : Mode
                 outline.enabled = false;
         }
 
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -28,6 +28,7 @@ public class Movement : Mode
                if(outline != null)
                    outline.enabled = true;
                
+               //todo reduce hardcode
                if (Input.GetMouseButtonDown(0)) 
                     player.MoveTo(tile);
             } 
