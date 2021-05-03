@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class Destruction : MonoBehaviour
 {
-    [SerializeField] Player _player;
-
-    private Tile _occupiedTile;
-    private List<GameObject> _adjacentTiles = new List<GameObject>();
+    [SerializeField] private Player player;
+    [SerializeField] private Vector3 raycastOffset;
+    
+    private List<Tile> _adjacentTiles = new List<Tile>();
 
     void Update()
     {
-        GetTileUnderneath();
         GetAdjacentTiles();
 
         foreach (var go in _adjacentTiles)
@@ -26,32 +25,25 @@ public class Destruction : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 50000f, (1 << 9), QueryTriggerInteraction.Ignore))
         {
             var tile = hit.transform.GetComponent<Tile>();
-            if(tile.Equals(null))
+            if(tile == null)
                 return;
             
-            if (_adjacentTiles.Contains(tile.gameObject))
+            if (_adjacentTiles.Contains(tile))
             {
-                tile.GetComponent<Outline>().enabled = true;
-                tile.GetComponent<Outline>().OutlineColor = Color.black;
-                if (Input.GetMouseButtonDown(0)) 
-                    _player.DestroyTile(tile);
+                var outline = tile.GetComponent<Outline>();
+                if(outline != null)
+                    tile.GetComponent<Outline>().enabled = true;
+                
+                if (Input.GetMouseButtonDown(0))
+                    player.DestroyTopTile(tile);
             }
         }
-    }
-
-    void GetTileUnderneath()
-    {
-        Ray ray = new Ray(_player.transform.position, Vector3.down);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 0.1f)) 
-            _occupiedTile = hit.transform.GetComponent<Tile>();
     }
 
     void GetAdjacentTiles()
     {
         _adjacentTiles.Clear();
-        
+        var startPosition = player.attachedTile.LowestTileFromUnderneath.transform.position;
         for (int i = 0; i < 6; i++)
         {
             RaycastHit hit = new RaycastHit();
@@ -83,22 +75,35 @@ public class Destruction : MonoBehaviour
                     break;
             }
 
-            var playerPosition = _player.transform.position;
-            
             //todo reduce hardcode
-            ray = new Ray(playerPosition + Vector3.down * .1f, direction);
+            ray = new Ray(startPosition + raycastOffset, direction);
 
             //todo reduce hardcode
-            if (Physics.Raycast(ray, out hit, 1.0f)) 
-                _adjacentTiles.Add(hit.transform.gameObject);
+            if (Physics.Raycast(ray, out hit, 1.0f))
+            {
+                var tile = hit.transform.GetComponent<Tile>();
+                if (tile != null)
+                {
+                    _adjacentTiles.Add(tile.HighestTileFromAbove);
+                    _adjacentTiles.Add(tile);
+                }
+            }
         }
     }
 
     private void OnDrawGizmos()
     {
+        var rayDown = new Ray(player.transform.position, Vector3.down);
+        RaycastHit hit;
+        Tile attachedTile = null;
+        if (Physics.Raycast(rayDown, out hit))
+            attachedTile = hit.transform.GetComponent<Tile>();
+        if (attachedTile != null)
+            attachedTile = attachedTile.LowestTileFromUnderneath;
+            
+        
         if (!isActiveAndEnabled)
             return;
-
         for (int i = 0; i < 6; i++)
         {
             Vector3 direction = new Vector3();
@@ -128,7 +133,7 @@ public class Destruction : MonoBehaviour
                     break;
             }
 
-            Debug.DrawRay(_player.transform.position + Vector3.down * .1f, direction);
+            Debug.DrawRay(attachedTile.transform.position + raycastOffset, direction);
         }
     }
 }

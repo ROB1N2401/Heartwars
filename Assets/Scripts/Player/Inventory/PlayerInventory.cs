@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private readonly Dictionary<ETileType, List<Tile>> _items = new Dictionary<ETileType, List<Tile>>();
+    private readonly Dictionary<ETileType, Stack<Tile>> _items = new Dictionary<ETileType, Stack<Tile>>();
     public int NumberOfItems => _items.Sum(pair => pair.Value.Count);
     public int TotalBonusPoints => _items.Sum(pair => pair.Value.Sum(tile => tile.TileData.BonusPoints));
-
     
     public int GetNumberOfGivenTilesInInventory(ETileType tileType)
     {
         if (!_items.ContainsKey(tileType))
             return 0;
-        
-        return _items.Where(pair => pair.Key == tileType).Sum(pair => pair.Value.Count);
+
+        return _items[tileType].Count;
     }
 
     public void AddTile(Tile tileToAdd)
@@ -22,18 +21,19 @@ public class PlayerInventory : MonoBehaviour
         var itemType = tileToAdd.TileData.TileType;
         
         if(_items.ContainsKey(itemType))
-            _items[itemType].Add(tileToAdd);
+            _items[itemType].Push(tileToAdd);
         else
-            _items.Add(itemType, new List<Tile>(){tileToAdd});
+        {
+            _items.Add(itemType, new Stack<Tile>());
+            _items[itemType].Push(tileToAdd);
+        }
     }
 
-    public Tile DeleteAndGetTile(ETileType itemType)
+    public Tile TakeTileFromInventory(ETileType itemType)
     {
         if(GetNumberOfGivenTilesInInventory(itemType) == 0)
             return null;
-
-        var itemToReturn = _items[itemType][0];
-        _items[itemType].RemoveAt(0);
-        return itemToReturn;
+        
+        return _items[itemType].Pop();
     }
 }

@@ -14,7 +14,7 @@ public class TileData : ScriptableObject
     [Header("Building options")]
     [SerializeField] private ETileType tileType = ETileType.Floor;
     [SerializeField] private bool isPlaceable = false;
-    [SerializeField] private bool isAllowedToPlaceTilesAbove = false;
+    [SerializeField] private bool isAllowedToBuildTilesAbove = false;
     [SerializeField] [Range(0, 10)] private int pointsToPlace = 0;
 
     [Header("Inventory options")]
@@ -26,7 +26,7 @@ public class TileData : ScriptableObject
     public int PointsToDestroy => pointsToDestroy;
     public ETileType TileType => tileType;
     public bool IsPlaceable => isPlaceable;
-    public bool IsAllowedToPlaceTilesAbove => isAllowedToPlaceTilesAbove;
+    public bool IsAllowedToBuildTilesAbove => isAllowedToBuildTilesAbove;
     public int PointsToPlace => pointsToPlace;
     public int BonusPoints => bonusPoints;
 }

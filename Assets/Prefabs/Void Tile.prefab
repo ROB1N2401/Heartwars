@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileData: {fileID: 11400000, guid: 53deb7692a77d0c49acc70ead6b55d13, type: 2}
   playerPositionOffset: {x: 0, y: 0, z: 0}
+  tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}
 --- !u!64 &5195161975230024032
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -106,6 +107,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5076798556035486163, guid: cbef8b077ec81e44fac34f9517163d67, type: 3}

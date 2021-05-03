@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: VoidData
   m_EditorClassIdentifier: 
   isWalkable: 0
-  tileSide: 1
+  side: 0
   isDestroyable: 0
   pointsToDestroy: 0
+  tileType: 0
   isPlaceable: 0
+  isAllowedToBuildTilesAbove: 1
   pointsToPlace: 0
   bonusPoints: 0

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public bool IsTurnTime => _isTurnTime;
     public PlayerData PlayerData => playerData;
 
-    public Tile attachedTile;
+    [HideInInspector] public Tile attachedTile;
     public Tile SpawnPoint => spawnPoint;
     public ESide Side => side;
 
@@ -33,33 +33,45 @@ public class Player : MonoBehaviour
     /// <param name="tile">Target tile where player will be moved</param>
     public void MoveTo(Tile tile)
     {
-        if(!tile.IsPlayerAbleToMove(this))
+        var topTile = tile.HighestTileFromAbove;
+        if(!topTile.IsPlayerAbleToMove(this))
             return;
 
         attachedTile.RemovePlayer();
-        tile.PlacePlayer(this);
+        topTile.PlacePlayer(this);
 
-        gameObject.transform.position = tile.transform.position + tile.PlayerPositionOffset;
+        gameObject.transform.position = topTile.transform.position + topTile.PlayerPositionOffset;
         
         SubtractActivePoints(playerData.PointsForMovementTaken);
     }
 
-    /// <summary>Method that places tile by player</summary>
-    /// <param name="tileType"></param>
-    /// <param name="tileToPlaceOn"></param>
+    /// <summary>Checks if there is item available in players inventory</summary>
+    /// <param name="tileType">Tile type gor which condition will be checked</param>
+    /// <returns>Returns tru if such item available in the inventory. Otherwise returns false</returns>
+    public bool HasSuchItemInInventory(ETileType tileType)
+    {
+        if (_playerInventory.GetNumberOfGivenTilesInInventory(tileType) <= 0)
+            return false;
+
+        return true;
+    }
+    
     public void PlaceTile(ETileType tileType, Tile baseTile)
     {
-        var tileToPlace = _playerInventory.DeleteAndGetTile(tileType);
+        var tileToPlace = _playerInventory.TakeTileFromInventory(tileType);
         if(tileToPlace == null || baseTile == null)
             return;
 
-        baseTile = baseTile.HighestTileFromAbove;
-        baseTile.PlaceTileAbove(baseTile);
+        var veryTopTile = baseTile.HighestTileFromAbove;
+        if(!veryTopTile.IsPlayerAbleToPlaceTileAbove(tileToPlace, this))
+            return;
+        
+        veryTopTile.PlaceTileAbove(tileToPlace);
     }
 
     /// <summary>Destroys given tile tile</summary>
     /// <param name="tile">Tile that will be destroyed</param>
-    public void DestroyTile(Tile tile)
+    public void DestroyTopTile(Tile tile)
     {
         var topTile = tile.HighestTileFromAbove;
         if(!topTile.IsPlayerAbleToDestroy(this))
@@ -92,6 +104,12 @@ public class Player : MonoBehaviour
         _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
         
         attachedTile.RemovePlayer();
+        if (spawnPoint == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
         MoveTo(spawnPoint);
         EndTurn();
     }
