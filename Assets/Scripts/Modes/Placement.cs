@@ -26,7 +26,8 @@ public class Placement : Mode
 
     private void OnDisable()
     {
-        _blueprintInstance.SetActive(false);
+        if(_blueprintInstance != null)
+            _blueprintInstance.SetActive(false);
     }
 
     private void Update()
@@ -52,7 +53,7 @@ public class Placement : Mode
                 if (Input.GetMouseButtonDown(0) && player.HasSuchItemInInventory(_selectedBlueprintEntry.tileType))
                 {
                     //todo remove hardcode
-                    player.PlaceTile(ETileType.Floor, selectedTile);
+                    player.PlaceTile(_selectedBlueprintEntry.tileType, selectedTile);
                 }
             }
         }
