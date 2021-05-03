@@ -67,6 +67,8 @@ public class Player : MonoBehaviour
             return;
         
         veryTopTile.PlaceTileAbove(tileToPlace);
+        
+        SubtractActivePoints(tileToPlace.TileData.PointsToPlace);
     }
 
     /// <summary>Destroys given tile tile</summary>
@@ -116,7 +118,7 @@ public class Player : MonoBehaviour
 
     private void SubtractActivePoints(int pointsToSubtract)
     {
-        pointsToSubtract = Mathf.Max(pointsToSubtract, 0);
+        pointsToSubtract = Mathf.Abs(pointsToSubtract);
         if(_pointsLeftForTheTurn < pointsToSubtract)
             return;
 

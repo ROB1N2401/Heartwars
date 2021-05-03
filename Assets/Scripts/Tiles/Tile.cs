@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class Tile : MonoBehaviour
     public Vector3 PlayerPositionOffset => playerPositionOffset;
 
     protected bool IsPlayerOnTile => _player != null;
-    protected bool CanBeDestroyed => !IsPlayerOnTile && tileData.IsDestroyable;
+    protected bool CanBeDestroyed => !IsPlayerOnTile && tileData.IsDestroyable && neighbourTiles.aboveTile == null;
     protected Player _player;
     protected (Tile aboveTile, Tile underTile) neighbourTiles;
 
@@ -79,26 +78,20 @@ public class Tile : MonoBehaviour
         }
     }
 
+    /// <summary>Hides tile (if possible)</summary>
     public virtual void DestroyTile()
     {
-        var neighbourAboveTile = neighbourTiles.aboveTile;
-        var neighbourUnderTile = neighbourTiles.underTile;
-
-        if (neighbourAboveTile != null)
-        {
-            neighbourAboveTile.neighbourTiles.underTile = neighbourUnderTile;
-            neighbourAboveTile.neighbourTiles.aboveTile = null;
-        }
-
-        if (neighbourUnderTile != null)
-        {
-            neighbourUnderTile.neighbourTiles.aboveTile = neighbourAboveTile;
-            neighbourUnderTile.neighbourTiles.underTile = null;
-        }
+        if(neighbourTiles.aboveTile != null)
+            return;
         
+        var underTile = neighbourTiles.underTile;
+        
+        if(underTile != null)
+            underTile.neighbourTiles.aboveTile = null;
+
         neighbourTiles.aboveTile = null;
         neighbourTiles.underTile = null;
-
+        
         gameObject.SetActive(false);
     }
     
@@ -117,11 +110,13 @@ public class Tile : MonoBehaviour
         tileData.IsAllowedToBuildTilesAbove &&
         !IsPlayerOnTile &&
         player.PointsLeftForTheTurn >= tileToPlace.TileData.PointsToPlace;
+
     /// <summary>Checks if given player able to destroy this tile</summary>
     /// <param name="player">Player for which condition will be checked</param>
     /// <returns>Returns true if player can destroy this tile. Otherwise returns false</returns>
-    public bool IsPlayerAbleToDestroy(Player player) => 
-        CanBeDestroyed && player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
+    public bool IsPlayerAbleToDestroy(Player player) =>
+        CanBeDestroyed &&
+        player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
 
     /// <summary>Places tile above this tile</summary>
     /// <param name="tileToAdd">Tile that will be placed above this tile</param>
