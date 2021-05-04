@@ -44,6 +44,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: MovePiece1
+    clip: {fileID: 8300000, guid: b9f5166c927430645b78af4ec829114e, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece2
+    clip: {fileID: 8300000, guid: 02d4631839870c04cab0af03ee30ddf8, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece3
+    clip: {fileID: 8300000, guid: 1e9b1d9a80922d846a1c61c13e28a59f, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece4
+    clip: {fileID: 8300000, guid: 42da4cea66dc2e04fb28b843d8535395, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece5
+    clip: {fileID: 8300000, guid: cfb9b0f2917610d4886982d076424695, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround1
+    clip: {fileID: 8300000, guid: 9431784ba00a62841b4a0b6ac4ce8f99, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround2
+    clip: {fileID: 8300000, guid: 69e55168508c72b4dad234a56eca16be, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround3
+    clip: {fileID: 8300000, guid: 782b94244e675b74d9d00e13e71c3f64, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround4
+    clip: {fileID: 8300000, guid: 1426c0c08f8490248a8e33a8c704f703, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: UraniumFever
     clip: {fileID: 8300000, guid: c7aab8f6e0446e449abd9451d343cc55, type: 3}
     mix: {fileID: 0}
@@ -66,3 +129,4 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   currentScene: 
+  shouldRandomizePitch: 0

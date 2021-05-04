@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class AudioManager : MonoBehaviour
     //This is only useful for sounds that are played on a loop, as well as all songs.
 
     //If you want to play a sound from inside this script instead of in another script, you can leave out the "AudioManager.instance." part of the code.
+    //If you want a sound effect to have a random pitch when it plays, make sure to make "randomize pitch" true before calling the sound. It will reset to false again once the sound has been played.
 
     public Sound[] sounds;
     public static AudioManager instance;
@@ -23,6 +25,8 @@ public class AudioManager : MonoBehaviour
     private string currentSong;
     private bool musicCanChange;
     private bool firstSong = true; //Why this bool exists is explained in the StopSound function
+    public bool shouldRandomizePitch;
+    private int testSounds;
 
     public void Awake()
     {
@@ -49,6 +53,7 @@ public class AudioManager : MonoBehaviour
         }
 
         musicCanChange = false;
+        shouldRandomizePitch = false;
     }
 
     public void Update()
@@ -60,7 +65,7 @@ public class AudioManager : MonoBehaviour
         {
             this.currentScene = "Menu";
         }
-        else if (sceneName == "GameScene"/* || sceneName == "OtherGameScene"*/) //This one as well
+        else if (sceneName == "SampleScene"/* || sceneName == "OtherGameScene"*/) //This one as well
         {
             this.currentScene = "Heartwars";
         }
@@ -68,6 +73,36 @@ public class AudioManager : MonoBehaviour
         {
             this.currentScene = "Error";
         }
+
+        //if (Input.GetKeyDown("k"))
+        //{
+        //    shouldRandomizePitch = true;
+        //    testSounds = Random.Range(0, 5);
+        //    if (testSounds == 0)
+        //    {
+        //        PlaySound("MovePiece1");
+        //    }
+        //    else if (testSounds == 1)
+        //    {
+        //        PlaySound("MovePiece2");
+        //    }
+        //    else if (testSounds == 2)
+        //    {
+        //        PlaySound("MovePiece3");
+        //    }
+        //    else if (testSounds == 3)
+        //    {
+        //        PlaySound("MovePiece4");
+        //    }
+        //    else if (testSounds == 4)
+        //    {
+        //        PlaySound("MovePiece5");
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
 
 
         if (lastScene != this.currentScene || lastScene == null)
@@ -107,7 +142,19 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound '" + name + "' not found.");
             return;
         }
-        s.source.Play();
+
+        if (shouldRandomizePitch == true)
+        {
+            s.source.pitch = Random.Range(0.95f, 1.05f);
+            s.source.Play();
+            shouldRandomizePitch = false;
+        }
+        else
+        {
+            s.source.pitch = 1f;
+            s.source.Play();
+        }
+        
     }
 
     public void PlaySong(string name)
