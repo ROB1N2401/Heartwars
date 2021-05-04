@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour
 
     public TileData TileData => tileData;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
+    public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
 
     protected bool IsPlayerOnTile => _player != null;
     protected bool CanBeDestroyed => !IsPlayerOnTile && tileData.IsDestroyable && neighbourTiles.aboveTile == null;

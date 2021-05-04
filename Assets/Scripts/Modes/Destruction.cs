@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Destruction : MonoBehaviour
-{
-    [SerializeField] private Player player;
-    [SerializeField] private Vector3 raycastOffset;
-    
-    private List<Tile> _adjacentTiles = new List<Tile>();
-
-    void Update()
+public class Destruction : Mode
+{ 
+    private void Update()
     {
         GetAdjacentTiles();
 
@@ -20,7 +14,7 @@ public class Destruction : MonoBehaviour
         }
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 50000f, (1 << 9), QueryTriggerInteraction.Ignore))
         {
@@ -34,106 +28,10 @@ public class Destruction : MonoBehaviour
                 if(outline != null)
                     tile.GetComponent<Outline>().enabled = true;
                 
+                //todo reduce hardcode
                 if (Input.GetMouseButtonDown(0))
                     player.DestroyTopTile(tile);
             }
-        }
-    }
-
-    void GetAdjacentTiles()
-    {
-        _adjacentTiles.Clear();
-        var startPosition = player.attachedTile.LowestTileFromUnderneath.transform.position;
-        for (int i = 0; i < 6; i++)
-        {
-            RaycastHit hit = new RaycastHit();
-            Ray ray = new Ray();
-            Vector3 direction = new Vector3();
-
-            switch (i)
-            { 
-                case 0:
-                    direction = new Vector3(1, 0, 0);
-                    break;
-                case 1:
-                    direction = new Vector3(1, 0, -1);
-                    break;
-                case 2:
-                    direction = new Vector3(-1,0, -1);
-                    break;
-                case 3:
-                    direction = new Vector3(-1,0, 0);
-                    break;
-                case 4:
-                    direction = new Vector3(-1,0, 1);
-                    break;
-                case 5:
-                    direction = new Vector3(1, 0, 1);
-                    break;
-                default:
-                    Debug.LogError("Failed to assign a direction");
-                    break;
-            }
-
-            //todo reduce hardcode
-            ray = new Ray(startPosition + raycastOffset, direction);
-
-            //todo reduce hardcode
-            if (Physics.Raycast(ray, out hit, 1.0f))
-            {
-                var tile = hit.transform.GetComponent<Tile>();
-                if (tile != null)
-                {
-                    _adjacentTiles.Add(tile.HighestTileFromAbove);
-                    _adjacentTiles.Add(tile);
-                }
-            }
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        var rayDown = new Ray(player.transform.position, Vector3.down);
-        RaycastHit hit;
-        Tile attachedTile = null;
-        if (Physics.Raycast(rayDown, out hit))
-            attachedTile = hit.transform.GetComponent<Tile>();
-        if (attachedTile != null)
-            attachedTile = attachedTile.LowestTileFromUnderneath;
-            
-        
-        if (!isActiveAndEnabled)
-            return;
-        for (int i = 0; i < 6; i++)
-        {
-            Vector3 direction = new Vector3();
-
-            switch (i)
-            {
-                case 0:
-                    direction = new Vector3(1, 0, 0);
-                    break;
-                case 1:
-                    direction = new Vector3(1, 0, -1);
-                    break;
-                case 2:
-                    direction = new Vector3(-1, 0, -1);
-                    break;
-                case 3:
-                    direction = new Vector3(-1, 0, 0);
-                    break;
-                case 4:
-                    direction = new Vector3(-1, 0, 1);
-                    break;
-                case 5:
-                    direction = new Vector3(1, 0, 1);
-                    break;
-                default:
-                    Debug.LogError("Failed to assign a direction");
-                    break;
-            }
-
-            Debug.DrawRay(attachedTile.transform.position + raycastOffset, direction);
         }
     }
 }
