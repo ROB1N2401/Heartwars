@@ -1,13 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] private PlayerInventoryData inventoryData;
+    
     private readonly Dictionary<ETileType, Stack<Tile>> _items = new Dictionary<ETileType, Stack<Tile>>();
     public int NumberOfItems => _items.Sum(pair => pair.Value.Count);
     public int TotalBonusPoints => _items.Sum(pair => pair.Value.Sum(tile => tile.TileData.BonusPoints));
-    
+
+
+    private void Start()
+    {
+        foreach (var tileEntry in inventoryData.InitialTiles)
+        {
+            for (var i = 0; i < tileEntry.numberOfTilesInInventory; i++)
+            {
+                var tile = Instantiate(tileEntry.tilePrefab).GetComponent<Tile>();
+                if (tile == null)
+                    continue;
+
+                AddTile(tile);
+                tile.gameObject.SetActive(false);
+            }
+        }
+    }
+
     public int GetNumberOfGivenTilesInInventory(ETileType tileType)
     {
         if (!_items.ContainsKey(tileType))

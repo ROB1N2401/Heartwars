@@ -1904,6 +1904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec3c2545ff85744cbbccba6a840b194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryData: {fileID: 11400000, guid: ca2acdead7643c844be896437111bbca, type: 2}
 --- !u!1001 &256218281
 PrefabInstance:
   m_ObjectHideFlags: 0

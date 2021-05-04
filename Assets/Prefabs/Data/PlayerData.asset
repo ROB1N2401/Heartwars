@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eeecd38aee793e4286e72d7afec2ebb, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  initialNumberOfPoints: 10
+  initialNumberOfPoints: 20
   pointsForMovementTaken: 1
