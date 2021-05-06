@@ -18,6 +18,6 @@ MonoBehaviour:
   pointsToDestroy: 1
   tileType: 3
   isPlaceable: 1
-  isAllowedToBuildTilesAbove: 0
+  isAllowedToBuildTilesAbove: 1
   pointsToPlace: 1
   bonusPoints: 0
