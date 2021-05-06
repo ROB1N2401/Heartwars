@@ -16,11 +16,13 @@ public class Destruction : Mode
         RaycastHit hit;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 50000f, (1 << 9), QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out hit, float.MaxValue, (1 << 9), QueryTriggerInteraction.Ignore))
         {
             var tile = hit.transform.GetComponent<Tile>();
             if(tile == null)
                 return;
+
+            tile = tile.HighestTileFromAbove;
             
             if (_adjacentTiles.Contains(tile))
             {

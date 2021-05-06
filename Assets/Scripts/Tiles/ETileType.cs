@@ -3,6 +3,7 @@
     Void,
     Floor,
     Wall,
+    Ice,
     Springboard,
     SideBlock
 }
