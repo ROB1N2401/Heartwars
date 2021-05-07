@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
@@ -139,7 +138,8 @@ public class Tile : MonoBehaviour
         if(player == null)
             return;
 
-        player.attachedTile.RemovePlayer();
+        if(player.attachedTile != null)
+            player.attachedTile.RemovePlayer();
         
         if (TileData.Side != ESide.Neutral && tileData.Side != player.Side || tileData.TileType == ETileType.Void)
         {

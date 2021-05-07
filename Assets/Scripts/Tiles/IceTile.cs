@@ -11,16 +11,19 @@ public class IceTile : Tile
         var oppositeTile = GetTileFromOppositeDirection(underneathTile);
         
         base.PlacePlayer(player);
-        
-        //todo debug
-        Debug.Log(oppositeTile.gameObject.name);
-        if(oppositeTile == null)
+
+        if (oppositeTile == null)
+        {
+            player.Die();
             return;
-        
+        }
+
         oppositeTile = oppositeTile.HighestTileFromAbove;
-    
+        
         if (oppositeTile.TileData.IsWalkable)
             oppositeTile.PlacePlayer(player);
+        else if(oppositeTile.TileData.TileType == ETileType.Void)
+            player.Die();
     }
 
     protected Tile GetTileFromOppositeDirection(Tile neighbourTile)
@@ -28,12 +31,16 @@ public class IceTile : Tile
         if (neighbourTile == null)
             return null;
         neighbourTile = neighbourTile.LowestTileFromUnderneath;
-        
-        var directionOfTheOppositeTile = neighbourTile.transform.position - LowestTileFromUnderneath.transform.position;
+
+        var positionOfTheBaseTile = LowestTileFromUnderneath.transform.position;
+        var directionOfTheOppositeTile = neighbourTile.transform.position - positionOfTheBaseTile;
         directionOfTheOppositeTile = -directionOfTheOppositeTile.normalized;
+        
         //todo debug
         _direction = directionOfTheOppositeTile;
-        var rayToTheOppositeTile = new Ray(transform.position, directionOfTheOppositeTile);
+        _start = positionOfTheBaseTile;
+        
+        var rayToTheOppositeTile = new Ray(positionOfTheBaseTile, directionOfTheOppositeTile);
         RaycastHit hit;
 
         if (Physics.Raycast(rayToTheOppositeTile, out hit)) 
@@ -43,9 +50,10 @@ public class IceTile : Tile
     }
 
     private Vector3 _direction;
+    private Vector3 _start;
     private new void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, _direction);
+        Gizmos.DrawRay(_start, _direction);
     }
 }
