@@ -59,7 +59,7 @@ public class Mode : MonoBehaviour
         }
     }
     
-    protected  void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         var rayDown = new Ray(player.transform.position, Vector3.down);
         RaycastHit hit;

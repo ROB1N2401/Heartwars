@@ -16,7 +16,7 @@ public class Tile : MonoBehaviour
     protected (Tile aboveTile, Tile underTile) neighbourTiles;
 
 
-    private void Start()
+    protected void Start()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
         var rayToTheBottom = new Ray(transform.position, transform.forward);
@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
         var rayToTheBottom = new Ray(transform.position, transform.forward);
@@ -135,7 +135,13 @@ public class Tile : MonoBehaviour
     
     public virtual void PlacePlayer(Player player)
     {
-        if (TileData.Side != ESide.Neutral && tileData.Side != player.Side)
+        if(player == null)
+            return;
+
+        if(player.attachedTile != null)
+            player.attachedTile.RemovePlayer();
+        
+        if (TileData.Side != ESide.Neutral && tileData.Side != player.Side || tileData.TileType == ETileType.Void)
         {
             RemovePlayer();
             player.Die();
@@ -144,10 +150,14 @@ public class Tile : MonoBehaviour
         
         _player = player;
         player.attachedTile = this;
+        player.transform.position = transform.position + playerPositionOffset;
     }
 
     public void RemovePlayer()
     {
+        if(_player == null)
+            return;
+        
         _player.attachedTile = null;
         _player = null;
     }

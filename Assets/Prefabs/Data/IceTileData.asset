@@ -9,8 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eeecd38aee793e4286e72d7afec2ebb, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 915689872dce2ae4a8622cbd861f02a3, type: 3}
+  m_Name: IceTileData
   m_EditorClassIdentifier: 
-  initialNumberOfPoints: 100
-  pointsForMovementTaken: 1
+  isWalkable: 1
+  side: 0
+  isDestroyable: 1
+  pointsToDestroy: 1
+  tileType: 3
+  isPlaceable: 1
+  isAllowedToBuildTilesAbove: 1
+  pointsToPlace: 1
+  bonusPoints: 0

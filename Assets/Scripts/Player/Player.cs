@@ -42,11 +42,9 @@ public class Player : MonoBehaviour
         if(!topTile.IsPlayerAbleToMove(this))
             return;
 
-        attachedTile.RemovePlayer();
+        // attachedTile.RemovePlayer();
         topTile.PlacePlayer(this);
 
-        gameObject.transform.position = topTile.transform.position + topTile.PlayerPositionOffset;
-        
         SubtractActivePoints(playerData.PointsForMovementTaken);
     }
 
@@ -88,6 +86,17 @@ public class Player : MonoBehaviour
         topTile.DestroyTile();
 
         SubtractActivePoints(topTile.TileData.PointsToDestroy);
+    }
+
+    public Tile GetTileUnderneathWithRaycast()
+    {
+        var rayDownwards = new Ray(transform.position, Vector3.down);
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayDownwards, out hit))
+            return hit.transform.GetComponent<Tile>();
+
+        return null;
     }
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>
