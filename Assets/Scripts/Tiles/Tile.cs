@@ -3,10 +3,12 @@
 public class Tile : MonoBehaviour
 {
     [SerializeField] protected TileData tileData;
+    public ESide tileSide;
     [SerializeField] protected Vector3 playerPositionOffset;
     [SerializeField] protected Vector3 tileAbovePositionOffset;
-
+    
     public TileData TileData => tileData;
+    // public ESide TileSide => tileSide;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
 
@@ -16,7 +18,7 @@ public class Tile : MonoBehaviour
     protected (Tile aboveTile, Tile underTile) neighbourTiles;
 
 
-    protected void Start()
+    protected virtual void Start()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
         var rayToTheBottom = new Ray(transform.position, transform.forward);
@@ -141,7 +143,7 @@ public class Tile : MonoBehaviour
         if(player.attachedTile != null)
             player.attachedTile.RemovePlayer();
         
-        if (TileData.Side != ESide.Neutral && tileData.Side != player.Side || tileData.TileType == ETileType.Void)
+        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
         {
             RemovePlayer();
             player.Die();

@@ -4239,6 +4239,10 @@ MonoBehaviour:
       type: 3}
     tileType: 3
     keyThatSelectsTile: 259
+  - blueprintPrefab: {fileID: 4805164233135818034, guid: f00dac8cbb51c48448102e3f8b5987c6,
+      type: 3}
+    tileType: 5
+    keyThatSelectsTile: 260
 --- !u!114 &548298069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4265,9 +4269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90b69c45f7582845b1a46be0c1be784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementButton: {fileID: 452036228}
-  destructionButton: {fileID: 1729762985}
-  placementButton: {fileID: 401296140}
 --- !u!4 &548298071
 Transform:
   m_ObjectHideFlags: 0

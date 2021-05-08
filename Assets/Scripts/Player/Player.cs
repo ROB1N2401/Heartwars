@@ -117,7 +117,8 @@ public class Player : MonoBehaviour
     {
         _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
         
-        attachedTile.RemovePlayer();
+        if(attachedTile != null)
+            attachedTile.RemovePlayer();
         if (spawnPoint == null)
         {
             gameObject.SetActive(false);

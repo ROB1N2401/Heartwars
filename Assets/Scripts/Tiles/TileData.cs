@@ -5,7 +5,7 @@ public class TileData : ScriptableObject
 {
     [Header("Movement options")]
     [SerializeField] private bool isWalkable = false;
-    [SerializeField] private ESide side = ESide.Neutral;
+    //[SerializeField] private ESide side = ESide.Neutral;
 
     [Header("Destruction options")]
     [SerializeField] private bool isDestroyable = false;
@@ -21,7 +21,7 @@ public class TileData : ScriptableObject
     [SerializeField] [Range(0, 10)] private int bonusPoints = 0;
     
     public bool IsWalkable => isWalkable;
-    public ESide Side => side;
+    //public ESide Side => side;
     public bool IsDestroyable => isDestroyable;
     public int PointsToDestroy => pointsToDestroy;
     public ETileType TileType => tileType;
