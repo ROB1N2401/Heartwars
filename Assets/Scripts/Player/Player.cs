@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
         _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
+    private void Update()
+    {
+        Debug.Log(_pointsLeftForTheTurn);
+    }
+
     /// <summary>Moves player to the given tile</summary>
     /// <param name="tile">Target tile where player will be moved</param>
     public void MoveTo(Tile tile)

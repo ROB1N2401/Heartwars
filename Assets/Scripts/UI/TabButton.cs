@@ -9,27 +9,28 @@ using UnityEngine.EventSystems;
 public class TabButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TabManager tabManagerRef;
+    [Header("UnityEvents")]
     [SerializeField] private UnityEvent selectionEvent;
     [SerializeField] private UnityEvent deselectionEvent;
+    [Header("Images")]
     [SerializeField] private Sprite spriteIdle;
     [SerializeField] private Sprite spriteHovered;
     [SerializeField] private Sprite spriteSelected;
     private Image _imageRef;
 
+    public UnityEvent SelectionEvent => selectionEvent;
+    public UnityEvent DeselectionEvent => deselectionEvent;
 
+    private void Awake()
+    {
+
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
         _imageRef = GetComponent<Image>();
         ResetSprite();
-        tabManagerRef.IncludeButton(this);
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
     }
 
     public void ResetSprite()
@@ -37,28 +38,16 @@ public class TabButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandl
         _imageRef.sprite = spriteIdle;
     }
 
-    private void Select()
+    public void SetActiveSprite()
     {
-        tabManagerRef.SelectedTab = this;
         _imageRef.sprite = spriteSelected;
-        selectionEvent.Invoke();
-    }
-
-    public void Deselect()
-    {
-        ResetSprite();
-        deselectionEvent.Invoke();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if(this != tabManagerRef.SelectedTab)
         {
-            if (tabManagerRef.SelectedTab != null)
-            {
-                tabManagerRef.SelectedTab.Deselect();
-            }
-            Select();
+            tabManagerRef.Select(this);
         }
     }
 

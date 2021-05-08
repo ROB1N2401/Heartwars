@@ -1,29 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ModeSelection : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    private TabManager _tabManagerRef;
+    private InputMaster _inputMaster;
+    private KeyCode _testKey;
+
+    void Awake()
+    { 
+        _tabManagerRef = FindObjectOfType<TabManager>();
+        _inputMaster = new InputMaster();
+        _inputMaster.Main.MovementMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[0]);
+        _inputMaster.Main.DestructionMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[1]);
+        _inputMaster.Main.PFloorMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[2]);
+        _inputMaster.Main.PWallMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[3]);
+    }
+
+    void OnEnable()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            this.gameObject.GetComponent<Movement>().enabled = true;
-            this.gameObject.GetComponent<Placement>().enabled = false;
-            this.gameObject.GetComponent<Destruction>().enabled = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            this.gameObject.GetComponent<Movement>().enabled = false;
-            this.gameObject.GetComponent<Placement>().enabled = true;
-            this.gameObject.GetComponent<Destruction>().enabled = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            this.gameObject.GetComponent<Movement>().enabled = false;
-            this.gameObject.GetComponent<Placement>().enabled = false;
-            this.gameObject.GetComponent<Destruction>().enabled = true;
-        }
+        _inputMaster.Enable();
+    }
+
+    void OnDisable()
+    {
+        _inputMaster.Disable();
     }
 }

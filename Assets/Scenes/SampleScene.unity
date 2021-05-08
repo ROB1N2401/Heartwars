@@ -2887,7 +2887,7 @@ MonoBehaviour:
   selectionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 548298067}
+      - m_Target: {fileID: 548298068}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -2901,7 +2901,7 @@ MonoBehaviour:
   deselectionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 548298067}
+      - m_Target: {fileID: 548298068}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -2912,9 +2912,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  spriteIdle: {fileID: 21300000, guid: 6c27231c3ed5f6c4e88585d72bede148, type: 3}
-  spriteHovered: {fileID: 21300000, guid: db8d971d67174754d9795ab423d8e395, type: 3}
-  spriteSelected: {fileID: 21300000, guid: f8d74e7e6524e6444bf6d855b188a929, type: 3}
+  spriteIdle: {fileID: 21300000, guid: d4e8389942b207540b564bd0ecb16a28, type: 3}
+  spriteHovered: {fileID: 21300000, guid: 91cf893300cc8394a830c83298354461, type: 3}
+  spriteSelected: {fileID: 21300000, guid: 0178c10fdc4cc514a9cf717f0c220eb6, type: 3}
 --- !u!1001 &406848664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4265,6 +4265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90b69c45f7582845b1a46be0c1be784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementButton: {fileID: 452036228}
+  destructionButton: {fileID: 1729762985}
+  placementButton: {fileID: 401296140}
 --- !u!4 &548298071
 Transform:
   m_ObjectHideFlags: 0
@@ -7367,7 +7370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 150, y: 680}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &936059171
@@ -13597,7 +13600,7 @@ MonoBehaviour:
   selectionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 548298068}
+      - m_Target: {fileID: 548298067}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -13611,7 +13614,7 @@ MonoBehaviour:
   deselectionEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 548298068}
+      - m_Target: {fileID: 548298067}
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -13622,9 +13625,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  spriteIdle: {fileID: 21300000, guid: d4e8389942b207540b564bd0ecb16a28, type: 3}
-  spriteHovered: {fileID: 21300000, guid: 91cf893300cc8394a830c83298354461, type: 3}
-  spriteSelected: {fileID: 21300000, guid: 0178c10fdc4cc514a9cf717f0c220eb6, type: 3}
+  spriteIdle: {fileID: 21300000, guid: 6c27231c3ed5f6c4e88585d72bede148, type: 3}
+  spriteHovered: {fileID: 21300000, guid: db8d971d67174754d9795ab423d8e395, type: 3}
+  spriteSelected: {fileID: 21300000, guid: f8d74e7e6524e6444bf6d855b188a929, type: 3}
 --- !u!1001 &1730901810
 PrefabInstance:
   m_ObjectHideFlags: 0
