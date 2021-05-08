@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_pointsLeftForTheTurn);
+        Debug.Log(_playerInventory.GetNumberOfGivenTilesInInventory(ETileType.Floor));
     }
 
     /// <summary>Moves player to the given tile</summary>
@@ -66,9 +66,12 @@ public class Player : MonoBehaviour
             return;
 
         var veryTopTile = baseTile.HighestTileFromAbove;
-        if(!veryTopTile.IsPlayerAbleToPlaceTileAbove(tileToPlace, this))
+        if (!veryTopTile.IsPlayerAbleToPlaceTileAbove(tileToPlace, this))
+        {
+            _playerInventory.AddTile(tileToPlace);
             return;
-        
+        }
+
         veryTopTile.PlaceTileAbove(tileToPlace);
         
         SubtractActivePoints(tileToPlace.TileData.PointsToPlace);
