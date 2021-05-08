@@ -16,7 +16,6 @@ public class ModeSelection : MonoBehaviour
         _inputMaster.Main.MovementMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[0]);
         _inputMaster.Main.DestructionMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[1]);
         _inputMaster.Main.PFloorMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[2]);
-        _inputMaster.Main.PWallMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[3]);
     }
 
     void OnEnable()
