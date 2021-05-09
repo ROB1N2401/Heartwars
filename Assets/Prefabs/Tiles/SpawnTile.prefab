@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2993432660312187396
+--- !u!1 &4144599852254894122
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2292779702561214487}
-  - component: {fileID: 7100646379699841569}
-  - component: {fileID: 3582078220681860824}
-  - component: {fileID: 205477878696169856}
-  - component: {fileID: 5445044846110641979}
-  - component: {fileID: 4866429110331894699}
+  - component: {fileID: 1143855222278122041}
+  - component: {fileID: 8251945802915893263}
+  - component: {fileID: 2429768518042397942}
+  - component: {fileID: 1356812417599613870}
+  - component: {fileID: 6601982171995501845}
+  - component: {fileID: 6018880308484247941}
   m_Layer: 9
-  m_Name: SideTile
+  m_Name: SpawnTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2292779702561214487
+--- !u!4 &1143855222278122041
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
+  m_GameObject: {fileID: 4144599852254894122}
   m_LocalRotation: {x: 0.6830127, y: -0.18301274, z: 0.18301274, w: 0.6830127}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,21 +35,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 30}
---- !u!33 &7100646379699841569
+--- !u!33 &8251945802915893263
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
+  m_GameObject: {fileID: 4144599852254894122}
   m_Mesh: {fileID: -5076798556035486163, guid: cbef8b077ec81e44fac34f9517163d67, type: 3}
---- !u!23 &3582078220681860824
+--- !u!23 &2429768518042397942
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
+  m_GameObject: {fileID: 4144599852254894122}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -82,13 +82,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &205477878696169856
+--- !u!114 &1356812417599613870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
+  m_GameObject: {fileID: 4144599852254894122}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -100,13 +100,13 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!64 &5445044846110641979
+--- !u!64 &6601982171995501845
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
+  m_GameObject: {fileID: 4144599852254894122}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -114,20 +114,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5076798556035486163, guid: cbef8b077ec81e44fac34f9517163d67, type: 3}
---- !u!114 &4866429110331894699
+--- !u!114 &6018880308484247941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
+  m_GameObject: {fileID: 4144599852254894122}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cdd5fc8ba3507a41bf573647432c541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileData: {fileID: 11400000, guid: 6f864d015835e2e468ab2f0ee105a329, type: 2}
-  tileSide: 0
-  buildingIgnoreSides: 
+  tileData: {fileID: 11400000, guid: 7faff41c27a129243bb0e2c4f02f540e, type: 2}
+  tileSide: 1
+  buildingIgnoreSides: 01000000
   playerPositionOffset: {x: 0, y: 0.02, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}

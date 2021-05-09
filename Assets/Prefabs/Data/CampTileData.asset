@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 915689872dce2ae4a8622cbd861f02a3, type: 3}
-  m_Name: SideTileData
+  m_Name: CampTileData
   m_EditorClassIdentifier: 
   isWalkable: 1
   isDestroyable: 1

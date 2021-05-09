@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796004207678323586}
   m_LocalRotation: {x: 0.6830127, y: -0.18301274, z: 0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: -1.1, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,7 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileData: {fileID: 11400000, guid: bd7bdf9402842c04d9f26c09bee659e1, type: 2}
+  tileSide: 0
+  buildingIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0, z: 0}
+  tileAbovePositionOffset: {x: 0, y: 0, z: 0}
 --- !u!64 &1822163298151239967
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] protected TileData tileData;
     [SerializeField] protected ESide tileSide;
+    [SerializeField] protected ESide[] buildingIgnoreSides;
+    [Header("Offset options")]
     [SerializeField] protected Vector3 playerPositionOffset;
     [SerializeField] protected Vector3 tileAbovePositionOffset;
     
@@ -121,12 +123,12 @@ public class Tile : MonoBehaviour
     {
         bool isPlayerAbleToDestroyDueToItsSide = tileData.IsDestroyable;
 
-        if (tileData.IgnoreSides.Length > 0)
+        if (buildingIgnoreSides.Length > 0)
         {
             if (tileData.IsDestroyable)
-                isPlayerAbleToDestroyDueToItsSide = !tileData.IgnoreSides.Contains(player.Side);
+                isPlayerAbleToDestroyDueToItsSide = !buildingIgnoreSides.Contains(player.Side);
             if (!tileData.IsDestroyable)
-                isPlayerAbleToDestroyDueToItsSide = tileData.IgnoreSides.Contains(player.Side);
+                isPlayerAbleToDestroyDueToItsSide = buildingIgnoreSides.Contains(player.Side);
         }
 
         return !IsPlayerOnTile &&
