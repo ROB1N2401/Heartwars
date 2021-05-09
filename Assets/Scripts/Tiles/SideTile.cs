@@ -5,7 +5,7 @@ using UnityEngine;
 public class SideTile : Tile
 {
     private Renderer _renderer;
-    private void Awake()
+    protected virtual void Awake()
     {
         _renderer = GetComponent<Renderer>();
         
@@ -17,6 +17,8 @@ public class SideTile : Tile
     {
         if(side == ESide.Neutral)
             throw new ArgumentException("Side tile can not be neutral");
+
+        tileSide = side;
 
         switch (side)
         {

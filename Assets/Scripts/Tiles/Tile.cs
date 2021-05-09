@@ -1,21 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     [SerializeField] protected TileData tileData;
-    public ESide tileSide;
+    [SerializeField] protected ESide tileSide;
     [SerializeField] protected Vector3 playerPositionOffset;
     [SerializeField] protected Vector3 tileAbovePositionOffset;
     
     public TileData TileData => tileData;
-    // public ESide TileSide => tileSide;
+    public ESide TileSide => tileSide;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
 
     protected bool IsPlayerOnTile => _player != null;
-    protected bool CanBeDestroyed => !IsPlayerOnTile && tileData.IsDestroyable && neighbourTiles.aboveTile == null;
     protected Player _player;
-    protected (Tile aboveTile, Tile underTile) neighbourTiles;
+    protected (Tile aboveTile, Tile underTile) _neighbourTiles;
 
 
     protected virtual void Start()
@@ -28,14 +28,14 @@ public class Tile : MonoBehaviour
         {
             var aboveTile = hit.transform.GetComponent<Tile>();
             if(aboveTile != null)
-                neighbourTiles.aboveTile = aboveTile;
+                _neighbourTiles.aboveTile = aboveTile;
         }
     
         if (Physics.Raycast(rayToTheBottom, out hit))
         {
             var underTile = hit.transform.GetComponent<Tile>();
             if(underTile != null)
-                neighbourTiles.underTile = underTile;
+                _neighbourTiles.underTile = underTile;
         }
     }
 
@@ -54,12 +54,12 @@ public class Tile : MonoBehaviour
     {
         get
         {
-            if (neighbourTiles.aboveTile == null)
+            if (_neighbourTiles.aboveTile == null)
                 return this;
             
             var highest = this;
-            while (highest.neighbourTiles.aboveTile != null)
-                highest = highest.neighbourTiles.aboveTile; 
+            while (highest._neighbourTiles.aboveTile != null)
+                highest = highest._neighbourTiles.aboveTile; 
 
             return highest;
         }
@@ -70,12 +70,12 @@ public class Tile : MonoBehaviour
     {
         get
         {
-            if (neighbourTiles.underTile == null)
+            if (_neighbourTiles.underTile == null)
                 return this;
             
             var lowest = this;
-            while (lowest.neighbourTiles.underTile != null)
-                lowest = lowest.neighbourTiles.underTile; 
+            while (lowest._neighbourTiles.underTile != null)
+                lowest = lowest._neighbourTiles.underTile; 
 
             return lowest;
         }
@@ -84,16 +84,16 @@ public class Tile : MonoBehaviour
     /// <summary>Hides tile (if possible)</summary>
     public virtual void DestroyTile()
     {
-        if(neighbourTiles.aboveTile != null)
+        if(_neighbourTiles.aboveTile != null)
             return;
         
-        var underTile = neighbourTiles.underTile;
+        var underTile = _neighbourTiles.underTile;
         
         if(underTile != null)
-            underTile.neighbourTiles.aboveTile = null;
+            underTile._neighbourTiles.aboveTile = null;
 
-        neighbourTiles.aboveTile = null;
-        neighbourTiles.underTile = null;
+        _neighbourTiles.aboveTile = null;
+        _neighbourTiles.underTile = null;
         
         gameObject.SetActive(false);
     }
@@ -117,19 +117,33 @@ public class Tile : MonoBehaviour
     /// <summary>Checks if given player able to destroy this tile</summary>
     /// <param name="player">Player for which condition will be checked</param>
     /// <returns>Returns true if player can destroy this tile. Otherwise returns false</returns>
-    public bool IsPlayerAbleToDestroy(Player player) =>
-        CanBeDestroyed &&
-        player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
+    public bool IsPlayerAbleToDestroy(Player player)
+    {
+        bool isPlayerAbleToDestroyDueToItsSide = tileData.IsDestroyable;
+
+        if (tileData.IgnoreSides.Length > 0)
+        {
+            if (tileData.IsDestroyable)
+                isPlayerAbleToDestroyDueToItsSide = !tileData.IgnoreSides.Contains(player.Side);
+            if (!tileData.IsDestroyable)
+                isPlayerAbleToDestroyDueToItsSide = tileData.IgnoreSides.Contains(player.Side);
+        }
+
+        return !IsPlayerOnTile &&
+               isPlayerAbleToDestroyDueToItsSide &&
+               _neighbourTiles.aboveTile == null &&
+               player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
+    }
 
     /// <summary>Places tile above this tile</summary>
     /// <param name="tileToAdd">Tile that will be placed above this tile</param>
     public void PlaceTileAbove(Tile tileToAdd)
     {
-        if(tileToAdd == null || neighbourTiles.aboveTile != null)
+        if(tileToAdd == null || _neighbourTiles.aboveTile != null)
             return;
         
-        neighbourTiles.aboveTile = tileToAdd;
-        tileToAdd.neighbourTiles.underTile = this;
+        _neighbourTiles.aboveTile = tileToAdd;
+        tileToAdd._neighbourTiles.underTile = this;
 
         tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
         tileToAdd.gameObject.SetActive(true);
