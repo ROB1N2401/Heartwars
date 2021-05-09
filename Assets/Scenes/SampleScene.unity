@@ -1889,7 +1889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 4d7574f21a45d314487a32e809213bea, type: 2}
-  side: 4
+  side: 1
   spawnPoint: {fileID: 1885902433}
   attachedTile: {fileID: 0}
 --- !u!114 &253605908
@@ -4239,7 +4239,7 @@ MonoBehaviour:
       type: 3}
     tileType: 3
     keyThatSelectsTile: 259
-  - blueprintPrefab: {fileID: 4805164233135818034, guid: f00dac8cbb51c48448102e3f8b5987c6,
+  - blueprintPrefab: {fileID: 796004207678323586, guid: f753e2118c9397a44bde6ec3e9590e28,
       type: 3}
     tileType: 5
     keyThatSelectsTile: 260

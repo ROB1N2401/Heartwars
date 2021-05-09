@@ -5,16 +5,20 @@ using UnityEngine;
 public class SideTile : Tile
 {
     private Renderer _renderer;
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
-        
-        if(tileSide == ESide.Neutral)
-            throw new ArgumentException("Side tile can not be neutral");
-        
         _renderer = GetComponent<Renderer>();
         
-        switch (tileSide)
+        if(tileSide != ESide.Neutral)
+            AssignSide(tileSide);
+    }
+
+    public void AssignSide(ESide side)
+    {
+        if(side == ESide.Neutral)
+            throw new ArgumentException("Side tile can not be neutral");
+
+        switch (side)
         {
             case ESide.Blue:
                 _renderer.material.color = Color.blue;
