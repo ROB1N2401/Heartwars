@@ -25,3 +25,6 @@ MonoBehaviour:
   - tilePrefab: {fileID: 2993432660312187396, guid: f00dac8cbb51c48448102e3f8b5987c6,
       type: 3}
     numberOfTilesInInventory: 5
+  - tilePrefab: {fileID: 7772089332642910705, guid: 11b2c809c2efe8e4c876a2bd084b73be,
+      type: 3}
+    numberOfTilesInInventory: 5

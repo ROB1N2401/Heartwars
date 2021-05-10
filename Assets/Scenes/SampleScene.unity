@@ -4243,6 +4243,10 @@ MonoBehaviour:
       type: 3}
     tileType: 5
     keyThatSelectsTile: 260
+  - blueprintPrefab: {fileID: 3417522543189066578, guid: 00d92c9babae9f64895ceb6c30873cd9,
+      type: 3}
+    tileType: 4
+    keyThatSelectsTile: 261
 --- !u!114 &548298069
 MonoBehaviour:
   m_ObjectHideFlags: 0

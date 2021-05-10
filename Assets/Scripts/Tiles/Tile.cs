@@ -40,7 +40,10 @@ public class Tile : MonoBehaviour
                 _neighbourTiles.underTile = underTile;
         }
     }
-
+    
+    //todo debug
+    private Vector3 _direction;
+    private Vector3 _start;
     protected void OnDrawGizmos()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
@@ -49,6 +52,9 @@ public class Tile : MonoBehaviour
         
         Gizmos.DrawRay(rayToTheUp);
         Gizmos.DrawRay(rayToTheBottom);
+        
+        // Gizmos.color = Color.black;
+        // Gizmos.DrawRay(_start, _direction);
     }
 
     /// <summary>Return the very top tile above this one. In case there is no tiles above, this tile will be returned</summary>
@@ -178,5 +184,28 @@ public class Tile : MonoBehaviour
         
         _player.attachedTile = null;
         _player = null;
+    }
+    
+    public Tile GetTileFromOppositeDirection(Tile neighbourOppositeTile)
+    {
+        if (neighbourOppositeTile == null)
+            return null;
+        neighbourOppositeTile = neighbourOppositeTile.LowestTileFromUnderneath;
+
+        var positionOfTheBaseTile = LowestTileFromUnderneath.transform.position;
+        var directionOfTheOppositeTile = neighbourOppositeTile.transform.position - positionOfTheBaseTile;
+        directionOfTheOppositeTile = -directionOfTheOppositeTile.normalized;
+
+        //todo debug
+        _direction = directionOfTheOppositeTile;
+        _start = positionOfTheBaseTile;
+        
+        var rayToTheOppositeTile = new Ray(positionOfTheBaseTile, directionOfTheOppositeTile);
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayToTheOppositeTile, out hit)) 
+            return hit.transform.GetComponent<Tile>();
+
+        return null;
     }
 }
