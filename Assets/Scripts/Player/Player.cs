@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
+        if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint.TileSide != Side || spawnPoint == null )
+            throw new ArgumentException("SpawnPoint has to be Spawn type, have the same side as player and be non null");
         attachedTile = spawnPoint;
         attachedTile.PlacePlayer(this);
         _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
@@ -117,7 +119,8 @@ public class Player : MonoBehaviour
     {
         _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
         
-        attachedTile.RemovePlayer();
+        if(attachedTile != null)
+            attachedTile.RemovePlayer();
         if (spawnPoint == null)
         {
             gameObject.SetActive(false);

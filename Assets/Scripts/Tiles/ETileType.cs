@@ -5,5 +5,6 @@
     Wall,
     Ice,
     Springboard,
-    SideBlock
+    SideBlock,
+    Spawn
 }

@@ -11,16 +11,28 @@ public class PlayerInventory : MonoBehaviour
     public int NumberOfItems => _items.Sum(pair => pair.Value.Count);
     public int TotalBonusPoints => _items.Sum(pair => pair.Value.Sum(tile => tile.TileData.BonusPoints));
 
-
+    private Player _player;
     private void Start()
     {
+        _player = GetComponent<Player>();
+        if(_player == null)
+            throw new NullReferenceException("Player component is not attached to the game object");
+
         foreach (var tileEntry in inventoryData.InitialTiles)
         {
             for (var i = 0; i < tileEntry.numberOfTilesInInventory; i++)
             {
                 var tile = Instantiate(tileEntry.tilePrefab).GetComponent<Tile>();
+                
                 if (tile == null)
                     continue;
+
+                if (tile.TileData.TileType == ETileType.SideBlock)
+                {
+                    var sideBlock = tile as SideTile;
+                    if(sideBlock != null)
+                        sideBlock.AssignSide(_player.Side);
+                }
 
                 AddTile(tile);
                 tile.gameObject.SetActive(false);
