@@ -42,8 +42,6 @@ public class Tile : MonoBehaviour
     }
     
     //todo debug
-    private Vector3 _direction;
-    private Vector3 _start;
     protected void OnDrawGizmos()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
@@ -195,10 +193,6 @@ public class Tile : MonoBehaviour
         var directionOfTheOppositeTile = neighbourOppositeTile.transform.position - positionOfTheBaseTile;
         directionOfTheOppositeTile = -directionOfTheOppositeTile.normalized;
 
-        //todo debug
-        _direction = directionOfTheOppositeTile;
-        _start = positionOfTheBaseTile;
-        
         var rayToTheOppositeTile = new Ray(positionOfTheBaseTile, directionOfTheOppositeTile);
         RaycastHit hit;
 
