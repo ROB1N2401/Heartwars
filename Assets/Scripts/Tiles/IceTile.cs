@@ -18,9 +18,10 @@
 
         destinationTile = destinationTile.HighestTileFromAbove;
         
-        if (destinationTile.TileData.IsWalkable)
-            destinationTile.PlacePlayer(player);
-        else if(destinationTile.TileData.TileType == ETileType.Void)
-            player.Die();
+        destinationTile.PlacePlayer(player);
+        // if (destinationTile.TileData.IsWalkable)
+        //     destinationTile.PlacePlayer(player);
+        // else if(destinationTile.TileData.TileType == ETileType.Void)
+        //     player.Die();
     }
 }
