@@ -9,28 +9,35 @@ public class TrampolineTile : Tile
             return;
         
         var path = GetPathOfTilesToTheOppositeTileWithGap(player.attachedTile, 3);
-        var destinationTile = path[path.Count - 1].HighestTileFromAbove;
+        Tile destinationTile = this;
 
         //Gets last walkable tile from the path
-        for (var i = path.Count - 1; i > -1; i--)
+        if (path.Count > 0)
         {
-            if (destinationTile.TileData.IsWalkable)
+            for (var i = path.Count - 1; i > -1; i--)
             {
-                destinationTile = path[i].HighestTileFromAbove;
-                break;
+                var tileOnPath = path[i].HighestTileFromAbove;
+
+                if (tileOnPath.TileData.IsWalkable || tileOnPath.TileData.TileType == ETileType.Void)
+                {
+                    destinationTile = tileOnPath;
+                    break;
+                }
             }
         }
-        
-        //todo debug
-        _pos1 = LowestTileFromUnderneath.transform.position;
-        _pos2 = path[path.Count - 1].transform.position;
-        foreach(var tile in path)
-            Debug.Log(tile.HighestTileFromAbove);
-        
-        if(destinationTile.TileData.TileType == ETileType.Void)
-            player.Die();
         else
-            destinationTile.PlacePlayer(player); 
+        {
+            player.Die();
+            return;
+        }
+
+        if (destinationTile == this)
+        {
+            base.PlacePlayer(player);
+            return;
+        }
+
+        destinationTile.PlacePlayer(player); 
     }
 
     private List<Tile> GetPathOfTilesToTheOppositeTileWithGap(Tile neighbourOppositeTile, int gap)
@@ -61,14 +68,5 @@ public class TrampolineTile : Tile
         }
 
         return path;
-    }
-
-
-    //todo debug
-    private Vector3 _pos1, _pos2;
-    private new void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(_pos1, _pos2);
     }
 }

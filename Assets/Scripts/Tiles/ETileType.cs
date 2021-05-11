@@ -6,5 +6,6 @@
     Ice,
     Trampoline,
     SideBlock,
-    Spawn
+    Spawn,
+    Bonus
 }
