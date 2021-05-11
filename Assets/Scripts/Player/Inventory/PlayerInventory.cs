@@ -20,7 +20,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (var tileEntry in inventoryData.InitialTiles)
         {
-            for (var i = 0; i < tileEntry.numberOfTilesInInventory; i++)
+            for (var i = 0; i < tileEntry.initialNumberOfTilesInInventory; i++)
             {
                 var tile = Instantiate(tileEntry.tilePrefab).GetComponent<Tile>();
                 

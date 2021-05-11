@@ -165,16 +165,15 @@ public class Tile : MonoBehaviour
         if(player.attachedTile != null)
             player.attachedTile.RemovePlayer();
         
-        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
-        {
-            RemovePlayer();
-            player.Die();
-            return;
-        }
-        
         _player = player;
         player.attachedTile = this;
         player.transform.position = transform.position + playerPositionOffset;
+        
+        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
+        {
+            player.Die();
+            RemovePlayer();
+        }
     }
 
     public void RemovePlayer()

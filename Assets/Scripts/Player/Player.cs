@@ -117,8 +117,12 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        if (_playerInventory.GetNumberOfGivenTilesInInventory(ETileType.Bonus) > 0)
+            while (_playerInventory.GetNumberOfGivenTilesInInventory(ETileType.Bonus) > 0)
+                attachedTile.HighestTileFromAbove.PlaceTileAbove(_playerInventory.TakeTileFromInventory(ETileType.Bonus));
+
         _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
-        
+
         if(attachedTile != null)
             attachedTile.RemovePlayer();
         if (spawnPoint == null)
