@@ -5,7 +5,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] protected TileData tileData;
     [SerializeField] protected ESide tileSide;
-    [SerializeField] protected ESide[] buildingIgnoreSides;
+    [SerializeField] protected ESide[] destructionIgnoreSides;
     [Header("Offset options")]
     [SerializeField] protected Vector3 playerPositionOffset;
     [SerializeField] protected Vector3 tileAbovePositionOffset;
@@ -40,7 +40,8 @@ public class Tile : MonoBehaviour
                 _neighbourTiles.underTile = underTile;
         }
     }
-
+    
+    //todo debug
     protected void OnDrawGizmos()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
@@ -49,6 +50,9 @@ public class Tile : MonoBehaviour
         
         Gizmos.DrawRay(rayToTheUp);
         Gizmos.DrawRay(rayToTheBottom);
+        
+        // Gizmos.color = Color.black;
+        // Gizmos.DrawRay(_start, _direction);
     }
 
     /// <summary>Return the very top tile above this one. In case there is no tiles above, this tile will be returned</summary>
@@ -123,12 +127,12 @@ public class Tile : MonoBehaviour
     {
         bool isPlayerAbleToDestroyDueToItsSide = tileData.IsDestroyable;
 
-        if (buildingIgnoreSides.Length > 0)
+        if (destructionIgnoreSides.Length > 0)
         {
             if (tileData.IsDestroyable)
-                isPlayerAbleToDestroyDueToItsSide = !buildingIgnoreSides.Contains(player.Side);
+                isPlayerAbleToDestroyDueToItsSide = !destructionIgnoreSides.Contains(player.Side);
             if (!tileData.IsDestroyable)
-                isPlayerAbleToDestroyDueToItsSide = buildingIgnoreSides.Contains(player.Side);
+                isPlayerAbleToDestroyDueToItsSide = destructionIgnoreSides.Contains(player.Side);
         }
 
         return !IsPlayerOnTile &&
@@ -159,16 +163,15 @@ public class Tile : MonoBehaviour
         if(player.attachedTile != null)
             player.attachedTile.RemovePlayer();
         
-        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
-        {
-            RemovePlayer();
-            player.Die();
-            return;
-        }
-        
         _player = player;
         player.attachedTile = this;
         player.transform.position = transform.position + playerPositionOffset;
+        
+        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
+        {
+            player.Die();
+            RemovePlayer();
+        }
     }
 
     public void RemovePlayer()
@@ -178,5 +181,24 @@ public class Tile : MonoBehaviour
         
         _player.attachedTile = null;
         _player = null;
+    }
+    
+    public Tile GetTileFromOppositeDirection(Tile neighbourOppositeTile)
+    {
+        if (neighbourOppositeTile == null)
+            return null;
+        neighbourOppositeTile = neighbourOppositeTile.LowestTileFromUnderneath;
+
+        var positionOfTheBaseTile = LowestTileFromUnderneath.transform.position;
+        var directionOfTheOppositeTile = neighbourOppositeTile.transform.position - positionOfTheBaseTile;
+        directionOfTheOppositeTile = -directionOfTheOppositeTile.normalized;
+
+        var rayToTheOppositeTile = new Ray(positionOfTheBaseTile, directionOfTheOppositeTile);
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayToTheOppositeTile, out hit)) 
+            return hit.transform.GetComponent<Tile>();
+
+        return null;
     }
 }

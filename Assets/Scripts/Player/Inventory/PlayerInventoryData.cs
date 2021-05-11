@@ -13,5 +13,5 @@ public class PlayerInventoryData : ScriptableObject
 public class InitialTileEntry
 {
     public GameObject tilePrefab;
-    [Min(0)] public int numberOfTilesInInventory = 0;
+    [Min(0)] public int initialNumberOfTilesInInventory = 0;
 }

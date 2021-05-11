@@ -4,7 +4,8 @@
     Floor,
     Wall,
     Ice,
-    Springboard,
+    Trampoline,
     SideBlock,
-    Spawn
+    Spawn,
+    Bonus
 }

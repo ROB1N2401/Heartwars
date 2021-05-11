@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 915689872dce2ae4a8622cbd861f02a3, type: 3}
-  m_Name: VoidData
+  m_Name: BonusTile
   m_EditorClassIdentifier: 
-  isWalkable: 0
-  isDestroyable: 0
+  isWalkable: 1
+  isDestroyable: 1
   pointsToDestroy: 0
-  tileType: 0
+  tileType: 7
   isPlaceable: 0
-  isAllowedToBuildTilesAbove: 1
+  isAllowedToBuildTilesAbove: 0
   pointsToPlace: 0
-  bonusPoints: 0
+  bonusPoints: 2

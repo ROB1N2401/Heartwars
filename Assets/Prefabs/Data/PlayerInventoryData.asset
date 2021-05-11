@@ -15,13 +15,16 @@ MonoBehaviour:
   initialTiles:
   - tilePrefab: {fileID: 7069068485134100718, guid: c5917d40fde89364781c02ac518dd064,
       type: 3}
-    numberOfTilesInInventory: 5
+    initialNumberOfTilesInInventory: 5
   - tilePrefab: {fileID: 796004207678323586, guid: af8fc6cfce337bf4395dfe53f2a6f97f,
       type: 3}
-    numberOfTilesInInventory: 5
+    initialNumberOfTilesInInventory: 5
   - tilePrefab: {fileID: 6942776103765952007, guid: 78b031a2db2067e4ab3af052f0341352,
       type: 3}
-    numberOfTilesInInventory: 5
+    initialNumberOfTilesInInventory: 5
   - tilePrefab: {fileID: 2993432660312187396, guid: f00dac8cbb51c48448102e3f8b5987c6,
       type: 3}
-    numberOfTilesInInventory: 5
+    initialNumberOfTilesInInventory: 5
+  - tilePrefab: {fileID: 7772089332642910705, guid: 11b2c809c2efe8e4c876a2bd084b73be,
+      type: 3}
+    initialNumberOfTilesInInventory: 5
