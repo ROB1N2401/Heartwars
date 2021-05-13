@@ -43,7 +43,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""P Wall Mode"",
+                    ""name"": ""Pushing Mode"",
                     ""type"": ""Button"",
                     ""id"": ""96f98c9b-c696-404c-918d-e5ca9e746b7b"",
                     ""expectedControlType"": ""Button"",
@@ -116,7 +116,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""P Wall Mode"",
+                    ""action"": ""Pushing Mode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -180,7 +180,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Main_MovementMode = m_Main.FindAction("Movement Mode", throwIfNotFound: true);
         m_Main_DestructionMode = m_Main.FindAction("Destruction Mode", throwIfNotFound: true);
         m_Main_PFloorMode = m_Main.FindAction("P Floor Mode", throwIfNotFound: true);
-        m_Main_PWallMode = m_Main.FindAction("P Wall Mode", throwIfNotFound: true);
+        m_Main_PushingMode = m_Main.FindAction("Pushing Mode", throwIfNotFound: true);
         m_Main_PIceMode = m_Main.FindAction("P Ice Mode", throwIfNotFound: true);
         m_Main_PColouredTileMode = m_Main.FindAction("P Coloured Tile Mode", throwIfNotFound: true);
         m_Main_PTrampolineMode = m_Main.FindAction("P Trampoline Mode", throwIfNotFound: true);
@@ -236,7 +236,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_MovementMode;
     private readonly InputAction m_Main_DestructionMode;
     private readonly InputAction m_Main_PFloorMode;
-    private readonly InputAction m_Main_PWallMode;
+    private readonly InputAction m_Main_PushingMode;
     private readonly InputAction m_Main_PIceMode;
     private readonly InputAction m_Main_PColouredTileMode;
     private readonly InputAction m_Main_PTrampolineMode;
@@ -247,7 +247,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @MovementMode => m_Wrapper.m_Main_MovementMode;
         public InputAction @DestructionMode => m_Wrapper.m_Main_DestructionMode;
         public InputAction @PFloorMode => m_Wrapper.m_Main_PFloorMode;
-        public InputAction @PWallMode => m_Wrapper.m_Main_PWallMode;
+        public InputAction @PushingMode => m_Wrapper.m_Main_PushingMode;
         public InputAction @PIceMode => m_Wrapper.m_Main_PIceMode;
         public InputAction @PColouredTileMode => m_Wrapper.m_Main_PColouredTileMode;
         public InputAction @PTrampolineMode => m_Wrapper.m_Main_PTrampolineMode;
@@ -269,9 +269,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @PFloorMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPFloorMode;
                 @PFloorMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPFloorMode;
                 @PFloorMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPFloorMode;
-                @PWallMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPWallMode;
-                @PWallMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPWallMode;
-                @PWallMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPWallMode;
+                @PushingMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPushingMode;
+                @PushingMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPushingMode;
+                @PushingMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPushingMode;
                 @PIceMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPIceMode;
                 @PIceMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPIceMode;
                 @PIceMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPIceMode;
@@ -294,9 +294,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @PFloorMode.started += instance.OnPFloorMode;
                 @PFloorMode.performed += instance.OnPFloorMode;
                 @PFloorMode.canceled += instance.OnPFloorMode;
-                @PWallMode.started += instance.OnPWallMode;
-                @PWallMode.performed += instance.OnPWallMode;
-                @PWallMode.canceled += instance.OnPWallMode;
+                @PushingMode.started += instance.OnPushingMode;
+                @PushingMode.performed += instance.OnPushingMode;
+                @PushingMode.canceled += instance.OnPushingMode;
                 @PIceMode.started += instance.OnPIceMode;
                 @PIceMode.performed += instance.OnPIceMode;
                 @PIceMode.canceled += instance.OnPIceMode;
@@ -324,7 +324,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovementMode(InputAction.CallbackContext context);
         void OnDestructionMode(InputAction.CallbackContext context);
         void OnPFloorMode(InputAction.CallbackContext context);
-        void OnPWallMode(InputAction.CallbackContext context);
+        void OnPushingMode(InputAction.CallbackContext context);
         void OnPIceMode(InputAction.CallbackContext context);
         void OnPColouredTileMode(InputAction.CallbackContext context);
         void OnPTrampolineMode(InputAction.CallbackContext context);

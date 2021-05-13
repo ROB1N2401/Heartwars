@@ -11,15 +11,15 @@ public class Tile : MonoBehaviour
     [SerializeField] protected Vector3 tileAbovePositionOffset;
     
     public TileData TileData => tileData;
+    public Player AttachedPlayer => _attachedPlayer;
     public ESide TileSide => tileSide;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
 
-    protected bool IsPlayerOnTile => _player != null;
-    protected Player _player;
+    protected bool IsPlayerOnTile => _attachedPlayer != null;
+    protected Player _attachedPlayer;
     protected (Tile aboveTile, Tile underTile) _neighbourTiles;
-
-
+    
     protected virtual void Start()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
@@ -163,7 +163,7 @@ public class Tile : MonoBehaviour
         if(player.attachedTile != null)
             player.attachedTile.RemovePlayer();
         
-        _player = player;
+        _attachedPlayer = player;
         player.attachedTile = this;
         player.transform.position = transform.position + playerPositionOffset;
         
@@ -176,11 +176,11 @@ public class Tile : MonoBehaviour
 
     public void RemovePlayer()
     {
-        if(_player == null)
+        if(_attachedPlayer == null)
             return;
         
-        _player.attachedTile = null;
-        _player = null;
+        _attachedPlayer.attachedTile = null;
+        _attachedPlayer = null;
     }
     
     public Tile GetTileFromOppositeDirection(Tile neighbourOppositeTile)

@@ -113,7 +113,19 @@ public class Player : MonoBehaviour
         _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
-    public void PushOtherPlayer(Player player) => throw new NotImplementedException();
+    public void PushOtherPlayer(Player playerToPush)
+    {
+        if(playerToPush == null)
+            return;
+
+        var destinationTile = playerToPush.attachedTile.LowestTileFromUnderneath
+            .GetTileFromOppositeDirection(attachedTile.LowestTileFromUnderneath);
+        
+        if(destinationTile == null)
+            playerToPush.Die();
+        
+        destinationTile.HighestTileFromAbove.PlacePlayer(playerToPush);
+    }
 
     public void Die()
     {
@@ -125,7 +137,7 @@ public class Player : MonoBehaviour
 
         if(attachedTile != null)
             attachedTile.RemovePlayer();
-        if (spawnPoint == null)
+        if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
             gameObject.SetActive(false);
             return;

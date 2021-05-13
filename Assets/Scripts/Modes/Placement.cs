@@ -32,7 +32,7 @@ public class Placement : Mode
 
     private void Update()
     {
-        GetAdjacentTiles();
+        GetAdjacentTilesAndPlayers();
 
         var mousePointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

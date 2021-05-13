@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Wall Mode",
+                    "name": "Pushing Mode",
                     "type": "Button",
                     "id": "96f98c9b-c696-404c-918d-e5ca9e746b7b",
                     "expectedControlType": "Button",
@@ -103,7 +103,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "P Wall Mode",
+                    "action": "Pushing Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
