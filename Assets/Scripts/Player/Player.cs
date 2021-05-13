@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
 
         if(attachedTile != null)
             attachedTile.RemovePlayer();
-        if (spawnPoint == null)
+        if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
             gameObject.SetActive(false);
             return;
