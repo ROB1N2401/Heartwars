@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
@@ -62,6 +63,9 @@ public class Tile : MonoBehaviour
             if (_neighbourTiles.aboveTile == null)
                 return this;
             
+            if(_neighbourTiles.aboveTile == this)
+                throw new ApplicationException("Reference of a neighbour is set to itself");
+            
             var highest = this;
             while (highest._neighbourTiles.aboveTile != null)
                 highest = highest._neighbourTiles.aboveTile; 
@@ -77,6 +81,9 @@ public class Tile : MonoBehaviour
         {
             if (_neighbourTiles.underTile == null)
                 return this;
+            
+            if(_neighbourTiles.underTile == this)
+                throw new ApplicationException("Reference of a neighbour is set to itself");
             
             var lowest = this;
             while (lowest._neighbourTiles.underTile != null)
