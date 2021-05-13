@@ -4,7 +4,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     [SerializeField] protected TileData tileData;
-    [SerializeField] protected ESide tileSide;
+    public ESide tileSide;
     [SerializeField] protected ESide[] destructionIgnoreSides;
     [Header("Offset options")]
     [SerializeField] protected Vector3 playerPositionOffset;
@@ -12,7 +12,6 @@ public class Tile : MonoBehaviour
     
     public TileData TileData => tileData;
     public Player AttachedPlayer => _attachedPlayer;
-    public ESide TileSide => tileSide;
     public Vector3 PlayerPositionOffset => playerPositionOffset;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
 
