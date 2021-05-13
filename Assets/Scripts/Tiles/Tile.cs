@@ -39,6 +39,15 @@ public class Tile : MonoBehaviour
             if(underTile != null)
                 _neighbourTiles.underTile = underTile;
         }
+
+        if (_neighbourTiles.underTile == this)
+            _neighbourTiles.underTile = null;
+
+        if (_neighbourTiles.aboveTile == this)
+            _neighbourTiles.aboveTile = null;
+        
+        if(_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
+            throw new ApplicationException("Reference of a neighbour is set to itself");
     }
     
     //todo debug
