@@ -29,8 +29,8 @@ public class Movement : Mode
                    outline.enabled = true;
                
                //todo reduce hardcode
-               if (Input.GetMouseButtonDown(0)) 
-                    player.MoveTo(tile);
+               if (Input.GetMouseButtonDown(0))
+                    PlayerManager.Instance.CurrentPlayer.MoveTo(tile);
             } 
         }
     }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Mode : MonoBehaviour
 {
-    [SerializeField] protected Player player;
     [SerializeField] protected Vector3 raycastOffset;
     
     protected List<Tile> _adjacentTiles = new List<Tile>();
@@ -12,7 +11,8 @@ public class Mode : MonoBehaviour
     protected void GetAdjacentTilesAndPlayers()
     {
         _adjacentTiles.Clear();
-        var startPosition = player.attachedTile.LowestTileFromUnderneath.transform.position;
+        var startPosition = PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.position;
+        Debug.Log($"Player Name: {PlayerManager.Instance.CurrentPlayer.gameObject.name} \n Lowest Tile: {PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.name}");
         for (int i = 0; i < 6; i++)
         {
             RaycastHit hit = new RaycastHit();
@@ -68,17 +68,17 @@ public class Mode : MonoBehaviour
     
     protected virtual void OnDrawGizmos()
     {
-        var rayDown = new Ray(player.transform.position, Vector3.down);
+        var rayDown = new Ray(PlayerManager.Instance.CurrentPlayer.transform.position, Vector3.down);
         RaycastHit hit;
         Tile attachedTile = null;
         if (Physics.Raycast(rayDown, out hit))
             attachedTile = hit.transform.GetComponent<Tile>();
         if (attachedTile != null)
             attachedTile = attachedTile.LowestTileFromUnderneath;
-            
-        
+
         if (!isActiveAndEnabled)
             return;
+
         for (int i = 0; i < 6; i++)
         {
             Vector3 direction = new Vector3();

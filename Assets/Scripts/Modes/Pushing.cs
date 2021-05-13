@@ -38,7 +38,7 @@ public class Pushing : Mode
                 
                 //todo reduce hardcode
                 if (Input.GetMouseButtonDown(0))
-                    player.PushOtherPlayer(playerToPush);
+                    PlayerManager.Instance.CurrentPlayer.PushOtherPlayer(playerToPush);
             }
         }
     }
