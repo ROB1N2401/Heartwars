@@ -4,7 +4,7 @@ public class Destruction : Mode
 { 
     private void Update()
     {
-        GetAdjacentTiles();
+        GetAdjacentTilesAndPlayers();
 
         foreach (var go in _adjacentTiles)
         {

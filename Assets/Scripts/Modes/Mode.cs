@@ -7,8 +7,9 @@ public class Mode : MonoBehaviour
     [SerializeField] protected Vector3 raycastOffset;
     
     protected List<Tile> _adjacentTiles = new List<Tile>();
+    protected List<Player> _adjacentPlayers = new List<Player>();
     
-    protected void GetAdjacentTiles()
+    protected void GetAdjacentTilesAndPlayers()
     {
         _adjacentTiles.Clear();
         var startPosition = player.attachedTile.LowestTileFromUnderneath.transform.position;
@@ -52,7 +53,13 @@ public class Mode : MonoBehaviour
                 var tile = hit.transform.GetComponent<Tile>();
                 if (tile != null)
                 {
-                    _adjacentTiles.Add(tile.HighestTileFromAbove);
+                    var veryTopTile = tile.HighestTileFromAbove;
+                    var attachedPlayer = veryTopTile.AttachedPlayer;
+                    
+                    if (attachedPlayer != null)
+                        _adjacentPlayers.Add(attachedPlayer);
+                    
+                    _adjacentTiles.Add(veryTopTile);
                     _adjacentTiles.Add(tile);
                 }
             }

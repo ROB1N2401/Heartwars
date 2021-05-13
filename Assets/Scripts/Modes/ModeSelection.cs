@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 public class ModeSelection : MonoBehaviour
 {
@@ -16,6 +13,7 @@ public class ModeSelection : MonoBehaviour
         _inputMaster.Main.MovementMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[0]);
         _inputMaster.Main.DestructionMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[1]);
         _inputMaster.Main.PFloorMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[2]);
+        _inputMaster.Main.PushingMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[3]);
     }
 
     void OnEnable()
