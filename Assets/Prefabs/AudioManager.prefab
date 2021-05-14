@@ -107,24 +107,157 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: DestroyGround1
+    clip: {fileID: 8300000, guid: 976203dc1c513c344abd60ec1903dffb, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyGround2
+    clip: {fileID: 8300000, guid: 4b2f2da3483be28419434f96b3f0c855, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyGround3
+    clip: {fileID: 8300000, guid: 48038086a4f948a4baa1b5e20aab919c, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyStone1
+    clip: {fileID: 8300000, guid: 537f3aa7a9133524891040af684edb64, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyStone2
+    clip: {fileID: 8300000, guid: 1759d9b85a559184e817d09a09e3a012, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceIce1
+    clip: {fileID: 8300000, guid: 2b72b46933fb5204dbb6638ddc7abb21, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceIce2
+    clip: {fileID: 8300000, guid: c2aaf35a824763f428ca741af0b84905, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceIce3
+    clip: {fileID: 8300000, guid: 24eb8614c9afa0340ad9b7b956280993, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyIce1
+    clip: {fileID: 8300000, guid: f4eb71d2fd35ca749a88a6883467327a, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyIce2
+    clip: {fileID: 8300000, guid: 7bffe38b43987d6418dbd82deaffc3da, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyIce3
+    clip: {fileID: 8300000, guid: abce39548c58c0d47977a740640e31f4, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiChangeMode1
+    clip: {fileID: 8300000, guid: 3e5c89f056a728f4289e6004c0405ca1, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiChangeMode2
+    clip: {fileID: 8300000, guid: c0c9f97ac74c2794bbcafdddfb1579fe, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiChangeMode3
+    clip: {fileID: 8300000, guid: c3e0744790bec234395eba267323fe61, type: 3}
+    mix: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiHoverButton
+    clip: {fileID: 8300000, guid: 00a09e38bec78084c86bc6273d6bc40d, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiPressButton
+    clip: {fileID: 8300000, guid: e944e4f85a1380a4fabbd50310de9024, type: 3}
+    mix: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling1
+    clip: {fileID: 8300000, guid: e21415074176b26479a24e265349582b, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling2
+    clip: {fileID: 8300000, guid: e4d68d4d79c7c844f8b9acf8c2a15ab1, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling3
+    clip: {fileID: 8300000, guid: 350f227e31215244aad7ac66a91067ce, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: UraniumFever
     clip: {fileID: 8300000, guid: c7aab8f6e0446e449abd9451d343cc55, type: 3}
     mix: {fileID: 0}
-    volume: 0.25
+    volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CountryRoads
     clip: {fileID: 8300000, guid: 334a47cac17a0dd418b54bab224b80c2, type: 3}
     mix: {fileID: 0}
-    volume: 0.25
+    volume: 0.1
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: ScatmansWorld
     clip: {fileID: 8300000, guid: b21d98ca55417d24ab5f65d0947aa766, type: 3}
     mix: {fileID: 0}
-    volume: 0.25
+    volume: 0.1
     pitch: 1
     loop: 1
     source: {fileID: 0}
