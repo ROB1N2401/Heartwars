@@ -32,23 +32,9 @@ public class Player : MonoBehaviour
         _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
-    /// <summary>Moves player to the given tile</summary>
-    /// <param name="tile">Target tile where player will be moved</param>
-    public void MoveTo(Tile tile)
-    {
-        var topTile = tile.HighestTileFromAbove;
-        if(!topTile.IsPlayerAbleToMove(this))
-            return;
-
-        // attachedTile.RemovePlayer();
-        topTile.PlacePlayer(this);
-
-        SubtractActivePoints(playerData.PointsForMovementTaken);
-    }
-
     /// <summary>Checks if there is item available in players inventory</summary>
-    /// <param name="tileType">Tile type gor which condition will be checked</param>
-    /// <returns>Returns tru if such item available in the inventory. Otherwise returns false</returns>
+    /// <param name="tileType">Tile type for which condition will be checked</param>
+    /// <returns>Returns true if such item available in the inventory. Otherwise returns false</returns>
     public bool HasSuchItemInInventory(ETileType tileType)
     {
         if (_playerInventory.GetNumberOfGivenTilesInInventory(tileType) <= 0)
@@ -56,7 +42,10 @@ public class Player : MonoBehaviour
 
         return true;
     }
-    
+
+    /// <summary>Checks if there is item available in players inventory</summary>
+    /// <param name="tileType">Tile type for which condition will be checked</param>
+    /// <returns>Returns true if such item available in the inventory. Otherwise returns false</returns>
     public void PlaceTile(ETileType tileType, Tile baseTile)
     {
         var tileToPlace = _playerInventory.TakeTileFromInventory(tileType);
@@ -88,32 +77,23 @@ public class Player : MonoBehaviour
 
         SubtractActivePoints(topTile.TileData.PointsToDestroy);
     }
-
-    public Tile GetTileUnderneathWithRaycast()
+    
+    /// <summary>Moves player to the given tile</summary>
+    /// <param name="tile">Target tile where player will be moved</param>
+    public void MoveTo(Tile tile)
     {
-        var rayDownwards = new Ray(transform.position, Vector3.down);
-        RaycastHit hit;
+        var topTile = tile.HighestTileFromAbove;
+        if(!topTile.IsPlayerAbleToMove(this))
+            return;
 
-        if (Physics.Raycast(rayDownwards, out hit))
-            return hit.transform.GetComponent<Tile>();
+        // attachedTile.RemovePlayer();
+        topTile.PlacePlayer(this);
 
-        return null;
+        SubtractActivePoints(playerData.PointsForMovementTaken);
     }
-
-    /// <summary>Method that sets the conditions for player when its turn begins</summary>
-    public void StartTurn()
-    {
-        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
-        _isTurnTime = true;
-    }
-
-    /// <summary>Method that sets the conditions for player when its turn begins</summary>
-    public void EndTurn()
-    {
-        _isTurnTime = false;
-        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
-    }
-
+    
+    /// <summary>Pushes other player to the opposite direction</summary>
+    /// <param name="playerToPush">Player that will be pushed</param>
     public void PushOtherPlayer(Player playerToPush)
     {
         if(playerToPush == null)
@@ -128,6 +108,21 @@ public class Player : MonoBehaviour
         destinationTile.HighestTileFromAbove.PlacePlayer(playerToPush);
     }
 
+    /// <summary>Method that sets the conditions for player when its turn begins</summary>
+    public void StartTurn()
+    {
+        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+        _isTurnTime = true;
+    }
+
+    /// <summary>Method that sets the conditions for player when its turn ends</summary>
+    public void EndTurn()
+    {
+        _isTurnTime = false;
+        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+    }
+
+    /// <summary>Method that defines logic behind player death</summary>
     public void Die()
     {
         if (_playerInventory.GetNumberOfGivenTilesInInventory(ETileType.Bonus) > 0)
@@ -147,7 +142,9 @@ public class Player : MonoBehaviour
         MoveTo(spawnPoint);
         EndTurn();
     }
-
+    
+    /// <summary>Subtracts points left for turn for current player</summary>
+    /// <param name="pointsToSubtract">Amount of point to subtract</param>
     private void SubtractActivePoints(int pointsToSubtract)
     {
         pointsToSubtract = Mathf.Abs(pointsToSubtract);

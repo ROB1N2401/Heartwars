@@ -40,6 +40,10 @@ public class TrampolineTile : Tile
         destinationTile.PlacePlayer(player); 
     }
 
+    /// <summary>Gets all the tiles on the opposite direction of a given tile direction</summary>
+    /// <param name="neighbourOppositeTile">Tile for which opposite direction will be taken</param>
+    /// <param name="gap">Length of the path (in Tiles)</param>
+    /// <returns>Returns list of tiles of the path</returns>
     private List<Tile> GetPathOfTilesToTheOppositeTileWithGap(Tile neighbourOppositeTile, int gap)
     {
         if (neighbourOppositeTile == null)

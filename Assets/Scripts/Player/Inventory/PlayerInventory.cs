@@ -40,6 +40,9 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>Gets number of given TileType in the inventory</summary>
+    /// <param name="tileType">TileType for which selection will be made</param>
+    /// <returns>Returns number of given TileType in the inventor</returns>
     public int GetNumberOfGivenTilesInInventory(ETileType tileType)
     {
         if (!_items.ContainsKey(tileType))
@@ -48,6 +51,9 @@ public class PlayerInventory : MonoBehaviour
         return _items[tileType].Count;
     }
 
+    
+    /// <summary>Adds tile to players inventory</summary>
+    /// <param name="tileToAdd">Tile that will be added to the inventory</param>
     public void AddTile(Tile tileToAdd)
     {
         var itemType = tileToAdd.TileData.TileType;
@@ -61,6 +67,9 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>Finds tile of a given type, removes it from inventory and returns it</summary>
+    /// <param name="itemType">TileType that will be found in inventory</param>
+    /// <returns>Returns Tile if it is present in inventory. Otherwise returns null</returns>
     public Tile TakeTileFromInventory(ETileType itemType)
     {
         if(GetNumberOfGivenTilesInInventory(itemType) == 0)

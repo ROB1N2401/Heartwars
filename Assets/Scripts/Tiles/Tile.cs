@@ -20,6 +20,8 @@ public class Tile : MonoBehaviour
     protected Player _attachedPlayer;
     protected (Tile aboveTile, Tile underTile) _neighbourTiles;
     
+    /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
+    /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
         var rayToTheUp = new Ray(transform.position, -transform.forward);
@@ -39,7 +41,7 @@ public class Tile : MonoBehaviour
         }
 
         if (_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
-            throw new ApplicationException($"Reference of a neighbour is set to itself {gameObject.name}");
+            throw new ApplicationException($"Reference of a neighbour is set to itself inside {gameObject.name}");
     }
     
     //todo debug
@@ -89,23 +91,6 @@ public class Tile : MonoBehaviour
 
             return lowest;
         }
-    }
-
-    /// <summary>Hides tile (if possible)</summary>
-    public virtual void DestroyTile()
-    {
-        if(_neighbourTiles.aboveTile != null)
-            return;
-        
-        var underTile = _neighbourTiles.underTile;
-        
-        if(underTile != null)
-            underTile._neighbourTiles.aboveTile = null;
-
-        _neighbourTiles.aboveTile = null;
-        _neighbourTiles.underTile = null;
-        
-        gameObject.SetActive(false);
     }
     
     /// <summary>Checks if given player can step on this tile</summary>
@@ -159,6 +144,25 @@ public class Tile : MonoBehaviour
         tileToAdd.gameObject.SetActive(true);
     }
     
+    /// <summary>Hides tile (if possible)</summary>
+    public virtual void DestroyTile()
+    {
+        if(_neighbourTiles.aboveTile != null)
+            return;
+        
+        var underTile = _neighbourTiles.underTile;
+        
+        if(underTile != null)
+            underTile._neighbourTiles.aboveTile = null;
+
+        _neighbourTiles.aboveTile = null;
+        _neighbourTiles.underTile = null;
+        
+        gameObject.SetActive(false);
+    }
+    
+    /// <summary>Places given player above current tile</summary>
+    /// <param name="player">Player that will be placed above</param>
     public virtual void PlacePlayer(Player player)
     {
         if(player == null)
@@ -178,6 +182,7 @@ public class Tile : MonoBehaviour
         }
     }
 
+    /// <summary>Removes all attachments from this tile relative to player</summary>
     public void RemovePlayer()
     {
         if(_attachedPlayer == null)
@@ -187,6 +192,9 @@ public class Tile : MonoBehaviour
         _attachedPlayer = null;
     }
     
+    /// <summary>Gets tile from the opposite direction of a given tile</summary>
+    /// <param name="neighbourOppositeTile">Tile for which opposite direction will be taken</param>
+    /// <returns>Returns closest tile from opposite direction</returns>
     public Tile GetTileFromOppositeDirection(Tile neighbourOppositeTile)
     {
         if (neighbourOppositeTile == null)

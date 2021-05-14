@@ -9,6 +9,7 @@ public class Mode : MonoBehaviour
     protected List<Tile> _adjacentTiles = new List<Tile>();
     protected List<Player> _adjacentPlayers = new List<Player>();
     
+    /// <summary>Sets all adjacent tiles and players on it to the proper fields</summary>
     protected void GetAdjacentTilesAndPlayers()
     {
         _adjacentTiles.Clear();
@@ -66,6 +67,7 @@ public class Mode : MonoBehaviour
         }
     }
     
+    //todo debug
     protected virtual void OnDrawGizmos()
     {
         var rayDown = new Ray(player.transform.position, Vector3.down);
