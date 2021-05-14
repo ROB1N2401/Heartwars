@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour
     //To stop a sound/song, you instead write: AudioManager.instance.StopSound("Name of sound");
     //This is only useful for sounds that are played on a loop, as well as all songs.
 
-    //If you want to play a sound from inside this script instead of in another script, you can leave out the "AudioManager.instance." part of the code.
-    //If you want a sound effect to have a random pitch when it plays, make sure to make "randomize pitch" true before calling the sound. It will reset to false again once the sound has been played.
+    //If you want a sound effect to have a random pitch when it plays, you can use "AudioManager.instance.shouldRandomizePitch = true;" before calling the PlaySound function.
+    //If you want to play a sound from inside this script instead of in another script, you can leave out the "AudioManager.instance." part of the code. Same thing goes for changing shouldRandomizePitch.
 
     public Sound[] sounds;
     public static AudioManager instance;
@@ -26,7 +26,6 @@ public class AudioManager : MonoBehaviour
     private bool musicCanChange;
     private bool firstSong = true; //Why this bool exists is explained in the StopSound function
     public bool shouldRandomizePitch;
-    private int testSounds;
 
     public void Awake()
     {
@@ -61,7 +60,7 @@ public class AudioManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
-        if (sceneName == "MenuScene"/* || sceneName == "OtherMenuScene"*/) //Change these to reflect actual scenes later
+        if (sceneName == "MainMenu"/* || sceneName == "OtherMenuScene"*/) //Change these to reflect actual scenes later
         {
             this.currentScene = "Menu";
         }
@@ -74,36 +73,6 @@ public class AudioManager : MonoBehaviour
             this.currentScene = "Error";
         }
 
-        //if (Input.GetKeyDown("k"))
-        //{
-        //    shouldRandomizePitch = true;
-        //    testSounds = Random.Range(0, 5);
-        //    if (testSounds == 0)
-        //    {
-        //        PlaySound("MovePiece1");
-        //    }
-        //    else if (testSounds == 1)
-        //    {
-        //        PlaySound("MovePiece2");
-        //    }
-        //    else if (testSounds == 2)
-        //    {
-        //        PlaySound("MovePiece3");
-        //    }
-        //    else if (testSounds == 3)
-        //    {
-        //        PlaySound("MovePiece4");
-        //    }
-        //    else if (testSounds == 4)
-        //    {
-        //        PlaySound("MovePiece5");
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-        //}
-
 
         if (lastScene != this.currentScene || lastScene == null)
         {
@@ -115,19 +84,19 @@ public class AudioManager : MonoBehaviour
             if (this.currentScene == "Menu")
             {
                 StopSound(currentSong);
-                PlaySong("ScatmansWorld");
+                //PlaySong("ScatmansWorld");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Heartwars")
             {
                 StopSound(currentSong);
-                PlaySong("CountryRoads");
+                //PlaySong("CountryRoads");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Error")
             {
                 StopSound(currentSong);
-                PlaySong("UraniumFever");
+                //PlaySong("UraniumFever");
                 musicCanChange = false;
             }
         }
@@ -145,7 +114,7 @@ public class AudioManager : MonoBehaviour
 
         if (shouldRandomizePitch == true)
         {
-            s.source.pitch = Random.Range(0.95f, 1.05f);
+            s.source.pitch = Random.Range(0.90f, 1.1f);
             s.source.Play();
             shouldRandomizePitch = false;
         }
