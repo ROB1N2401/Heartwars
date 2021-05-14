@@ -5,12 +5,10 @@ using TMPro;
 
 public class ActionPointsInfo : MonoBehaviour
 {
-    private Player _playerRef = null;
     private TextMeshProUGUI _TMProRef = null;
 
     void Awake()
     {
-        _playerRef = FindObjectOfType<Player>();
         _TMProRef = GetComponent<TextMeshProUGUI>();
     }
 
@@ -23,7 +21,6 @@ public class ActionPointsInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"ref: {_playerRef.PointsLeftForTheTurn} ");
-        _TMProRef.text = _playerRef.PointsLeftForTheTurn.ToString();
+        _TMProRef.text = PlayerManager.Instance.CurrentPlayer.PointsLeftForTheTurn.ToString();
     }
 }
