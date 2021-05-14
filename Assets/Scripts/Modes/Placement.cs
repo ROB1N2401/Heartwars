@@ -54,6 +54,7 @@ public class Placement : Mode
                 {
                     //todo reduce hardcode
                     player.PlaceTile(_selectedBlueprintEntry.tileType, selectedTile);
+                    AudioManager.InvokePlacementSound(_selectedBlueprintEntry.tileType);
                 }
             }
         }

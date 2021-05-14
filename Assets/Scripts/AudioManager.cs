@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
     private bool musicCanChange;
     private bool firstSong = true; //Why this bool exists is explained in the StopSound function
     public bool shouldRandomizePitch;
+    private int randomizeSounds;
 
     public void Awake()
     {
@@ -101,6 +102,55 @@ public class AudioManager : MonoBehaviour
             }
         }
         lastScene = this.currentScene;
+    }
+
+
+    public static void InvokePlacementSound(ETileType type)
+    {
+        Debug.Log("Played sound " + type);
+        switch (type)
+        {
+            case ETileType.Void:
+                break;
+            case ETileType.Floor:
+                AudioManager.instance.shouldRandomizePitch = true;
+                instance.randomizeSounds = Random.Range(0, 4);
+                if (instance.randomizeSounds == 0)
+                {
+                    AudioManager.instance.PlaySound("PlaceGround1");
+                }
+                else if (instance.randomizeSounds == 1)
+                {
+                    AudioManager.instance.PlaySound("PlaceGround2");
+                }
+                else if (instance.randomizeSounds == 2)
+                {
+                    AudioManager.instance.PlaySound("PlaceGround3");
+                }
+                else if (instance.randomizeSounds == 3)
+                {
+                    AudioManager.instance.PlaySound("PlaceGround4");
+                }
+                else
+                {
+                    return;
+                }
+                break;
+            case ETileType.Wall:
+                break;
+            case ETileType.Ice:
+                break;
+            case ETileType.Trampoline:
+                break;
+            case ETileType.SideBlock:
+                break;
+            case ETileType.Spawn:
+                break;
+            case ETileType.Bonus:
+                break;
+            default:
+                break;
+        }
     }
 
     public void PlaySound(string name)
