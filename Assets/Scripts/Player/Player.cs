@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     {
         _playerInventory = GetComponent<PlayerInventory>();
         if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint == null)
-            throw new ArgumentException("SpawnPoint has to be Spawn type, have the same side as player and be non null");
+            throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
         spawnPoint.tileSide = side;
         attachedTile = spawnPoint;
         attachedTile.PlacePlayer(this);

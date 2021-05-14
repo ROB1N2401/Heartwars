@@ -26,28 +26,20 @@ public class Tile : MonoBehaviour
         var rayToTheBottom = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         
-        if (Physics.Raycast(rayToTheUp, out hit))
+        if (Physics.Raycast(rayToTheUp, out hit, 5f))
         {
             var aboveTile = hit.transform.GetComponent<Tile>();
-            if(aboveTile != null)
-                _neighbourTiles.aboveTile = aboveTile;
+            _neighbourTiles.aboveTile = aboveTile;
         }
     
-        if (Physics.Raycast(rayToTheBottom, out hit))
+        if (Physics.Raycast(rayToTheBottom, out hit, 5f))
         {
             var underTile = hit.transform.GetComponent<Tile>();
-            if(underTile != null)
-                _neighbourTiles.underTile = underTile;
+            _neighbourTiles.underTile = underTile;
         }
 
-        if (_neighbourTiles.underTile == this)
-            _neighbourTiles.underTile = null;
-
-        if (_neighbourTiles.aboveTile == this)
-            _neighbourTiles.aboveTile = null;
-        
-        if(_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
-            throw new ApplicationException("Reference of a neighbour is set to itself");
+        if (_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
+            throw new ApplicationException($"Reference of a neighbour is set to itself {gameObject.name}");
     }
     
     //todo debug
@@ -59,9 +51,6 @@ public class Tile : MonoBehaviour
         
         Gizmos.DrawRay(rayToTheUp);
         Gizmos.DrawRay(rayToTheBottom);
-        
-        // Gizmos.color = Color.black;
-        // Gizmos.DrawRay(_start, _direction);
     }
 
     /// <summary>Return the very top tile above this one. In case there is no tiles above, this tile will be returned</summary>
