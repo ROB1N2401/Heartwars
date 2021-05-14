@@ -84,19 +84,19 @@ public class AudioManager : MonoBehaviour
             if (this.currentScene == "Menu")
             {
                 StopSound(currentSong);
-                //PlaySong("ScatmansWorld");
+                PlaySong("ScatmansWorld");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Heartwars")
             {
                 StopSound(currentSong);
-                //PlaySong("CountryRoads");
+                PlaySong("CountryRoads");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Error")
             {
                 StopSound(currentSong);
-                //PlaySong("UraniumFever");
+                PlaySong("UraniumFever");
                 musicCanChange = false;
             }
         }
