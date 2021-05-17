@@ -142,6 +142,7 @@ public class Tile : MonoBehaviour
 
         tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
         tileToAdd.gameObject.SetActive(true);
+        AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
     }
     
     /// <summary>Hides tile (if possible)</summary>
@@ -159,6 +160,7 @@ public class Tile : MonoBehaviour
         _neighbourTiles.underTile = null;
         
         gameObject.SetActive(false);
+        AudioManager.InvokeDestructionSound(TileData.TileType);
     }
     
     /// <summary>Places given player above current tile</summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PlayerInventory))]
 public class Player : MonoBehaviour
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     private bool _isTurnTime = false;
     private int _pointsLeftForTheTurn = 0;
     private PlayerInventory _playerInventory;
+    private int randomizeSounds;
 
     private void Start()
     {
@@ -90,6 +92,33 @@ public class Player : MonoBehaviour
         topTile.PlacePlayer(this);
 
         SubtractActivePoints(playerData.PointsForMovementTaken);
+
+        AudioManager.instance.shouldRandomizePitch = true;
+        randomizeSounds = Random.Range(0, 5);
+        if (randomizeSounds == 0)
+        {
+            AudioManager.instance.PlaySound("MovePiece1");
+        }
+        else if (randomizeSounds == 1)
+        {
+            AudioManager.instance.PlaySound("MovePiece2");
+        }
+        else if (randomizeSounds == 2)
+        {
+            AudioManager.instance.PlaySound("MovePiece3");
+        }
+        else if (randomizeSounds == 3)
+        {
+            AudioManager.instance.PlaySound("MovePiece4");
+        }
+        else if (randomizeSounds == 4)
+        {
+            AudioManager.instance.PlaySound("MovePiece5");
+        }
+        else
+        {
+            return;
+        }
     }
     
     /// <summary>Pushes other player to the opposite direction</summary>
@@ -131,7 +160,26 @@ public class Player : MonoBehaviour
 
         _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
 
-        if(attachedTile != null)
+        AudioManager.instance.shouldRandomizePitch = true;
+        randomizeSounds = Random.Range(0, 3);
+        if (randomizeSounds == 0)
+        {
+            AudioManager.instance.PlaySound("Falling1");
+        }
+        else if (randomizeSounds == 1)
+        {
+            AudioManager.instance.PlaySound("Falling2");
+        }
+        else if (randomizeSounds == 2)
+        {
+            AudioManager.instance.PlaySound("Falling3");
+        }
+        else
+        {
+            return;
+        }
+
+        if (attachedTile != null)
             attachedTile.RemovePlayer();
         if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
