@@ -3939,9 +3939,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  spriteIdle: {fileID: 21300000, guid: 191d32b0ceef1c547bcac9a46413e94f, type: 3}
-  spriteHovered: {fileID: 21300000, guid: 19ed5ae029c86aa469b9ee1e3218168a, type: 3}
-  spriteSelected: {fileID: 21300000, guid: 4691d4e53e4e5a94bb90b71b0b00ed11, type: 3}
+  spriteIdle: {fileID: 21300000, guid: 8386750c41e34f5438584ef9d72ca5d2, type: 3}
+  spriteHovered: {fileID: 21300000, guid: 3f05575e1df7d134097899fb1a57e724, type: 3}
+  spriteSelected: {fileID: 21300000, guid: 2a321f795352ba242a16144d06179018, type: 3}
 --- !u!1001 &460185887
 PrefabInstance:
   m_ObjectHideFlags: 0
