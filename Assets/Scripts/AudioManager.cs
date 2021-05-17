@@ -207,12 +207,54 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Wall:
+                instance.randomizeSounds = Random.Range(0, 2);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyStone1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyStone2");
+                        break;
+                    case 2:
+                        break;
+                }
                 break;
             case ETileType.Ice:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyIce1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyIce2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("DestroyIce3");
+                        break;
+                    case 3:
+                        break;
+                }
                 break;
             case ETileType.Trampoline:
                 break;
             case ETileType.SideBlock:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyGround1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyGround2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("DestroyGround3");
+                        break;
+                    case 3:
+                        break;
+                }
                 break;
             case ETileType.Spawn:
                 break;
