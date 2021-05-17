@@ -181,6 +181,46 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public static void InvokeDestructionSound(ETileType type)
+    {
+        AudioManager.instance.shouldRandomizePitch = true;
+        Debug.Log("Played sound " + type);
+        switch (type)
+        {
+            case ETileType.Void:
+                break;
+            case ETileType.Floor:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyGround1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyGround2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("DestroyGround3");
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case ETileType.Wall:
+                break;
+            case ETileType.Ice:
+                break;
+            case ETileType.Trampoline:
+                break;
+            case ETileType.SideBlock:
+                break;
+            case ETileType.Spawn:
+                break;
+            case ETileType.Bonus:
+                break;
+        }
+    }
+
     public void PlaySound(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

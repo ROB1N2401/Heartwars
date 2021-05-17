@@ -32,7 +32,10 @@ public class Destruction : Mode
                 
                 //todo reduce hardcode
                 if (Input.GetMouseButtonDown(0))
+                {
                     player.DestroyTopTile(tile);
+                    AudioManager.InvokeDestructionSound(tile.TileData.TileType);
+                }
             }
         }
     }
