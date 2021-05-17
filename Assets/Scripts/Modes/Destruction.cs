@@ -34,7 +34,7 @@ public class Destruction : Mode
                 if (Input.GetMouseButtonDown(0))
                 {
                     player.DestroyTopTile(tile);
-                    AudioManager.InvokeDestructionSound(tile.TileData.TileType);
+                    
                 }
             }
         }
