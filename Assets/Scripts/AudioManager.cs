@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
             musicCanChange = true;
         }
 
-        if (musicCanChange == true)
+        if (musicCanChange)
         {
             if (this.currentScene == "Menu")
             {
@@ -104,6 +104,49 @@ public class AudioManager : MonoBehaviour
         lastScene = this.currentScene;
     }
 
+    public static void InvokeWalkingSound()
+    {
+        instance.shouldRandomizePitch = true;
+        var randomizeSounds = Random.Range(0, 3);
+        
+        switch (randomizeSounds)
+        {
+            case 0:
+                AudioManager.instance.PlaySound("MovePiece1");
+                break;
+            case 1:
+                AudioManager.instance.PlaySound("MovePiece2");
+                break;
+            case 2:
+                AudioManager.instance.PlaySound("MovePiece3");
+                break;
+            case 3:
+                AudioManager.instance.PlaySound("MovePiece4");
+                break;
+            default:
+                AudioManager.instance.PlaySound("MovePiece5");
+                break;
+        }
+    }
+
+    public static void InvokeDeathSound()
+    {
+        instance.shouldRandomizePitch = true;
+        var randomizeSounds = Random.Range(0, 3);
+        
+        switch (randomizeSounds)
+        {
+            case 0:
+                AudioManager.instance.PlaySound("Falling1");
+                break;
+            case 1:
+                AudioManager.instance.PlaySound("Falling2");
+                break;
+            default:
+                AudioManager.instance.PlaySound("Falling3");
+                break;
+        }
+    }
 
     public static void InvokePlacementSound(ETileType type)
     {
@@ -272,7 +315,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (shouldRandomizePitch == true)
+        if (shouldRandomizePitch)
         {
             s.source.pitch = Random.Range(0.90f, 1.1f);
             s.source.Play();
