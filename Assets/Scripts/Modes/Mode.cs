@@ -70,6 +70,9 @@ public class Mode : MonoBehaviour
     //todo debug
     protected virtual void OnDrawGizmos()
     {
+        if(PlayerManager.Instance == null)
+            return;
+            
         var rayDown = new Ray(PlayerManager.Instance.CurrentPlayer.transform.position, Vector3.down);
         RaycastHit hit;
         Tile attachedTile = null;
@@ -77,14 +80,14 @@ public class Mode : MonoBehaviour
             attachedTile = hit.transform.GetComponent<Tile>();
         if (attachedTile != null)
             attachedTile = attachedTile.LowestTileFromUnderneath;
-
+        
         if (!isActiveAndEnabled)
             return;
-
+        
         for (int i = 0; i < 6; i++)
         {
             Vector3 direction = new Vector3();
-
+        
             switch (i)
             {
                 case 0:
@@ -109,7 +112,7 @@ public class Mode : MonoBehaviour
                     Debug.LogError("Failed to assign a direction");
                     break;
             }
-
+        
             Debug.DrawRay(attachedTile.transform.position + raycastOffset, direction);
         }
     }
