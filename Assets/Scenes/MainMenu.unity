@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 464372589}
   - component: {fileID: 464372588}
   - component: {fileID: 464372587}
+  - component: {fileID: 464372590}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
@@ -626,6 +627,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464372585}
   m_CullTransparentMesh: 0
+--- !u!114 &464372590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464372585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1047211861}
+          m_MethodName: PlaySound
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UiHoverButton
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &468979528
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +882,7 @@ GameObject:
   - component: {fileID: 1012105949}
   - component: {fileID: 1012105948}
   - component: {fileID: 1012105947}
+  - component: {fileID: 1012105950}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -982,6 +1012,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012105945}
   m_CullTransparentMesh: 0
+--- !u!114 &1012105950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012105945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1047211861}
+          m_MethodName: PlaySound
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UiHoverButton
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1047211861 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4222376495304023269, guid: 25e99edf17ba8dd42a7344f2154108c9,
@@ -1293,6 +1351,7 @@ GameObject:
   - component: {fileID: 1735706213}
   - component: {fileID: 1735706212}
   - component: {fileID: 1735706211}
+  - component: {fileID: 1735706214}
   m_Layer: 5
   m_Name: 'QuitButton '
   m_TagString: Untagged
@@ -1422,6 +1481,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735706209}
   m_CullTransparentMesh: 0
+--- !u!114 &1735706214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735706209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1047211861}
+          m_MethodName: PlaySound
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UiHoverButton
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1865887990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,6 +1521,7 @@ GameObject:
   - component: {fileID: 1865887994}
   - component: {fileID: 1865887993}
   - component: {fileID: 1865887992}
+  - component: {fileID: 1865887995}
   m_Layer: 5
   m_Name: 'BackButton '
   m_TagString: Untagged
@@ -1574,6 +1662,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865887990}
   m_CullTransparentMesh: 0
+--- !u!114 &1865887995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865887990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1047211861}
+          m_MethodName: PlaySound
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: UiHoverButton
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1905449765
 GameObject:
   m_ObjectHideFlags: 0
