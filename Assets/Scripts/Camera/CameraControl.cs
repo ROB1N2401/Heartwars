@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class CameraControl : MonoBehaviour
@@ -16,15 +18,55 @@ public class CameraControl : MonoBehaviour
     public Vector3 highestPositionForCamera;
 
     private Camera _camera;
+    private bool _isControllable = false;
 
-    private void Start() => _camera = GetComponent<Camera>();
+    private void Start()
+    {
+        _camera = GetComponent<Camera>();
+        _isControllable = true;
+    }
 
     private void Update()
     {
+        if (!_isControllable)
+            return;
+
         MoveCamera();
         RotateCamera();
     }
-    
+
+    public void FocusCameraAboveObject(GameObject focusObject)
+    {
+        if(focusObject == null)
+            return;
+        
+        var cameraPositionY = transform.position.y;
+        var xDistance = Mathf.Tan(transform.eulerAngles.x) * cameraPositionY;
+        var endPos = focusObject.transform.position + Vector3.back * xDistance + Vector3.up * cameraPositionY;
+
+        StartCoroutine(SmoothTransition(endPos, 0));
+    }
+
+    private IEnumerator SmoothTransition(Vector3 endPos, float endRotationY)
+    {
+        _isControllable = false;
+        var yRotation = transform.eulerAngles.y;
+        const float speed = 8f;
+
+        var velocity = Vector3.zero;
+        while (transform.position != endPos || Math.Abs(transform.eulerAngles.y - endRotationY) > .001f)
+        {
+
+            yRotation = Mathf.LerpAngle(yRotation, endRotationY, Time.deltaTime * speed);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
+            transform.position = Vector3.SmoothDamp(transform.position, endPos, ref velocity, .15f);
+
+            yield return null;
+        }
+
+        _isControllable = true;
+    }
+
     private void MoveCamera()
     {
         float directionForward = 0, directionLeft = 0;

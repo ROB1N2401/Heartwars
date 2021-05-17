@@ -50,11 +50,10 @@ public class Placement : Mode
                 DrawSelectedBlueprint(selectedTile);
                 
                 //todo reduce hardcode
-                if (Input.GetMouseButtonDown(0) && player.HasSuchItemInInventory(_selectedBlueprintEntry.tileType))
+                if (Input.GetMouseButtonDown(0) && PlayerManager.Instance.CurrentPlayer.HasSuchItemInInventory(_selectedBlueprintEntry.tileType))
                 {
                     //todo reduce hardcode
-                    player.PlaceTile(_selectedBlueprintEntry.tileType, selectedTile);
-                    
+                    PlayerManager.Instance.CurrentPlayer.PlaceTile(_selectedBlueprintEntry.tileType, selectedTile);
                 }
             }
         }
