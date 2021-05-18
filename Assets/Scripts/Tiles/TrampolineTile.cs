@@ -11,6 +11,12 @@ public class TrampolineTile : Tile
         var path = GetPathOfTilesToTheOppositeTileWithGap(player.attachedTile, 3);
         Tile destinationTile = this;
 
+        if (path.Count < 3)
+        {
+            player.Die();
+            return;
+        }
+
         //Gets last walkable tile from the path
         if (path.Count > 0)
         {
