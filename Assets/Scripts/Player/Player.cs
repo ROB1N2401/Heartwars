@@ -95,16 +95,21 @@ public class Player : MonoBehaviour
     /// <param name="playerToPush">Player that will be pushed</param>
     public void PushOtherPlayer(Player playerToPush)
     {
-        if(playerToPush == null)
+        if(playerToPush == null || PointsLeftForTheTurn < playerData.PointsForPushTaken)
             return;
+        
+        SubtractActivePoints(playerData.PointsForPushTaken);
 
         var destinationTile = playerToPush.attachedTile.LowestTileFromUnderneath
             .GetTileFromOppositeDirection(attachedTile.LowestTileFromUnderneath);
         
         if(destinationTile == null)
             playerToPush.Die();
-        
-        destinationTile.HighestTileFromAbove.PlacePlayer(playerToPush);
+
+        destinationTile = destinationTile.HighestTileFromAbove;
+
+        if (destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void)
+            destinationTile.PlacePlayer(playerToPush);
     }
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>
