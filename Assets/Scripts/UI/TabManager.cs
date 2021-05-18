@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TabManager : MonoBehaviour
 { 
     private TabButton _selectedTab = null;
     private List<TabButton> _tabButtonEntry = null;
+    private int randomizeSounds;
 
     public TabButton SelectedTab { get => _selectedTab; set => _selectedTab = value; }
     public List<TabButton> TabButtonEntry => _tabButtonEntry;
@@ -30,6 +32,25 @@ public class TabManager : MonoBehaviour
             _selectedTab = button_in;
             button_in.SetActiveSprite();
             button_in.SelectionEvent.Invoke();
+            AudioManager.instance.shouldRandomizePitch = true;
+
+            randomizeSounds = Random.Range(0, 3);
+            if (randomizeSounds == 0)
+            {
+                AudioManager.instance.PlaySound("UiChangeMode1");
+            }
+            else if (randomizeSounds == 1)
+            {
+                AudioManager.instance.PlaySound("UiChangeMode2");
+            }
+            else if (randomizeSounds == 2)
+            {
+                AudioManager.instance.PlaySound("UiChangeMode3");
+            }
+            else
+            {
+                return;
+            }
         }
     }
 

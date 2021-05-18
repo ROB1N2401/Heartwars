@@ -17,9 +17,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public Tile attachedTile;
     public Tile SpawnPoint => spawnPoint;
     public ESide Side => side;
-    
-    private PlayerInventory _playerInventory;
 
+    private PlayerInventory _playerInventory;
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
@@ -84,11 +83,12 @@ public class Player : MonoBehaviour
         var topTile = tile.HighestTileFromAbove;
         if(!topTile.IsPlayerAbleToMove(this))
             return;
-
-        // attachedTile.RemovePlayer();
+        
         topTile.PlacePlayer(this);
 
         SubtractActivePoints(playerData.PointsForMovementTaken);
+        
+        AudioManager.InvokeWalkingSound();
     }
     
     /// <summary>Pushes other player to the opposite direction</summary>
@@ -130,15 +130,17 @@ public class Player : MonoBehaviour
 
         PointsLeftForTheTurn = playerData.PointsForMovementTaken;
 
-        if(attachedTile != null)
+        if (attachedTile != null)
             attachedTile.RemovePlayer();
         if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
             gameObject.SetActive(false);
             IsAlive = false;
+            AudioManager.InvokeDeathSound();
             return;
         }
         
+        AudioManager.InvokeDeathSound();
         MoveTo(spawnPoint);
         EndTurn();
     }
