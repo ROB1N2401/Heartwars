@@ -5265,7 +5265,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3553784554131343581}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242711550}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1515315b12103bc449e4c2f12a1bde57, type: 3}
@@ -7838,7 +7838,6 @@ MonoBehaviour:
   rotationSpeed: 100
   lowestPositionForCamera: {x: -900, y: -200, z: -100}
   highestPositionForCamera: {x: 900, y: 800, z: 600}
-  debug: {fileID: 1242711550}
 --- !u!1001 &980765350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9837,12 +9836,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7024204346851997131, guid: 00d92c9babae9f64895ceb6c30873cd9,
     type: 3}
   m_PrefabInstance: {fileID: 1235140563}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1242711550 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8794557037143398825, guid: 12797b0b9e8fe9f418d6a438e15aa4a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3553784554131343581}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1246309521
 PrefabInstance:
@@ -16784,6 +16777,16 @@ PrefabInstance:
     - target: {fileID: 6018880308484247941, guid: 87b53a8c56552634b99081b2ddfa56a5,
         type: 3}
       propertyPath: tileSide
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018880308484247941, guid: 87b53a8c56552634b99081b2ddfa56a5,
+        type: 3}
+      propertyPath: destructionIgnoreSides.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018880308484247941, guid: 87b53a8c56552634b99081b2ddfa56a5,
+        type: 3}
+      propertyPath: destructionIgnoreSides.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

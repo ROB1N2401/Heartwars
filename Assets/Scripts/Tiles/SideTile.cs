@@ -1,16 +1,55 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
 public class SideTile : Tile
 {
     private Renderer _renderer;
-    protected virtual void Awake()
+    private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         
         if(tileSide != ESide.Neutral)
             AssignSide(tileSide);
+    }
+
+    public override bool IsPlayerAbleToDestroy(Player player)
+    {
+        bool isPlayerAbleToDestroyDueToItsSide = tileData.IsDestroyable;
+        bool isPlayerAbleToDestroyDueToTileType = !IsPlayerOnTile || tileData.TileType == ETileType.Spawn;
+
+        if (destructionIgnoreSides.Length > 0)
+        {
+            if (tileData.IsDestroyable)
+                isPlayerAbleToDestroyDueToItsSide = !destructionIgnoreSides.Contains(player.Side);
+            if (!tileData.IsDestroyable)
+                isPlayerAbleToDestroyDueToItsSide = destructionIgnoreSides.Contains(player.Side);
+        }
+        
+        return isPlayerAbleToDestroyDueToTileType &&
+               isPlayerAbleToDestroyDueToItsSide &&
+               _neighbourTiles.aboveTile == null &&
+               player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
+    }
+
+    public override void DestroyTile()
+    {
+        if(_neighbourTiles.aboveTile != null)
+            return;
+        
+        var underTile = _neighbourTiles.underTile;
+        
+        if(underTile != null) 
+            underTile._neighbourTiles.aboveTile = null;
+
+        _neighbourTiles.aboveTile = null;
+        _neighbourTiles.underTile = null;
+        
+        gameObject.SetActive(false);
+        AudioManager.InvokeDestructionSound(TileData.TileType);
+        
+        underTile.PlacePlayer(_attachedPlayer);
     }
 
     public void AssignSide(ESide side)
