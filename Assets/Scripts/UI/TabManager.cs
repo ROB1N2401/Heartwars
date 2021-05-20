@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ public class TabManager : MonoBehaviour
 { 
     private TabButton _selectedTab = null;
     private List<TabButton> _tabButtonEntry = null;
+
+    public static Action<TabButton> SelectButton;
+    public static Action<TabButton> DeselectButton;
 
     public TabButton SelectedTab { get => _selectedTab; set => _selectedTab = value; }
     public List<TabButton> TabButtonEntry => _tabButtonEntry;
@@ -18,25 +22,19 @@ public class TabManager : MonoBehaviour
         {
             _tabButtonEntry.Add(transform.GetChild(i).GetComponent<TabButton>());
         }
+        for (int i = 0; i < _tabButtonEntry.Count; i++)
+        {
+            _tabButtonEntry[i].GetComponent<TabButton>().Id = i;
+        }
     }
 
     public void Select(TabButton button_in)
     {
-        if(_selectedTab != button_in)
-        {
-            if(_selectedTab != null)
-                DeselectActiveButton();
-
-            _selectedTab = button_in;
-            button_in.SetActiveSprite();
-            button_in.SelectionEvent.Invoke();
-        }
+        SelectButton?.Invoke(button_in);
     }
 
-    private void DeselectActiveButton()
+    public void Deselect(TabButton button_in)
     {
-        _selectedTab.ResetSprite();
-        _selectedTab.DeselectionEvent.Invoke();
-        _selectedTab = null;
+        DeselectButton?.Invoke(button_in);
     }
 }

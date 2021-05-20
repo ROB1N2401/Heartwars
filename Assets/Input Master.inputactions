@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Floor Mode",
+                    "name": "Placement Mode",
                     "type": "Button",
                     "id": "100637e0-a587-4647-ac51-eb1f99fb130e",
                     "expectedControlType": "Button",
@@ -33,6 +33,22 @@
                     "name": "Pushing Mode",
                     "type": "Button",
                     "id": "96f98c9b-c696-404c-918d-e5ca9e746b7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P Floor Mode",
+                    "type": "Button",
+                    "id": "fe8153f1-2df5-46d6-9207-f14e6c9061b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P Wall Mode",
+                    "type": "Button",
+                    "id": "3a999a1f-d274-4122-bcc2-2021578fe72e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -57,6 +73,14 @@
                     "name": "P Trampoline Mode",
                     "type": "Button",
                     "id": "4b574a3f-d6cf-4a39-9784-263d59fda33a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Undo Action",
+                    "type": "Button",
+                    "id": "b1bf0437-cfad-4284-bfd3-8ca6dae50756",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -92,7 +116,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "P Floor Mode",
+                    "action": "Placement Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -110,7 +134,7 @@
                 {
                     "name": "",
                     "id": "129a0848-3858-4ec2-b262-922789865e52",
-                    "path": "<Keyboard>/5",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
@@ -121,7 +145,7 @@
                 {
                     "name": "",
                     "id": "de8d6535-7694-417c-9981-bc8d3b8e40dd",
-                    "path": "<Keyboard>/6",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
@@ -132,11 +156,44 @@
                 {
                     "name": "",
                     "id": "403389f5-951c-41af-a626-8e5599581857",
-                    "path": "<Keyboard>/7",
+                    "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "P Trampoline Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45b3dd8a-e050-437b-8953-01aeb16546cc",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Undo Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e5abe0c0-b120-45a9-ab6b-1ab2ea732e0e",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "P Floor Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "533400ce-cfd3-4f6f-8307-cf2f3253960f",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P Wall Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
