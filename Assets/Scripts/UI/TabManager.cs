@@ -34,7 +34,7 @@ public class TabManager : MonoBehaviour
             button_in.SelectionEvent.Invoke();
             AudioManager.instance.shouldRandomizePitch = true;
 
-            randomizeSounds = Random.Range(0, 3);
+            randomizeSounds = Random.Range(0, 2);
             if (randomizeSounds == 0)
             {
                 AudioManager.instance.PlaySound("UiChangeMode1");
@@ -42,10 +42,6 @@ public class TabManager : MonoBehaviour
             else if (randomizeSounds == 1)
             {
                 AudioManager.instance.PlaySound("UiChangeMode2");
-            }
-            else if (randomizeSounds == 2)
-            {
-                AudioManager.instance.PlaySound("UiChangeMode3");
             }
             else
             {

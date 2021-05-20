@@ -187,35 +187,35 @@ MonoBehaviour:
   - name: UiChangeMode1
     clip: {fileID: 8300000, guid: 3e5c89f056a728f4289e6004c0405ca1, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiChangeMode2
     clip: {fileID: 8300000, guid: c0c9f97ac74c2794bbcafdddfb1579fe, type: 3}
     mix: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: UiChangeMode3
-    clip: {fileID: 8300000, guid: c3e0744790bec234395eba267323fe61, type: 3}
-    mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiHoverButton
-    clip: {fileID: 8300000, guid: 00a09e38bec78084c86bc6273d6bc40d, type: 3}
+    clip: {fileID: 8300000, guid: c3e0744790bec234395eba267323fe61, type: 3}
     mix: {fileID: 0}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiPressButton
-    clip: {fileID: 8300000, guid: e944e4f85a1380a4fabbd50310de9024, type: 3}
+    clip: {fileID: 8300000, guid: 00a09e38bec78084c86bc6273d6bc40d, type: 3}
     mix: {fileID: 0}
     volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: I don't feel like moving up the entire list lol
+    clip: {fileID: 8300000, guid: e944e4f85a1380a4fabbd50310de9024, type: 3}
+    mix: {fileID: 0}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
