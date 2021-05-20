@@ -8,31 +8,12 @@ using UnityEngine.EventSystems;
 public class ModeButton : TabButton
 {
     [Header("Images")]
-    [SerializeField] private Sprite spriteIdle;
-    [SerializeField] private Sprite spriteHovered;
     [SerializeField] private Sprite spriteSelected;
 
+    // Start is called before the first frame update
     private void Start()
     {
         ResetSprite();
-    }
-
-    private void OnEnable()
-    {
-        TabManager.SelectButton += OnSelect;
-        TabManager.DeselectButton += OnDeSelect;
-    }
-
-    private void OnDisable()
-    {
-        TabManager.SelectButton -= OnSelect;
-        TabManager.DeselectButton -= OnDeSelect;
-    }
-
-    private void OnDestroy()
-    {
-        TabManager.SelectButton -= OnSelect;
-        TabManager.DeselectButton -= OnDeSelect;
     }
 
     protected override void OnSelect(TabButton tabButton_in)
@@ -54,6 +35,7 @@ public class ModeButton : TabButton
     protected override void OnDeSelect(TabButton tabButton_in)
     {
         ResetSprite();
+        BrightenImage();
         tabButton_in.DeselectionEvent.Invoke();
     }
 
@@ -69,13 +51,13 @@ public class ModeButton : TabButton
     public override void OnPointerEnter(PointerEventData eventData)
     {
         if (this != tabManagerRef.SelectedTab)
-            imageRef.sprite = spriteHovered;
+            DarkenImage();
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
         if (this != tabManagerRef.SelectedTab)
-            ResetSprite();
+            BrightenImage();
     }
 
     public void ResetSprite()

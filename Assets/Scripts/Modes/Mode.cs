@@ -13,7 +13,7 @@ public class Mode : MonoBehaviour
     {
         _adjacentTiles.Clear();
         var startPosition = PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.position;
-        Debug.Log($"Player Name: {PlayerManager.Instance.CurrentPlayer.gameObject.name} \n Lowest Tile: {PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.name}");
+        //Debug.Log($"Player Name: {PlayerManager.Instance.CurrentPlayer.gameObject.name} \n Lowest Tile: {PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.name}");
         for (int i = 0; i < 6; i++)
         {
             RaycastHit hit = new RaycastHit();
