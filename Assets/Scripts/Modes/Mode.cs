@@ -13,7 +13,7 @@ public class Mode : MonoBehaviour
     {
         _adjacentTiles.Clear();
         var startPosition = PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.position;
-        Debug.Log($"Player Name: {PlayerManager.Instance.CurrentPlayer.gameObject.name} \n Lowest Tile: {PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.name}");
+        //Debug.Log($"Player Name: {PlayerManager.Instance.CurrentPlayer.gameObject.name} \n Lowest Tile: {PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.name}");
         for (int i = 0; i < 6; i++)
         {
             RaycastHit hit = new RaycastHit();
@@ -68,52 +68,49 @@ public class Mode : MonoBehaviour
     }
     
     //todo debug
-    protected virtual void OnDrawGizmos()
-    {
-        if(PlayerManager.Instance == null)
-            return;
-            
-        var rayDown = new Ray(PlayerManager.Instance.CurrentPlayer.transform.position, Vector3.down);
-        RaycastHit hit;
-        Tile attachedTile = null;
-        if (Physics.Raycast(rayDown, out hit))
-            attachedTile = hit.transform.GetComponent<Tile>();
-        if (attachedTile != null)
-            attachedTile = attachedTile.LowestTileFromUnderneath;
-        
-        if (!isActiveAndEnabled)
-            return;
-        
-        for (int i = 0; i < 6; i++)
-        {
-            Vector3 direction = new Vector3();
-        
-            switch (i)
-            {
-                case 0:
-                    direction = new Vector3(1, 0, 0);
-                    break;
-                case 1:
-                    direction = new Vector3(1, 0, -1);
-                    break;
-                case 2:
-                    direction = new Vector3(-1, 0, -1);
-                    break;
-                case 3:
-                    direction = new Vector3(-1, 0, 0);
-                    break;
-                case 4:
-                    direction = new Vector3(-1, 0, 1);
-                    break;
-                case 5:
-                    direction = new Vector3(1, 0, 1);
-                    break;
-                default:
-                    Debug.LogError("Failed to assign a direction");
-                    break;
-            }
-        
-            Debug.DrawRay(attachedTile.transform.position + raycastOffset, direction);
-        }
-    }
+    //protected virtual void OnDrawGizmos()
+    //{
+    //    var rayDown = new Ray(PlayerManager.Instance.CurrentPlayer.transform.position, Vector3.down);
+    //    RaycastHit hit;
+    //    Tile attachedTile = null;
+    //    if (Physics.Raycast(rayDown, out hit))
+    //        attachedTile = hit.transform.GetComponent<Tile>();
+    //    if (attachedTile != null)
+    //        attachedTile = attachedTile.LowestTileFromUnderneath;
+
+    //    if (!isActiveAndEnabled)
+    //        return;
+
+    //    for (int i = 0; i < 6; i++)
+    //    {
+    //        Vector3 direction = new Vector3();
+
+    //        switch (i)
+    //        {
+    //            case 0:
+    //                direction = new Vector3(1, 0, 0);
+    //                break;
+    //            case 1:
+    //                direction = new Vector3(1, 0, -1);
+    //                break;
+    //            case 2:
+    //                direction = new Vector3(-1, 0, -1);
+    //                break;
+    //            case 3:
+    //                direction = new Vector3(-1, 0, 0);
+    //                break;
+    //            case 4:
+    //                direction = new Vector3(-1, 0, 1);
+    //                break;
+    //            case 5:
+    //                direction = new Vector3(1, 0, 1);
+    //                break;
+    //            default:
+    //                Debug.LogError("Failed to assign a direction");
+    //                break;
+    //        }
+
+    //        Debug.DrawRay(attachedTile.transform.position + raycastOffset, direction);
+    //    }
+    //}
 }

@@ -6,60 +6,68 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Image))]
-public class TabButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public abstract class TabButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private TabManager tabManagerRef;
-    [Header("UnityEvents")]
-    [SerializeField] private UnityEvent selectionEvent;
-    [SerializeField] private UnityEvent deselectionEvent;
-    [Header("Images")]
-    [SerializeField] private Sprite spriteIdle;
-    [SerializeField] private Sprite spriteHovered;
-    [SerializeField] private Sprite spriteSelected;
-    private Image _imageRef;
+    private int _id;
 
+    protected TabManager tabManagerRef;
+
+    [SerializeField] protected Sprite spriteIdle;
+
+    [Header("UnityEvents")]
+    [SerializeField] protected UnityEvent selectionEvent;
+    [SerializeField] protected UnityEvent deselectionEvent;
+
+    //[Header("DarkMaskSettings")]
+    //[Tooltip("The ratio of how dense darkMask is: 0.0 is the darkest mask, 1.0 is the lightest")]
+    protected float darkeningRatio;
+    protected Color darkMaskColor;
+    protected Image imageRef;
+
+    public int Id { get => _id; set => _id = value; }
     public UnityEvent SelectionEvent => selectionEvent;
     public UnityEvent DeselectionEvent => deselectionEvent;
 
     private void Awake()
     {
-
+        tabManagerRef = transform.GetComponentInParent<TabManager>();
+        imageRef = GetComponent<Image>();
+        imageRef.sprite = spriteIdle;
+        darkeningRatio = 0.8f;
+        darkMaskColor = new Color(1.0f * darkeningRatio, 1.0f * darkeningRatio, 1.0f * darkeningRatio);
     }
 
-    // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
-        _imageRef = GetComponent<Image>();
-        ResetSprite();
+        tabManagerRef.SelectButton += OnSelect;
+        tabManagerRef.DeselectButton += OnDeSelect;
     }
 
-    public void ResetSprite()
+    private void OnDisable()
     {
-        _imageRef.sprite = spriteIdle;
+        tabManagerRef.SelectButton -= OnSelect;
+        tabManagerRef.DeselectButton -= OnDeSelect;
     }
 
-    public void SetActiveSprite()
+    private void OnDestroy()
     {
-        _imageRef.sprite = spriteSelected;
+        tabManagerRef.SelectButton -= OnSelect;
+        tabManagerRef.DeselectButton -= OnDeSelect;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    protected void DarkenImage()
     {
-        if(this != tabManagerRef.SelectedTab)
-        {
-            tabManagerRef.Select(this);
-        }
+        imageRef.color = darkMaskColor;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    protected void BrightenImage()
     {
-        if(this != tabManagerRef.SelectedTab)
-            _imageRef.sprite = spriteHovered;
+        imageRef.color = Color.white;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (this != tabManagerRef.SelectedTab)
-            _imageRef.sprite = spriteIdle;
-    }
+    protected abstract void OnSelect(TabButton tabButton_in);
+    protected abstract void OnDeSelect(TabButton tabButton_in);
+    public abstract void OnPointerClick(PointerEventData eventData);
+    public abstract void OnPointerEnter(PointerEventData eventData);
+    public abstract void OnPointerExit(PointerEventData eventData);
 }

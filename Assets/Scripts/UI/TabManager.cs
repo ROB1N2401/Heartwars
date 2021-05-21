@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,6 +10,9 @@ public class TabManager : MonoBehaviour
     private List<TabButton> _tabButtonEntry = null;
     private int randomizeSounds;
 
+    public Action<TabButton> SelectButton;
+    public Action<TabButton> DeselectButton;
+
     public TabButton SelectedTab { get => _selectedTab; set => _selectedTab = value; }
     public List<TabButton> TabButtonEntry => _tabButtonEntry;
 
@@ -18,46 +22,28 @@ public class TabManager : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            _tabButtonEntry.Add(transform.GetChild(i).GetComponent<TabButton>());
+            var temp = transform.GetChild(i).GetComponent<TabButton>();
+            if(temp != null)
+                _tabButtonEntry.Add(temp);
+        }
+        for (int i = 0; i < _tabButtonEntry.Count; i++)
+        {
+            _tabButtonEntry[i].GetComponent<TabButton>().Id = i;
         }
     }
 
     public void Select(TabButton button_in)
     {
-        if(_selectedTab != button_in)
-        {
-            if(_selectedTab != null)
-                DeselectActiveButton();
-
-            _selectedTab = button_in;
-            button_in.SetActiveSprite();
-            button_in.SelectionEvent.Invoke();
-            AudioManager.instance.shouldRandomizePitch = true;
-
-            randomizeSounds = Random.Range(0, 3);
-            if (randomizeSounds == 0)
-            {
-                AudioManager.instance.PlaySound("UiChangeMode1");
-            }
-            else if (randomizeSounds == 1)
-            {
-                AudioManager.instance.PlaySound("UiChangeMode2");
-            }
-            else if (randomizeSounds == 2)
-            {
-                AudioManager.instance.PlaySound("UiChangeMode3");
-            }
-            else
-            {
-                return;
-            }
-        }
+        SelectButton?.Invoke(button_in);
     }
 
-    private void DeselectActiveButton()
+    public void Deselect(TabButton button_in)
     {
-        _selectedTab.ResetSprite();
-        _selectedTab.DeselectionEvent.Invoke();
-        _selectedTab = null;
+        DeselectButton?.Invoke(button_in);
+    }
+
+    public void Blank()
+    {
+
     }
 }

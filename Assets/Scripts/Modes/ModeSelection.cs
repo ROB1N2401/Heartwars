@@ -2,18 +2,20 @@
 
 public class ModeSelection : MonoBehaviour
 {
-    private TabManager _tabManagerRef;
     private InputMaster _inputMaster;
-    private KeyCode _testKey;
+    [Header("Tab Managers")]
+    [SerializeField] private TabManager _modeTabManagerRef;
+    //[SerializeField] private TabManager _inventoryTabManagerRef;
+    //[SerializeField] private TabManager _tabManagerRef;
+    //private KeyCode _testKey;
 
     void Awake()
     { 
-        _tabManagerRef = FindObjectOfType<TabManager>();
         _inputMaster = new InputMaster();
-        _inputMaster.Main.MovementMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[0]);
-        _inputMaster.Main.DestructionMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[1]);
-        _inputMaster.Main.PFloorMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[2]);
-        _inputMaster.Main.PushingMode.performed += ctx => _tabManagerRef.Select(_tabManagerRef.TabButtonEntry[3]);
+        _inputMaster.Main.MovementMode.performed += ctx => _modeTabManagerRef.Select(_modeTabManagerRef.TabButtonEntry[0]);
+        _inputMaster.Main.DestructionMode.performed += ctx => _modeTabManagerRef.Select(_modeTabManagerRef.TabButtonEntry[1]);
+        _inputMaster.Main.PlacementMode.performed += ctx => _modeTabManagerRef.Select(_modeTabManagerRef.TabButtonEntry[2]);
+        _inputMaster.Main.PushingMode.performed += ctx => _modeTabManagerRef.Select(_modeTabManagerRef.TabButtonEntry[3]);
     }
 
     void OnEnable()
