@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TabManager : MonoBehaviour
 { 
     private TabButton _selectedTab = null;
     private List<TabButton> _tabButtonEntry = null;
+    private int randomizeSounds;
 
     public Action<TabButton> SelectButton;
     public Action<TabButton> DeselectButton;

@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
     private bool musicCanChange;
     private bool firstSong = true; //Why this bool exists is explained in the StopSound function
     public bool shouldRandomizePitch;
+    private int randomizeSounds;
 
     public void Awake()
     {
@@ -79,28 +80,230 @@ public class AudioManager : MonoBehaviour
             musicCanChange = true;
         }
 
-        if (musicCanChange == true)
+        if (musicCanChange)
         {
             if (this.currentScene == "Menu")
             {
                 StopSound(currentSong);
-                //PlaySong("ScatmansWorld");
+                PlaySong("ScatmansWorld");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Heartwars")
             {
                 StopSound(currentSong);
-                //PlaySong("CountryRoads");
+                PlaySong("CountryRoads");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Error")
             {
                 StopSound(currentSong);
-                //PlaySong("UraniumFever");
+                PlaySong("UraniumFever");
                 musicCanChange = false;
             }
         }
         lastScene = this.currentScene;
+    }
+
+    public static void InvokeWalkingSound()
+    {
+        instance.shouldRandomizePitch = true;
+        var randomizeSounds = Random.Range(0, 3);
+        
+        switch (randomizeSounds)
+        {
+            case 0:
+                AudioManager.instance.PlaySound("MovePiece1");
+                break;
+            case 1:
+                AudioManager.instance.PlaySound("MovePiece2");
+                break;
+            case 2:
+                AudioManager.instance.PlaySound("MovePiece3");
+                break;
+            case 3:
+                AudioManager.instance.PlaySound("MovePiece4");
+                break;
+            default:
+                AudioManager.instance.PlaySound("MovePiece5");
+                break;
+        }
+    }
+
+    public static void InvokeDeathSound()
+    {
+        instance.shouldRandomizePitch = true;
+        var randomizeSounds = Random.Range(0, 3);
+        
+        switch (randomizeSounds)
+        {
+            case 0:
+                AudioManager.instance.PlaySound("Falling1");
+                break;
+            case 1:
+                AudioManager.instance.PlaySound("Falling2");
+                break;
+            default:
+                AudioManager.instance.PlaySound("Falling3");
+                break;
+        }
+    }
+
+    public static void InvokePlacementSound(ETileType type)
+    {
+        AudioManager.instance.shouldRandomizePitch = true;
+        Debug.Log("Played sound " + type);
+        switch (type)
+        {
+            case ETileType.Void:
+                break;
+            case ETileType.Floor:
+                instance.randomizeSounds = Random.Range(0, 4);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("PlaceGround1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("PlaceGround2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("PlaceGround3");
+                        break;
+                    case 3:
+                        AudioManager.instance.PlaySound("PlaceGround4");
+                        break;
+                    case 4:
+                        break;
+                }
+                break;
+            case ETileType.Wall:
+                break;
+            case ETileType.Ice:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("PlaceIce1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("PlaceIce2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("PlaceIce3");
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case ETileType.Trampoline:
+                break;
+            case ETileType.SideBlock:
+                instance.randomizeSounds = Random.Range(0, 4);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("PlaceGround1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("PlaceGround2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("PlaceGround3");
+                        break;
+                    case 3:
+                        AudioManager.instance.PlaySound("PlaceGround4");
+                        break;
+                    case 4:
+                        break;
+                }
+                break;
+            case ETileType.Spawn:
+                break;
+            case ETileType.Bonus:
+                break;
+        }
+    }
+
+    public static void InvokeDestructionSound(ETileType type)
+    {
+        AudioManager.instance.shouldRandomizePitch = true;
+        Debug.Log("Played sound " + type);
+        switch (type)
+        {
+            case ETileType.Void:
+                break;
+            case ETileType.Floor:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyGround1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyGround2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("DestroyGround3");
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case ETileType.Wall:
+                instance.randomizeSounds = Random.Range(0, 2);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyStone1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyStone2");
+                        break;
+                    case 2:
+                        break;
+                }
+                break;
+            case ETileType.Ice:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyIce1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyIce2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("DestroyIce3");
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case ETileType.Trampoline:
+                break;
+            case ETileType.SideBlock:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyGround1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyGround2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("DestroyGround3");
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
+            case ETileType.Spawn:
+                break;
+            case ETileType.Bonus:
+                break;
+        }
     }
 
     public void PlaySound(string name)
@@ -112,7 +315,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        if (shouldRandomizePitch == true)
+        if (shouldRandomizePitch)
         {
             s.source.pitch = Random.Range(0.90f, 1.1f);
             s.source.Play();

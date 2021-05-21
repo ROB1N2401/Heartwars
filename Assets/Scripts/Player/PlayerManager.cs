@@ -36,9 +36,12 @@ public class PlayerManager : MonoBehaviour
     {
         players[_currentIndex].EndTurn();
 
-        if (_currentIndex >= players.Count - 1)
-            _currentIndex = 0;
-        else _currentIndex++;
+        do
+        {
+            if (_currentIndex >= players.Count - 1)
+                _currentIndex = 0;
+            else _currentIndex++;
+        } while (!players[_currentIndex].IsAlive);
 
         _currentPlayer = players[_currentIndex];
         players[_currentIndex].StartTurn();

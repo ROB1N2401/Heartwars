@@ -17,7 +17,8 @@
         }
 
         destinationTile = destinationTile.HighestTileFromAbove;
-        
-        destinationTile.PlacePlayer(player);
+
+        if(destinationTile.TileData.IsWalkable|| destinationTile.TileData.TileType == ETileType.Void)
+            destinationTile.PlacePlayer(player);
     }
 }

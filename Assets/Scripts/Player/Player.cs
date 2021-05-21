@@ -9,18 +9,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Tile spawnPoint;
 
     public int PointsAtTheBeginningOfTheTurn => playerData.InitialNumberOfPoints + _playerInventory.TotalBonusPoints;
-    public int PointsLeftForTheTurn => _pointsLeftForTheTurn;
-    public bool IsTurnTime => _isTurnTime;
+    public int PointsLeftForTheTurn { get; private set; } = 0;
+    public bool IsTurnTime { get; private set; } = false;
+    public bool IsAlive { get; private set; } = true;
     public PlayerData PlayerData => playerData;
 
     [HideInInspector] public Tile attachedTile;
     public Tile SpawnPoint => spawnPoint;
     public ESide Side => side;
 
-    private bool _isTurnTime = false;
-    private int _pointsLeftForTheTurn = 0;
     private PlayerInventory _playerInventory;
-
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
@@ -29,7 +27,7 @@ public class Player : MonoBehaviour
         spawnPoint.tileSide = side;
         attachedTile = spawnPoint;
         attachedTile.PlacePlayer(this);
-        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+        PointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
     /// <summary>Checks if there is item available in players inventory</summary>
@@ -85,41 +83,47 @@ public class Player : MonoBehaviour
         var topTile = tile.HighestTileFromAbove;
         if(!topTile.IsPlayerAbleToMove(this))
             return;
-
-        // attachedTile.RemovePlayer();
+        
         topTile.PlacePlayer(this);
 
         SubtractActivePoints(playerData.PointsForMovementTaken);
+        
+        AudioManager.InvokeWalkingSound();
     }
     
     /// <summary>Pushes other player to the opposite direction</summary>
     /// <param name="playerToPush">Player that will be pushed</param>
     public void PushOtherPlayer(Player playerToPush)
     {
-        if(playerToPush == null)
+        if(playerToPush == null || PointsLeftForTheTurn < playerData.PointsForPushTaken)
             return;
+        
+        SubtractActivePoints(playerData.PointsForPushTaken);
 
         var destinationTile = playerToPush.attachedTile.LowestTileFromUnderneath
             .GetTileFromOppositeDirection(attachedTile.LowestTileFromUnderneath);
         
         if(destinationTile == null)
             playerToPush.Die();
-        
-        destinationTile.HighestTileFromAbove.PlacePlayer(playerToPush);
+
+        destinationTile = destinationTile.HighestTileFromAbove;
+
+        if (destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void)
+            destinationTile.PlacePlayer(playerToPush);
     }
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>
     public void StartTurn()
     {
-        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
-        _isTurnTime = true;
+        PointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+        IsTurnTime = true;
     }
 
     /// <summary>Method that sets the conditions for player when its turn ends</summary>
     public void EndTurn()
     {
-        _isTurnTime = false;
-        _pointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
+        IsTurnTime = false;
+        PointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
     /// <summary>Method that defines logic behind player death</summary>
@@ -129,16 +133,19 @@ public class Player : MonoBehaviour
             while (_playerInventory.GetNumberOfGivenTilesInInventory(ETileType.Bonus) > 0)
                 attachedTile.HighestTileFromAbove.PlaceTileAbove(_playerInventory.TakeTileFromInventory(ETileType.Bonus));
 
-        _pointsLeftForTheTurn = playerData.PointsForMovementTaken;
+        PointsLeftForTheTurn = playerData.PointsForMovementTaken;
 
-        if(attachedTile != null)
+        if (attachedTile != null)
             attachedTile.RemovePlayer();
         if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
             gameObject.SetActive(false);
+            IsAlive = false;
+            AudioManager.InvokeDeathSound();
             return;
         }
         
+        AudioManager.InvokeDeathSound();
         MoveTo(spawnPoint);
         EndTurn();
     }
@@ -148,9 +155,9 @@ public class Player : MonoBehaviour
     private void SubtractActivePoints(int pointsToSubtract)
     {
         pointsToSubtract = Mathf.Abs(pointsToSubtract);
-        if(_pointsLeftForTheTurn < pointsToSubtract)
+        if(PointsLeftForTheTurn < pointsToSubtract)
             return;
 
-        _pointsLeftForTheTurn -= pointsToSubtract;
+        PointsLeftForTheTurn -= pointsToSubtract;
     }
 }

@@ -18,7 +18,7 @@ public class Tile : MonoBehaviour
 
     protected bool IsPlayerOnTile => _attachedPlayer != null;
     protected Player _attachedPlayer;
-    protected (Tile aboveTile, Tile underTile) _neighbourTiles;
+    protected internal (Tile aboveTile, Tile underTile) _neighbourTiles;
     
     /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
@@ -112,7 +112,7 @@ public class Tile : MonoBehaviour
     /// <summary>Checks if given player able to destroy this tile</summary>
     /// <param name="player">Player for which condition will be checked</param>
     /// <returns>Returns true if player can destroy this tile. Otherwise returns false</returns>
-    public bool IsPlayerAbleToDestroy(Player player)
+    public virtual bool IsPlayerAbleToDestroy(Player player)
     {
         bool isPlayerAbleToDestroyDueToItsSide = tileData.IsDestroyable;
 
@@ -142,6 +142,7 @@ public class Tile : MonoBehaviour
 
         tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
         tileToAdd.gameObject.SetActive(true);
+        AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
     }
     
     /// <summary>Hides tile (if possible)</summary>
@@ -159,6 +160,7 @@ public class Tile : MonoBehaviour
         _neighbourTiles.underTile = null;
         
         gameObject.SetActive(false);
+        AudioManager.InvokeDestructionSound(TileData.TileType);
     }
     
     /// <summary>Places given player above current tile</summary>
