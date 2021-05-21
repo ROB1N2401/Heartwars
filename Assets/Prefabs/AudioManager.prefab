@@ -82,140 +82,140 @@ MonoBehaviour:
   - name: PlaceGround1
     clip: {fileID: 8300000, guid: 9431784ba00a62841b4a0b6ac4ce8f99, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlaceGround2
     clip: {fileID: 8300000, guid: 69e55168508c72b4dad234a56eca16be, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlaceGround3
     clip: {fileID: 8300000, guid: 782b94244e675b74d9d00e13e71c3f64, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlaceGround4
     clip: {fileID: 8300000, guid: 1426c0c08f8490248a8e33a8c704f703, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyGround1
     clip: {fileID: 8300000, guid: 976203dc1c513c344abd60ec1903dffb, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyGround2
     clip: {fileID: 8300000, guid: 4b2f2da3483be28419434f96b3f0c855, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyGround3
     clip: {fileID: 8300000, guid: 48038086a4f948a4baa1b5e20aab919c, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyStone1
     clip: {fileID: 8300000, guid: 537f3aa7a9133524891040af684edb64, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyStone2
     clip: {fileID: 8300000, guid: 1759d9b85a559184e817d09a09e3a012, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlaceIce1
     clip: {fileID: 8300000, guid: 2b72b46933fb5204dbb6638ddc7abb21, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlaceIce2
     clip: {fileID: 8300000, guid: c2aaf35a824763f428ca741af0b84905, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlaceIce3
     clip: {fileID: 8300000, guid: 24eb8614c9afa0340ad9b7b956280993, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce1
     clip: {fileID: 8300000, guid: f4eb71d2fd35ca749a88a6883467327a, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce2
     clip: {fileID: 8300000, guid: 7bffe38b43987d6418dbd82deaffc3da, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce3
     clip: {fileID: 8300000, guid: abce39548c58c0d47977a740640e31f4, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiChangeMode1
     clip: {fileID: 8300000, guid: 3e5c89f056a728f4289e6004c0405ca1, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiChangeMode2
     clip: {fileID: 8300000, guid: c0c9f97ac74c2794bbcafdddfb1579fe, type: 3}
     mix: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: UiChangeMode3
-    clip: {fileID: 8300000, guid: c3e0744790bec234395eba267323fe61, type: 3}
-    mix: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiHoverButton
-    clip: {fileID: 8300000, guid: 00a09e38bec78084c86bc6273d6bc40d, type: 3}
+    clip: {fileID: 8300000, guid: c3e0744790bec234395eba267323fe61, type: 3}
     mix: {fileID: 0}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UiPressButton
-    clip: {fileID: 8300000, guid: e944e4f85a1380a4fabbd50310de9024, type: 3}
+    clip: {fileID: 8300000, guid: 00a09e38bec78084c86bc6273d6bc40d, type: 3}
     mix: {fileID: 0}
     volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Not deleting this entry, id have to move the entire list up lol
+    clip: {fileID: 8300000, guid: e944e4f85a1380a4fabbd50310de9024, type: 3}
+    mix: {fileID: 0}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -260,6 +260,13 @@ MonoBehaviour:
     volume: 0.1
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: PlaceStone1
+    clip: {fileID: 8300000, guid: ac0975991401f5c48ba87d1abb11f90e, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
   currentScene: 
   shouldRandomizePitch: 0

@@ -5,72 +5,29 @@ using Random = UnityEngine.Random;
 
 public class SoundTester : MonoBehaviour
 {
-    private int testSounds;
+    //private int testSounds;
 
     void Update()
     {
+        if (Input.GetKeyDown("h"))
+        {
+            AudioManager.instance.shouldRandomizePitch = true;
+            AudioManager.instance.PlaySound("Temp1");
+        }
         if (Input.GetKeyDown("j"))
         {
             AudioManager.instance.shouldRandomizePitch = true;
-            testSounds = Random.Range(0, 1);
-            if (testSounds == 0)
-            {
-                AudioManager.instance.PlaySound("Falling1");
-            }
-            else if (testSounds == 1)
-            {
-                AudioManager.instance.PlaySound("Falling2");
-            }
-            else if (testSounds == 2)
-            {
-                AudioManager.instance.PlaySound("Falling3");
-            }
-            else
-            {
-                return;
-            }
+            AudioManager.instance.PlaySound("Temp2");
         }
         if (Input.GetKeyDown("k"))
         {
             AudioManager.instance.shouldRandomizePitch = true;
-            testSounds = Random.Range(0, 1);
-            if (testSounds == 0)
-            {
-                AudioManager.instance.PlaySound("Falling2");
-            }
-            else if (testSounds == 1)
-            {
-                AudioManager.instance.PlaySound("Falling2");
-            }
-            else if (testSounds == 2)
-            {
-                AudioManager.instance.PlaySound("Falling3");
-            }
-            else
-            {
-                return;
-            }
+            AudioManager.instance.PlaySound("Temp3");
         }
         if (Input.GetKeyDown("l"))
         {
             AudioManager.instance.shouldRandomizePitch = true;
-            testSounds = Random.Range(0, 1);
-            if (testSounds == 0)
-            {
-                AudioManager.instance.PlaySound("Falling3");
-            }
-            else if (testSounds == 1)
-            {
-                AudioManager.instance.PlaySound("Falling2");
-            }
-            else if (testSounds == 2)
-            {
-                AudioManager.instance.PlaySound("Falling3");
-            }
-            else
-            {
-                return;
-            }
+            AudioManager.instance.PlaySound("Temp4");
         }
     }
 }
