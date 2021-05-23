@@ -240,24 +240,17 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: UraniumFever
-    clip: {fileID: 8300000, guid: c7aab8f6e0446e449abd9451d343cc55, type: 3}
+  - name: LandsofMagic
+    clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
     mix: {fileID: 0}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: CountryRoads
-    clip: {fileID: 8300000, guid: 334a47cac17a0dd418b54bab224b80c2, type: 3}
-    mix: {fileID: 0}
-    volume: 0.1
+    volume: 0.2
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: ScatmansWorld
-    clip: {fileID: 8300000, guid: b21d98ca55417d24ab5f65d0947aa766, type: 3}
+  - name: Clash
+    clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
     mix: {fileID: 0}
-    volume: 0.1
+    volume: 0.2
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -268,19 +261,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: LandsofMagic
-    clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
+  - name: PlaceStone2
+    clip: {fileID: 8300000, guid: b77a298d00e39fd43aa11979c18e1e4e, type: 3}
     mix: {fileID: 0}
-    volume: 0.4
+    volume: 0.7
     pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: Clash
-    clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
-    mix: {fileID: 0}
-    volume: 0.4
-    pitch: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
   currentScene: 
   shouldRandomizePitch: 0

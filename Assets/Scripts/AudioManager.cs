@@ -177,7 +177,18 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Wall:
-                AudioManager.instance.PlaySound("PlaceStone1");
+                instance.randomizeSounds = Random.Range(0, 2);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("PlaceStone1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("PlaceStone2");
+                        break;
+                    case 2:
+                        break;
+                }
                 break;
             case ETileType.Ice:
                 instance.randomizeSounds = Random.Range(0, 3);
