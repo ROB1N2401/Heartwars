@@ -33,11 +33,11 @@ public class SideTile : Tile
                player.PointsLeftForTheTurn >= tileData.PointsToDestroy;
     }
 
-    public override void DestroyTile()
+    public override void DestroyTile(Player player)
     {
         if(_neighbourTiles.aboveTile != null)
             return;
-        
+
         var underTile = _neighbourTiles.underTile;
         
         if(underTile != null) 
@@ -47,8 +47,11 @@ public class SideTile : Tile
         _neighbourTiles.underTile = null;
         
         gameObject.SetActive(false);
+
+        if (player != null) 
+            AssignSide(player.Side);
+
         AudioManager.InvokeDestructionSound(TileData.TileType);
-        
         underTile.PlacePlayer(_attachedPlayer);
     }
 
@@ -58,6 +61,10 @@ public class SideTile : Tile
             throw new ArgumentException("Side tile can not be neutral");
 
         tileSide = side;
+        destructionIgnoreSides = new []{side};
+        movementIgnoreSides = ((ESide[]) Enum.GetValues(typeof(ESide)))
+            .Where(val => val != tileSide && val != ESide.Neutral)
+            .ToArray();
 
         switch (side)
         {

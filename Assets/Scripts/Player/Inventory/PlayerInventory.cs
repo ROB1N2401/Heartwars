@@ -26,7 +26,7 @@ public class PlayerInventory : MonoBehaviour
                 
                 if (tile == null)
                     continue;
-
+                
                 if (tile.TileData.TileType == ETileType.SideBlock)
                 {
                     var sideBlock = tile as SideTile;

@@ -49,17 +49,18 @@ public class CameraControl : MonoBehaviour
 
     private IEnumerator SmoothTransition(Vector3 endPos, float endRotationY)
     {
+        yield return new WaitUntil(() => _isControllable);
         _isControllable = false;
         var yRotation = transform.eulerAngles.y;
         const float speed = 8f;
 
         var velocity = Vector3.zero;
-        while (transform.position != endPos || Math.Abs(transform.eulerAngles.y - endRotationY) > .001f)
+        while (Mathf.Abs((transform.position - endPos).magnitude) > 0.1f|| Math.Abs(transform.eulerAngles.y - endRotationY) > .01f)
         {
 
             yRotation = Mathf.LerpAngle(yRotation, endRotationY, Time.deltaTime * speed);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
-            transform.position = Vector3.SmoothDamp(transform.position, endPos, ref velocity, .15f);
+            transform.position = Vector3.SmoothDamp(transform.position, endPos, ref velocity, .08f);
 
             yield return null;
         }

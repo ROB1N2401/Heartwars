@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
             return;
 
         _playerInventory.AddTile(topTile);
-        topTile.DestroyTile();
+        topTile.DestroyTile(this);
 
         SubtractActivePoints(topTile.TileData.PointsToDestroy);
     }

@@ -12,6 +12,7 @@ public class Mode : MonoBehaviour
     protected void GetAdjacentTilesAndPlayers()
     {
         _adjacentTiles.Clear();
+        _adjacentPlayers.Clear();
         var startPosition = PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.position;
         //Debug.Log($"Player Name: {PlayerManager.Instance.CurrentPlayer.gameObject.name} \n Lowest Tile: {PlayerManager.Instance.CurrentPlayer.attachedTile.LowestTileFromUnderneath.transform.name}");
         for (int i = 0; i < 6; i++)

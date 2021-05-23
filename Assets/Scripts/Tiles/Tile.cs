@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour
     [SerializeField] protected TileData tileData;
     public ESide tileSide;
     [SerializeField] protected ESide[] destructionIgnoreSides;
+    [SerializeField] protected ESide[] movementIgnoreSides;
     [Header("Offset options")]
     [SerializeField] protected Vector3 playerPositionOffset;
     [SerializeField] protected Vector3 tileAbovePositionOffset;
@@ -96,9 +97,23 @@ public class Tile : MonoBehaviour
     /// <summary>Checks if given player can step on this tile</summary>
     /// <param name="player">Player for which condition will be checked</param>
     /// <returns>Returns true if player can be moved to this tile. Otherwise returns false</returns>
-    public bool IsPlayerAbleToMove(Player player) =>
-        tileData.IsWalkable && !IsPlayerOnTile &&
-        player.PointsLeftForTheTurn >= player.PlayerData.PointsForMovementTaken;
+    public bool IsPlayerAbleToMove(Player player)
+    {
+        bool isPlayerAbleToMoveDueToSide = tileData.IsWalkable;
+
+        if (destructionIgnoreSides.Length > 0)
+        {
+            if (tileData.IsWalkable)
+                isPlayerAbleToMoveDueToSide = !movementIgnoreSides.Contains(player.Side);
+            else
+                isPlayerAbleToMoveDueToSide = movementIgnoreSides.Contains(player.Side);
+        }
+        
+        return isPlayerAbleToMoveDueToSide &&
+               !IsPlayerOnTile &&
+               player.PointsLeftForTheTurn >= player.PlayerData.PointsForMovementTaken;
+    }
+
     /// <summary>Checks if given player able to place given tile above this one</summary>
     /// <param name="tileToPlace">Tile player tries to place</param>
     /// <param name="player">Player for which condition will be checked</param>
@@ -120,7 +135,7 @@ public class Tile : MonoBehaviour
         {
             if (tileData.IsDestroyable)
                 isPlayerAbleToDestroyDueToItsSide = !destructionIgnoreSides.Contains(player.Side);
-            if (!tileData.IsDestroyable)
+            else
                 isPlayerAbleToDestroyDueToItsSide = destructionIgnoreSides.Contains(player.Side);
         }
 
@@ -146,7 +161,7 @@ public class Tile : MonoBehaviour
     }
     
     /// <summary>Hides tile (if possible)</summary>
-    public virtual void DestroyTile()
+    public virtual void DestroyTile(Player player)
     {
         if(_neighbourTiles.aboveTile != null)
             return;

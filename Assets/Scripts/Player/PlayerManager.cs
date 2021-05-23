@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -14,7 +15,6 @@ public class PlayerManager : MonoBehaviour
     public Player CurrentPlayer => _currentPlayer;
 
     
-
     private void Awake()
     {
         if(Instance == null)
@@ -44,6 +44,11 @@ public class PlayerManager : MonoBehaviour
         } while (!players[_currentIndex].IsAlive);
 
         _currentPlayer = players[_currentIndex];
+
+        var cameraControl = Camera.main.GetComponent<CameraControl>();
+        if(cameraControl != null)
+            cameraControl.FocusCameraAboveObject(_currentPlayer.gameObject);
+        
         players[_currentIndex].StartTurn();
     }
 }
