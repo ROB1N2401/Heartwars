@@ -268,5 +268,19 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  currentScene: 
-  shouldRandomizePitch: 0
+  - name: LandsofMagic
+    clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Clash
+    clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  currentScene: TheMainScene
+  shouldRandomizePitch: 1

@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
         {
             this.currentScene = "Menu";
         }
-        else if (sceneName == "SampleScene"/* || sceneName == "OtherGameScene"*/) //This one as well
+        else if (sceneName == "TheMainScene"/* || sceneName == "OtherGameScene"*/) //This one as well
         {
             this.currentScene = "Heartwars";
         }
@@ -85,13 +85,13 @@ public class AudioManager : MonoBehaviour
             if (this.currentScene == "Menu")
             {
                 StopSound(currentSong);
-                //PlaySong("ScatmansWorld");
+                PlaySong("LandsofMagic");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Heartwars")
             {
                 StopSound(currentSong);
-                //PlaySong("CountryRoads");
+                PlaySong("Clash");
                 musicCanChange = false;
             }
             else if (this.currentScene == "Error")

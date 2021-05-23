@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HueChange : MonoBehaviour
 {
-    public bool randomize;
+    public bool randomize = true;
     public bool invert;
     public float speed;
     public float hue;
@@ -23,12 +23,13 @@ public class HueChange : MonoBehaviour
         }
         sat = 1;
         bri = 1;
-        rend.material.color = Color.HSVToRGB(hue, sat, bri);
+        speed = 2;
+        rend.color = Color.HSVToRGB(hue, sat, bri);
     }
 
     void Update()
     {
-        Color.RGBToHSV(rend.material.color, out hue, out sat, out bri);
+        Color.RGBToHSV(rend.color, out hue, out sat, out bri);
         if (invert)
         {
             hue -= speed / 10000;
@@ -45,6 +46,6 @@ public class HueChange : MonoBehaviour
                 hue = 0;
             }
         }
-        rend.material.color = Color.HSVToRGB(hue, sat, bri);
+        rend.color = Color.HSVToRGB(hue, sat, bri);
     }
 }
