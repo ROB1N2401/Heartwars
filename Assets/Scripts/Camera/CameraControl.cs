@@ -20,6 +20,8 @@ public class CameraControl : MonoBehaviour
     private Camera _camera;
     private bool _isControllable = false;
 
+    public bool IsControllable { get => _isControllable; set => _isControllable = value; }
+
     private void Start()
     {
         _camera = GetComponent<Camera>();

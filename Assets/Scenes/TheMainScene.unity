@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6306801, g: 0.69897664, b: 0.78629196, a: 1}
+  m_IndirectSpecularColor: {r: 0.63154006, g: 0.69935507, b: 0.7864293, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2793,6 +2793,7 @@ GameObject:
   - component: {fileID: 313726685}
   - component: {fileID: 313726684}
   - component: {fileID: 313726683}
+  - component: {fileID: 313726686}
   m_Layer: 5
   m_Name: End Turn Button
   m_TagString: Untagged
@@ -2862,18 +2863,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 313726684}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 548298072}
-        m_MethodName: StartNewTurn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &313726684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2911,6 +2901,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313726681}
   m_CullTransparentMesh: 0
+--- !u!114 &313726686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313726681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ca393f4545ad7429f939066e8f6d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &342497823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17821,12 +17823,12 @@ PrefabInstance:
     - target: {fileID: 4222376495304023269, guid: 25e99edf17ba8dd42a7344f2154108c9,
         type: 3}
       propertyPath: sounds.Array.data[32].volume
-      value: 0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4222376495304023269, guid: 25e99edf17ba8dd42a7344f2154108c9,
         type: 3}
       propertyPath: sounds.Array.data[33].volume
-      value: 0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4222376495304023270, guid: 25e99edf17ba8dd42a7344f2154108c9,
         type: 3}

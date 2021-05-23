@@ -36,19 +36,27 @@ public class PlayerManager : MonoBehaviour
     {
         players[_currentIndex].EndTurn();
 
-        do
-        {
-            if (_currentIndex >= players.Count - 1)
-                _currentIndex = 0;
-            else _currentIndex++;
-        } while (!players[_currentIndex].IsAlive);
+        UpdatePlayerRoster();
 
+        if (_currentIndex >= players.Count - 1)
+            _currentIndex = 0;
+        else _currentIndex++;
+       
         _currentPlayer = players[_currentIndex];
 
         var cameraControl = Camera.main.GetComponent<CameraControl>();
-        if(cameraControl != null)
+        if (cameraControl != null)
             cameraControl.FocusCameraAboveObject(_currentPlayer.gameObject);
-        
+
         players[_currentIndex].StartTurn();
+    }
+
+    private void UpdatePlayerRoster()
+    {
+        for(int i = 0; i < players.Count; i++)
+        {
+            if (!players[i].IsAlive)
+                players.RemoveAt(i);
+        }
     }
 }
