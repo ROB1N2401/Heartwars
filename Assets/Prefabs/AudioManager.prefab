@@ -222,21 +222,21 @@ MonoBehaviour:
   - name: Falling1
     clip: {fileID: 8300000, guid: e21415074176b26479a24e265349582b, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Falling2
     clip: {fileID: 8300000, guid: e4d68d4d79c7c844f8b9acf8c2a15ab1, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Falling3
     clip: {fileID: 8300000, guid: 350f227e31215244aad7ac66a91067ce, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -271,16 +271,16 @@ MonoBehaviour:
   - name: LandsofMagic
     clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
     mix: {fileID: 0}
-    volume: 0.7
+    volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Clash
     clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
     mix: {fileID: 0}
-    volume: 0.7
+    volume: 0.4
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  currentScene: TheMainScene
-  shouldRandomizePitch: 1
+  currentScene: 
+  shouldRandomizePitch: 0
