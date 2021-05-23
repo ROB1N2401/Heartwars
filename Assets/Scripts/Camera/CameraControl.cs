@@ -55,7 +55,7 @@ public class CameraControl : MonoBehaviour
         const float speed = 8f;
 
         var velocity = Vector3.zero;
-        while (Mathf.Abs((transform.position - endPos).magnitude) > 0.1f|| Math.Abs(transform.eulerAngles.y - endRotationY) > .01f)
+        while ((transform.position - endPos).magnitude > .1f || Math.Abs(transform.eulerAngles.y - endRotationY) > .01f)
         {
 
             yRotation = Mathf.LerpAngle(yRotation, endRotationY, Time.deltaTime * speed);

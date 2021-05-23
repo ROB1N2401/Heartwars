@@ -190,8 +190,11 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
-        player.transform.position = transform.position + playerPositionOffset;
+
+        var playerControl = player.GetComponent<PlayerAnimationControl>();
         
+        playerControl.DirectTransition(transform.position + playerPositionOffset);
+
         if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
         {
             player.Die();

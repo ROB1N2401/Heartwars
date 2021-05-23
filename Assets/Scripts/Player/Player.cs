@@ -2,6 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
+[RequireComponent(typeof(PlayerAnimationControl))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     private PlayerInventory _playerInventory;
     private void Start()
     {
+
         _playerInventory = GetComponent<PlayerInventory>();
         if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint == null)
             throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
