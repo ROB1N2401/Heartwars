@@ -47,35 +47,35 @@ MonoBehaviour:
   - name: MovePiece1
     clip: {fileID: 8300000, guid: b9f5166c927430645b78af4ec829114e, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece2
     clip: {fileID: 8300000, guid: 02d4631839870c04cab0af03ee30ddf8, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece3
     clip: {fileID: 8300000, guid: 1e9b1d9a80922d846a1c61c13e28a59f, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece4
     clip: {fileID: 8300000, guid: 42da4cea66dc2e04fb28b843d8535395, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece5
     clip: {fileID: 8300000, guid: cfb9b0f2917610d4886982d076424695, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -166,21 +166,21 @@ MonoBehaviour:
   - name: DestroyIce1
     clip: {fileID: 8300000, guid: f4eb71d2fd35ca749a88a6883467327a, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce2
     clip: {fileID: 8300000, guid: 7bffe38b43987d6418dbd82deaffc3da, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce3
     clip: {fileID: 8300000, guid: abce39548c58c0d47977a740640e31f4, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
