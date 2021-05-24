@@ -20,15 +20,16 @@ public class Player : MonoBehaviour
     public ESide Side => side;
 
     private PlayerInventory _playerInventory;
+    private PlayerAnimationControl _animationControl;
     private void Start()
     {
-
         _playerInventory = GetComponent<PlayerInventory>();
+        _animationControl = GetComponent<PlayerAnimationControl>();
         if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint == null)
             throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
         spawnPoint.tileSide = side;
         attachedTile = spawnPoint;
-        attachedTile.PlacePlayer(this, ETransitionType.Spawn);
+        attachedTile.PlacePlayer(this);
         PointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
@@ -86,10 +87,18 @@ public class Player : MonoBehaviour
         if(!topTile.IsPlayerAbleToMove(this))
             return;
         
-        topTile.PlacePlayer(this, transitionType);
-
-        SubtractActivePoints(playerData.PointsForMovementTaken);
+        switch (transitionType)
+        {
+            case ETransitionType.Walk:
+                _animationControl.DirectTransition(topTile.PositionForPlayer);
+                break;
+            case ETransitionType.Spawn:
+                _animationControl.Respawn(topTile.PositionForPlayer, topTile.PositionForPlayer.y + 10f);
+                break;
+        }
+        topTile.PlacePlayer(this);
         
+        SubtractActivePoints(playerData.PointsForMovementTaken);
         AudioManager.InvokeWalkingSound();
     }
     
@@ -111,7 +120,11 @@ public class Player : MonoBehaviour
         destinationTile = destinationTile.HighestTileFromAbove;
 
         if (destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void)
+        {
+            var animationControl = playerToPush.GetComponent<PlayerAnimationControl>();
+            animationControl.DirectTransition(destinationTile.PositionForPlayer);
             destinationTile.PlacePlayer(playerToPush);
+        }
     }
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>

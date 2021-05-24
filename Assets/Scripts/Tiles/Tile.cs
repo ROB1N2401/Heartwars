@@ -15,7 +15,7 @@ public class Tile : MonoBehaviour
     
     public TileData TileData => tileData;
     public Player AttachedPlayer => _attachedPlayer;
-    public Vector3 PlayerPositionOffset => playerPositionOffset;
+    public Vector3 PositionForPlayer => playerPositionOffset + transform.position;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
 
     protected bool IsPlayerOnTile => _attachedPlayer != null;
@@ -181,7 +181,7 @@ public class Tile : MonoBehaviour
     
     /// <summary>Places given player above current tile</summary>
     /// <param name="player">Player that will be placed above</param>
-    public virtual void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
+    public virtual void PlacePlayer(Player player)
     {
         if(player == null)
             return;
@@ -191,22 +191,6 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
-        var playerControl = player.GetComponent<PlayerAnimationControl>();
-
-        if (playerControl != null)
-        {
-            var destination = transform.position + playerPositionOffset;
-            
-            switch (transitionType)
-            {
-                case ETransitionType.Spawn:
-                    playerControl.Respawn(destination, destination.y + 10f);
-                    break;
-                case ETransitionType.Walk:
-                    playerControl.DirectTransition(destination);
-                    break;
-            }
-        }
 
         if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
         {
