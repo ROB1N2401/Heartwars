@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
             throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
         spawnPoint.tileSide = side;
         attachedTile = spawnPoint;
-        attachedTile.PlacePlayer(this);
+        attachedTile.PlacePlayer(this, ETransitionType.Spawn);
         PointsLeftForTheTurn = PointsAtTheBeginningOfTheTurn;
     }
 
@@ -80,13 +80,13 @@ public class Player : MonoBehaviour
     
     /// <summary>Moves player to the given tile</summary>
     /// <param name="tile">Target tile where player will be moved</param>
-    public void MoveTo(Tile tile)
+    public void MoveTo(Tile tile, ETransitionType transitionType = ETransitionType.Walk)
     {
         var topTile = tile.HighestTileFromAbove;
         if(!topTile.IsPlayerAbleToMove(this))
             return;
         
-        topTile.PlacePlayer(this);
+        topTile.PlacePlayer(this, transitionType);
 
         SubtractActivePoints(playerData.PointsForMovementTaken);
         
@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
         }
         
         AudioManager.InvokeDeathSound();
-        MoveTo(spawnPoint);
+        MoveTo(spawnPoint, ETransitionType.Spawn);
         EndTurn();
     }
     

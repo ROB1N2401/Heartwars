@@ -4,27 +4,55 @@ using UnityEngine;
 
 public class PlayerAnimationControl : MonoBehaviour
 {
-    public bool IsTransitionTime { get; private set; } = false;
+    public bool IsTransitionTime
+    {
+        get
+        {
+            lock (this)
+            {
+                return _isTransitionTime;
+            }
+        }
+    }
     
-    public void Respawn(Vector3 targetPosition) => throw new NotImplementedException();
+    private volatile bool _isTransitionTime = false;
+
+    public void Respawn(Vector3 targetPosition, float startHeight) => StartCoroutine(RespawnCor(targetPosition, startHeight));
 
     public void FallDown(float negativeHeight) => StartCoroutine(FallDownCor(negativeHeight));
 
     public void DirectTransition(Vector3 targetPosition) => StartCoroutine(DirectTransitionCor(targetPosition));
 
     public void ParabolicTransition(Vector3 targetPosition) => StartCoroutine(ParabolicTransitionCor(targetPosition));
+    
+    private IEnumerator RespawnCor(Vector3 targetPosition, float startHeight)
+    {
+        yield return new WaitUntil(() => !_isTransitionTime);
+        _isTransitionTime = true;
+
+        var velocity = Vector3.zero;
+        transform.position = targetPosition + Vector3.up * startHeight;
+        
+        while ((transform.position - targetPosition).magnitude > 0.01f)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.2f);
+            
+            yield return null;
+        }
+        
+        transform.position = targetPosition;
+        
+        _isTransitionTime = false;
+    }
 
     private IEnumerator FallDownCor(float height)
     {
-        yield return new WaitUntil(() => !IsTransitionTime);
+        yield return new WaitUntil(() => !_isTransitionTime);
+        _isTransitionTime = true;
 
         height = -Math.Abs(height);
-        IsTransitionTime = true;
         float speed = 0f;
         var yTransition = transform.position.y + height;
-
-        //todo debug
-        print(yTransition);
 
         while (transform.position.y > yTransition)
         {
@@ -33,56 +61,66 @@ public class PlayerAnimationControl : MonoBehaviour
             yield return null;
         }
 
-        IsTransitionTime = false;
+        _isTransitionTime = false;
     }
 
     private IEnumerator ParabolicTransitionCor(Vector3 targetPosition)
     {
         StartCoroutine(LookAtGivenObjectCor(targetPosition));
         
-        yield return new WaitUntil(() => !IsTransitionTime);
-        IsTransitionTime = true;
+        yield return new WaitUntil(() => !_isTransitionTime);
+        _isTransitionTime = true;
         
-        const float speed = 1f;
-        
-        while ((transform.position - targetPosition).magnitude > .01f)
+        const float speed = 2f;
+        Func<float, float, float> parabola = (x, dist) =>
+            -Mathf.Pow(x - dist / 2, 2) / (dist / 2) + dist / 2;
+        var startPosition = transform.position;
+        var totalDistance = (targetPosition - startPosition).magnitude;
+        while ((transform.position - targetPosition).magnitude > .1f)
         {
-            transform.position = Parabola(transform.position, targetPosition,1f, Time.deltaTime * speed);
+            var x = Mathf.Lerp(transform.position.x, targetPosition.x, Time.deltaTime * speed);
+            var z = Mathf.Lerp(transform.position.z, targetPosition.z, Time.deltaTime * speed);
+            var y = parabola(Vector2.Distance(startPosition, new Vector2(z, x)), totalDistance);
+            y += transform.position.y;
+            transform.position = new Vector3(x, y, z);
 
             yield return null;
         }
 
         transform.position = targetPosition;
 
-        IsTransitionTime = false;
+        _isTransitionTime = false;
     }
 
     private IEnumerator DirectTransitionCor(Vector3 targetPosition)
     {
-        StartCoroutine(LookAtGivenObjectCor(targetPosition));
-        
-        yield return new WaitUntil(() => !IsTransitionTime);
-        IsTransitionTime = true;
-        
-        var velocity = Vector3.zero;
-        while ((transform.position - targetPosition).magnitude > .01f)
+        lock (this)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, .1f);
+            yield return new WaitUntil(() => !_isTransitionTime);
+            yield return LookAtGivenObjectCor(targetPosition);
+            
+            _isTransitionTime = true;
 
-            yield return null;
+            var velocity = Vector3.zero;
+            while ((transform.position - targetPosition).magnitude > .01f)
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, .05f);
+
+                yield return null;
+            }
+
+            transform.position = targetPosition;
+
+            _isTransitionTime = false;
         }
-
-        transform.position = targetPosition;
-
-        IsTransitionTime = false;
     }
     
     private IEnumerator LookAtGivenObjectCor(Vector3 target)
     {
-        yield return new WaitUntil(() => !IsTransitionTime);
-        IsTransitionTime = true;
+        yield return new WaitUntil(() => !_isTransitionTime);
+        _isTransitionTime = true;
 
-        const float speed = 14f;
+        const float speed = 30f;
         var rotationY = transform.localEulerAngles.y;
         var endRotationY = Quaternion.LookRotation(target - transform.position).eulerAngles.y;
 
@@ -96,30 +134,6 @@ public class PlayerAnimationControl : MonoBehaviour
         
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, endRotationY, transform.eulerAngles.z);
 
-        IsTransitionTime = false;
-    }
-
-    private Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
-    {
-        float parabolicT = t * 2 - 1;
-        
-        if (Mathf.Abs(start.y - end.y) < 0.1f)
-        {
-            var travelDirection = end - start;
-            var result = start + t * travelDirection;
-            result.y += (-parabolicT * parabolicT + 1) * height;
-            return result;
-        }
-        else
-        {
-            var travelDirection = end - start;
-            var levelDirecteion = end - new Vector3(start.x, end.y, start.z);
-            var right = Vector3.Cross(travelDirection, levelDirecteion);
-            var up = Vector3.Cross(right, travelDirection);
-            if (end.y > start.y) up = -up;
-            var result = start + t * travelDirection;
-            result += ((-parabolicT * parabolicT + 1) * height) * up.normalized;
-            return result;
-        }
+        _isTransitionTime = false;
     }
 }

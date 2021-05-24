@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
@@ -180,7 +181,7 @@ public class Tile : MonoBehaviour
     
     /// <summary>Places given player above current tile</summary>
     /// <param name="player">Player that will be placed above</param>
-    public virtual void PlacePlayer(Player player)
+    public virtual void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
         if(player == null)
             return;
@@ -190,10 +191,22 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
-
         var playerControl = player.GetComponent<PlayerAnimationControl>();
-        
-        playerControl.DirectTransition(transform.position + playerPositionOffset);
+
+        if (playerControl != null)
+        {
+            var destination = transform.position + playerPositionOffset;
+            
+            switch (transitionType)
+            {
+                case ETransitionType.Spawn:
+                    playerControl.Respawn(destination, destination.y + 10f);
+                    break;
+                case ETransitionType.Walk:
+                    playerControl.DirectTransition(destination);
+                    break;
+            }
+        }
 
         if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
         {
