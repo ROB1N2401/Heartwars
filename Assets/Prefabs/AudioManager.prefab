@@ -47,35 +47,35 @@ MonoBehaviour:
   - name: MovePiece1
     clip: {fileID: 8300000, guid: b9f5166c927430645b78af4ec829114e, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece2
     clip: {fileID: 8300000, guid: 02d4631839870c04cab0af03ee30ddf8, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece3
     clip: {fileID: 8300000, guid: 1e9b1d9a80922d846a1c61c13e28a59f, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece4
     clip: {fileID: 8300000, guid: 42da4cea66dc2e04fb28b843d8535395, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: MovePiece5
     clip: {fileID: 8300000, guid: cfb9b0f2917610d4886982d076424695, type: 3}
     mix: {fileID: 0}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -166,21 +166,21 @@ MonoBehaviour:
   - name: DestroyIce1
     clip: {fileID: 8300000, guid: f4eb71d2fd35ca749a88a6883467327a, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce2
     clip: {fileID: 8300000, guid: 7bffe38b43987d6418dbd82deaffc3da, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DestroyIce3
     clip: {fileID: 8300000, guid: abce39548c58c0d47977a740640e31f4, type: 3}
     mix: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -212,41 +212,6 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Not deleting this entry, id have to move the entire list up lol
-    clip: {fileID: 8300000, guid: e944e4f85a1380a4fabbd50310de9024, type: 3}
-    mix: {fileID: 0}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Falling1
-    clip: {fileID: 8300000, guid: e21415074176b26479a24e265349582b, type: 3}
-    mix: {fileID: 0}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Falling2
-    clip: {fileID: 8300000, guid: e4d68d4d79c7c844f8b9acf8c2a15ab1, type: 3}
-    mix: {fileID: 0}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Falling3
-    clip: {fileID: 8300000, guid: 350f227e31215244aad7ac66a91067ce, type: 3}
-    mix: {fileID: 0}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: UraniumFever
-    clip: {fileID: 8300000, guid: c7aab8f6e0446e449abd9451d343cc55, type: 3}
-    mix: {fileID: 0}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
   - name: CountryRoads
     clip: {fileID: 8300000, guid: 334a47cac17a0dd418b54bab224b80c2, type: 3}
     mix: {fileID: 0}
@@ -254,12 +219,40 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: ScatmansWorld
-    clip: {fileID: 8300000, guid: b21d98ca55417d24ab5f65d0947aa766, type: 3}
+  - name: Falling1
+    clip: {fileID: 8300000, guid: e21415074176b26479a24e265349582b, type: 3}
     mix: {fileID: 0}
-    volume: 0.1
+    volume: 0.25
     pitch: 1
-    loop: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling2
+    clip: {fileID: 8300000, guid: e4d68d4d79c7c844f8b9acf8c2a15ab1, type: 3}
+    mix: {fileID: 0}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling3
+    clip: {fileID: 8300000, guid: 350f227e31215244aad7ac66a91067ce, type: 3}
+    mix: {fileID: 0}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LandsofMagic
+    clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Clash
+    clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
   - name: PlaceStone1
     clip: {fileID: 8300000, guid: ac0975991401f5c48ba87d1abb11f90e, type: 3}
@@ -268,19 +261,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: LandsofMagic
-    clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
+  - name: PlaceStone2
+    clip: {fileID: 8300000, guid: 46bfae92884fc0749bf8326fb1de27cf, type: 3}
     mix: {fileID: 0}
     volume: 0.7
     pitch: 1
-    loop: 1
+    loop: 0
     source: {fileID: 0}
-  - name: Clash
-    clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
-    mix: {fileID: 0}
-    volume: 0.7
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  currentScene: TheMainScene
-  shouldRandomizePitch: 1
+  currentScene: 
+  shouldRandomizePitch: 0
