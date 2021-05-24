@@ -245,14 +245,14 @@ MonoBehaviour:
     mix: {fileID: 0}
     volume: 0.2
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: Clash
     clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
     mix: {fileID: 0}
     volume: 0.2
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: PlaceStone1
     clip: {fileID: 8300000, guid: ac0975991401f5c48ba87d1abb11f90e, type: 3}
