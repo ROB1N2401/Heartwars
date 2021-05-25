@@ -34,14 +34,6 @@ public class AnimationControl : MonoBehaviour
         _firstTime = true;
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            AnimationControl.Instance.RollAnnouncementOut(PlayerManager.Instance.CurrentPlayer);
-        }
-    }
-
     public void RollAnnouncementOut(Player player_in)
     {
         if (_firstTime)

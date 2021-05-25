@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
         {
             gameObject.SetActive(false);
             IsAlive = false;
-            AnimationControl.Instance.RollAnnouncementOut(this);
+            PlayerManager.Instance.EliminatePlayer(this);
             AudioManager.InvokeDeathSound();
             return;
         }
