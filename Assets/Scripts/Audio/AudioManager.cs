@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
@@ -16,6 +17,10 @@ public class AudioManager : MonoBehaviour
 
     //If you want a sound effect to have a random pitch when it plays, you can use "AudioManager.instance.shouldRandomizePitch = true;" before calling the PlaySound function.
     //If you want to play a sound from inside this script instead of in another script, you can leave out the "AudioManager.instance." part of the code. Same thing goes for changing shouldRandomizePitch.
+
+    //For fading between songs specifically, you want to use "AudioManager.instance.fadeIn("Name of song", (float value, duration in seconds))" or "fadeIn("Name of song", (float value, duration in
+    //seconds))" if done within this script. Replace "fadeIn" with "fadeOut" when fading out, same arguments are taken in.
+    //"PlaySong()" and "StopSound()" can still be used if no transition is desired.
 
     public Sound[] sounds;
     public static AudioManager instance;
@@ -84,24 +89,54 @@ public class AudioManager : MonoBehaviour
         {
             if (this.currentScene == "Menu")
             {
-                StopSound(currentSong);
-                PlaySong("LandsofMagic");
+                StartCoroutine(fadeOut(currentSong, 1f));
+                StartCoroutine(fadeIn("LandsofMagic", 1f));
                 musicCanChange = false;
             }
             else if (this.currentScene == "Heartwars")
             {
-                StopSound(currentSong);
-                PlaySong("Clash");
+                StartCoroutine(fadeOut(currentSong, 1f));
+                StartCoroutine(fadeIn("Clash", 1f));
                 musicCanChange = false;
             }
             else if (this.currentScene == "Error")
             {
-                StopSound(currentSong);
-                //PlaySong("UraniumFever");
                 musicCanChange = false;
             }
         }
         lastScene = this.currentScene;
+    }
+
+    IEnumerator fadeIn(string name, float fadeTime)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        float startVolume = s.volume;
+
+        s.source.volume = 0f;
+        PlaySong(name);
+
+        while (s.source.volume < startVolume)
+        {
+            s.source.volume += startVolume * Time.deltaTime / fadeTime;
+            yield return null;
+        }
+
+        s.source.volume = startVolume;
+    }
+
+    IEnumerator fadeOut(string name, float fadeTime)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        float startVolume = s.source.volume;
+
+        while (s.source.volume > 0)
+        {
+            s.source.volume -= startVolume * Time.deltaTime / fadeTime;
+            yield return null;
+        }
+
+        StopSound(name);
+        s.source.volume = startVolume;
     }
 
     public static void InvokeWalkingSound()
@@ -341,7 +376,7 @@ public class AudioManager : MonoBehaviour
         currentSong = s.name;
         s.source.Play();
     }
-
+    
     public void StopSound(string sound)
     {
         Sound s = Array.Find(sounds, item => item.name == sound);
@@ -364,4 +399,6 @@ public class AudioManager : MonoBehaviour
 
         s.source.Stop();
     }
+
+    
 }
