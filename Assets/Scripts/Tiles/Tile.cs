@@ -17,8 +17,8 @@ public class Tile : MonoBehaviour
     public Player AttachedPlayer => _attachedPlayer;
     public Vector3 PositionForPlayer => playerPositionOffset + transform.position;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
+    public bool IsPlayerOnTile => _attachedPlayer != null;
 
-    protected bool IsPlayerOnTile => _attachedPlayer != null;
     protected Player _attachedPlayer;
     protected internal (Tile aboveTile, Tile underTile) _neighbourTiles;
     
@@ -181,7 +181,7 @@ public class Tile : MonoBehaviour
     
     /// <summary>Places given player above current tile</summary>
     /// <param name="player">Player that will be placed above</param>
-    public virtual void PlacePlayer(Player player)
+    public virtual void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
         if(player == null)
             return;
@@ -191,12 +191,23 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
+        var animator = player.GetComponent<PlayerAnimationControl>();
 
-        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
+        if (animator != null)
         {
-            player.Die();
-            RemovePlayer();
+            switch (transitionType)
+            {
+                case ETransitionType.Walk:
+                    animator.DirectTransition(PositionForPlayer);
+                    break;
+                case ETransitionType.Spawn:
+                    animator.Respawn(PositionForPlayer, PositionForPlayer.y + 10f);
+                    break;
+            }
         }
+
+        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void) 
+            player.Die();
     }
 
     /// <summary>Removes all attachments from this tile relative to player</summary>

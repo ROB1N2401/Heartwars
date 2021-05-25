@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TrampolineTile : Tile
 {
-    public override void PlacePlayer(Player player)
+    public override void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
         if(player == null)
             return;

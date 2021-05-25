@@ -81,21 +81,12 @@ public class Player : MonoBehaviour
     
     /// <summary>Moves player to the given tile</summary>
     /// <param name="tile">Target tile where player will be moved</param>
-    public void MoveTo(Tile tile, ETransitionType transitionType = ETransitionType.Walk)
+    public void MoveTo(Tile tile)
     {
         var topTile = tile.HighestTileFromAbove;
         if(!topTile.IsPlayerAbleToMove(this))
             return;
         
-        switch (transitionType)
-        {
-            case ETransitionType.Walk:
-                _animationControl.DirectTransition(topTile.PositionForPlayer);
-                break;
-            case ETransitionType.Spawn:
-                _animationControl.Respawn(topTile.PositionForPlayer, topTile.PositionForPlayer.y + 10f);
-                break;
-        }
         topTile.PlacePlayer(this);
         
         SubtractActivePoints(playerData.PointsForMovementTaken);
@@ -121,8 +112,6 @@ public class Player : MonoBehaviour
 
         if (destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void)
         {
-            var animationControl = playerToPush.GetComponent<PlayerAnimationControl>();
-            animationControl.DirectTransition(destinationTile.PositionForPlayer);
             destinationTile.PlacePlayer(playerToPush);
         }
     }
@@ -149,19 +138,27 @@ public class Player : MonoBehaviour
                 attachedTile.HighestTileFromAbove.PlaceTileAbove(_playerInventory.TakeTileFromInventory(ETileType.Bonus));
 
         PointsLeftForTheTurn = playerData.PointsForMovementTaken;
-
-        if (attachedTile != null)
-            attachedTile.RemovePlayer();
+        
         if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
+            if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
+            {
+                _animationControl.FallDown(attachedTile.PositionForPlayer.y - 100f);
+                attachedTile.RemovePlayer();
+            }
             gameObject.SetActive(false);
             IsAlive = false;
             AudioManager.InvokeDeathSound();
             return;
         }
-        
+
+        if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
+        {
+            _animationControl.FallDown(attachedTile.PositionForPlayer.y - 100f);
+            attachedTile.RemovePlayer();
+        }
+        spawnPoint.PlacePlayer(this, ETransitionType.Spawn);
         AudioManager.InvokeDeathSound();
-        MoveTo(spawnPoint, ETransitionType.Spawn);
         EndTurn();
     }
     

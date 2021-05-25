@@ -1,14 +1,13 @@
 ﻿public class IceTile : Tile
-{ 
-    public override void PlacePlayer(Player player)
+{
+    public override void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
-        if(player == null)
+        if (player == null)
             return;
-    
+
+        var animator = player.GetComponent<PlayerAnimationControl>();
         var underneathTile = player.attachedTile.LowestTileFromUnderneath;
         var destinationTile = GetTileFromOppositeDirection(underneathTile);
-        
-        base.PlacePlayer(player);
 
         if (destinationTile == null)
         {
@@ -18,7 +17,9 @@
 
         destinationTile = destinationTile.HighestTileFromAbove;
 
-        if(destinationTile.TileData.IsWalkable|| destinationTile.TileData.TileType == ETileType.Void)
+        if ((destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void) && !destinationTile.IsPlayerOnTile)
             destinationTile.PlacePlayer(player);
+        else
+            base.PlacePlayer(player);
     }
 }

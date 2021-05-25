@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerAnimationControl : MonoBehaviour
 {
-    
     public bool IsTransitionTime
     {
         get
@@ -16,9 +15,8 @@ public class PlayerAnimationControl : MonoBehaviour
             }
         }
     }
-
-
-    private Stack<IEnumerator> _animationsStack = new Stack<IEnumerator>();
+    
+    private Queue<IEnumerator> _animationsQueue = new Queue<IEnumerator>();
     private volatile bool _isTransitionTime = false;
 
     private void Start() => StartCoroutine(CoroutineCoordinator());
@@ -27,20 +25,19 @@ public class PlayerAnimationControl : MonoBehaviour
     {
         while (true)
         {
-            while (_animationsStack.Count > 0)
-                yield return _animationsStack.Pop();
-
+            while (_animationsQueue.Count > 0)
+                yield return _animationsQueue.Dequeue();
             yield return null;
         }
     }
 
-    public void Respawn(Vector3 targetPosition, float startHeight) => _animationsStack.Push(RespawnCor(targetPosition, startHeight));
+    public void Respawn(Vector3 targetPosition, float startHeight) => _animationsQueue.Enqueue(RespawnCor(targetPosition, startHeight));
 
-    public void FallDown(float negativeHeight) => _animationsStack.Push(FallDownCor(negativeHeight));
+    public void FallDown(float negativeHeight) => _animationsQueue.Enqueue(FallDownCor(negativeHeight));
 
-    public void DirectTransition(Vector3 targetPosition) => _animationsStack.Push(DirectTransitionCor(targetPosition));
+    public void DirectTransition(Vector3 targetPosition) => _animationsQueue.Enqueue(DirectTransitionCor(targetPosition));
 
-    public void ParabolicTransition(Vector3 targetPosition) => _animationsStack.Push(ParabolicTransitionCor(targetPosition));
+    public void ParabolicTransition(Vector3 targetPosition) => _animationsQueue.Enqueue(ParabolicTransitionCor(targetPosition));
     
     private IEnumerator RespawnCor(Vector3 targetPosition, float startHeight)
     {
