@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
@@ -26,8 +25,8 @@ public class Tile : MonoBehaviour
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
-        var rayToTheUp = new Ray(transform.position, -transform.forward);
-        var rayToTheBottom = new Ray(transform.position, transform.forward);
+        var rayToTheUp = new Ray(transform.position, Vector3.up);
+        var rayToTheBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
         
         if (Physics.Raycast(rayToTheUp, out hit, 5f))
@@ -49,8 +48,8 @@ public class Tile : MonoBehaviour
     //todo debug
     protected void OnDrawGizmos()
     {
-        var rayToTheUp = new Ray(transform.position, -transform.forward);
-        var rayToTheBottom = new Ray(transform.position, transform.forward);
+        var rayToTheUp = new Ray(transform.position, Vector3.up);
+        var rayToTheBottom = new Ray(transform.position, Vector3.down);
         Gizmos.color = Color.magenta;
         
         Gizmos.DrawRay(rayToTheUp);
@@ -206,7 +205,7 @@ public class Tile : MonoBehaviour
             }
         }
 
-        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void) 
+        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
             player.Die();
     }
 

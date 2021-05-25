@@ -138,25 +138,43 @@ public class Player : MonoBehaviour
                 attachedTile.HighestTileFromAbove.PlaceTileAbove(_playerInventory.TakeTileFromInventory(ETileType.Bonus));
 
         PointsLeftForTheTurn = playerData.PointsForMovementTaken;
-        
+
         if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
+            void PreAction() => AudioManager.InvokeDeathSound();
+            void AfterAction() => gameObject.SetActive(false);
+            
             if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
             {
                 _animationControl
-                    .FallDown(attachedTile.PositionForPlayer.y - 100f, false, AudioManager.InvokeDeathSound);
+                    .Fly( 100f, Vector3.down, PreAction, AfterAction);
+                attachedTile.RemovePlayer();
+            }
+            else
+            {
+                //todo replace with flying up animation
+                _animationControl
+                    .Fly(100f, Vector3.up, PreAction, AfterAction);
                 attachedTile.RemovePlayer();
             }
             IsAlive = false;
             return;
         }
-
+        
         if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
         {
             _animationControl
-                .FallDown(attachedTile.PositionForPlayer.y - 100f, action: AudioManager.InvokeDeathSound);
+                .Fly(100f, Vector3.down, preAction: AudioManager.InvokeDeathSound);
             attachedTile.RemovePlayer();
         }
+        else
+        {
+            //todo replace with flying up animation
+            _animationControl
+                .Fly(100f, Vector3.up, preAction: AudioManager.InvokeDeathSound);
+            attachedTile.RemovePlayer();
+        }
+
         spawnPoint.PlacePlayer(this, ETransitionType.Spawn);
         EndTurn();
     }
