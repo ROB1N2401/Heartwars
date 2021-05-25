@@ -24,7 +24,7 @@ public class TrampolineTile : Tile
             {
                 var tileOnPath = path[i].HighestTileFromAbove;
 
-                if (tileOnPath.TileData.IsWalkable || tileOnPath.TileData.TileType == ETileType.Void)
+                if ((tileOnPath.TileData.IsWalkable || tileOnPath.TileData.TileType == ETileType.Void) && !tileOnPath.IsPlayerOnTile)
                 {
                     destinationTile = tileOnPath;
                     break;

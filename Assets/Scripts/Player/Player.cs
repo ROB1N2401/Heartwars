@@ -143,10 +143,9 @@ public class Player : MonoBehaviour
         {
             if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
             {
-                _animationControl.FallDown(attachedTile.PositionForPlayer.y - 100f);
+                _animationControl.FallDown(attachedTile.PositionForPlayer.y - 100f, false);
                 attachedTile.RemovePlayer();
             }
-            gameObject.SetActive(false);
             IsAlive = false;
             AudioManager.InvokeDeathSound();
             return;

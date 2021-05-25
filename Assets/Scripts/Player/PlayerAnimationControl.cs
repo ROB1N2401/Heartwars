@@ -33,7 +33,7 @@ public class PlayerAnimationControl : MonoBehaviour
 
     public void Respawn(Vector3 targetPosition, float startHeight) => _animationsQueue.Enqueue(RespawnCor(targetPosition, startHeight));
 
-    public void FallDown(float negativeHeight) => _animationsQueue.Enqueue(FallDownCor(negativeHeight));
+    public void FallDown(float negativeHeight, bool isActiveAfterAnimation = true) => _animationsQueue.Enqueue(FallDownCor(negativeHeight, isActiveAfterAnimation));
 
     public void DirectTransition(Vector3 targetPosition) => _animationsQueue.Enqueue(DirectTransitionCor(targetPosition));
 
@@ -59,7 +59,7 @@ public class PlayerAnimationControl : MonoBehaviour
         _isTransitionTime = false;
     }
 
-    private IEnumerator FallDownCor(float height)
+    private IEnumerator FallDownCor(float height, bool isActiveAfterAnimation)
     {
         yield return new WaitUntil(() => !_isTransitionTime);
         _isTransitionTime = true;
@@ -74,7 +74,8 @@ public class PlayerAnimationControl : MonoBehaviour
             speed += 0.98f;
             yield return null;
         }
-
+        
+        gameObject.SetActive(isActiveAfterAnimation);
         _isTransitionTime = false;
     }
 
