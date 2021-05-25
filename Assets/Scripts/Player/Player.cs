@@ -141,10 +141,11 @@ public class Player : MonoBehaviour
         {
             gameObject.SetActive(false);
             IsAlive = false;
+            AnimationControl.Instance.RollAnnouncementOut(this);
             AudioManager.InvokeDeathSound();
             return;
         }
-        
+
         AudioManager.InvokeDeathSound();
         MoveTo(spawnPoint);
         EndTurn();
