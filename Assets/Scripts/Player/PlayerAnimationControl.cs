@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class PlayerAnimationControl : MonoBehaviour
 {
+    [Header("Rotation options")]
+    [SerializeField] [Min(.0001f)] private float rotationSpeed = 30f;
+    
+    [Header("Direct transition options")]
+    [SerializeField] [Min(.0001f)] private float directTransitionTime = .05f;
+
+    [Header("Respawn options")] 
+    [SerializeField] [Min(.0001f)] private float respawnSpeed = .2f;
+    
+    [Header("Falling down options")]
+    [SerializeField] private float initialSpeed = 0f;
+    [SerializeField] private float acceleration = .98f;
+    
     public bool IsTransitionTime
     {
         get
@@ -31,13 +44,17 @@ public class PlayerAnimationControl : MonoBehaviour
         }
     }
 
-    public void Respawn(Vector3 targetPosition, float startHeight) => _animationsQueue.Enqueue(RespawnCor(targetPosition, startHeight));
+    public void Respawn(Vector3 targetPosition, float startHeight) => 
+        _animationsQueue.Enqueue(RespawnCor(targetPosition, startHeight));
 
-    public void FallDown(float negativeHeight, bool isActiveAfterAnimation = true) => _animationsQueue.Enqueue(FallDownCor(negativeHeight, isActiveAfterAnimation));
+    public void FallDown(float negativeHeight, bool isActiveAfterAnimation = true, Action action = null) =>
+        _animationsQueue.Enqueue(FallDownCor(negativeHeight, isActiveAfterAnimation, action));
 
-    public void DirectTransition(Vector3 targetPosition) => _animationsQueue.Enqueue(DirectTransitionCor(targetPosition));
+    public void DirectTransition(Vector3 targetPosition) =>
+        _animationsQueue.Enqueue(DirectTransitionCor(targetPosition));
 
-    public void ParabolicTransition(Vector3 targetPosition) => _animationsQueue.Enqueue(ParabolicTransitionCor(targetPosition));
+    public void ParabolicTransition(Vector3 targetPosition) => 
+        _animationsQueue.Enqueue(ParabolicTransitionCor(targetPosition));
     
     private IEnumerator RespawnCor(Vector3 targetPosition, float startHeight)
     {
@@ -49,7 +66,7 @@ public class PlayerAnimationControl : MonoBehaviour
         
         while ((transform.position - targetPosition).magnitude > 0.01f)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, 0.2f);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, respawnSpeed);
             
             yield return null;
         }
@@ -59,19 +76,20 @@ public class PlayerAnimationControl : MonoBehaviour
         _isTransitionTime = false;
     }
 
-    private IEnumerator FallDownCor(float height, bool isActiveAfterAnimation)
+    private IEnumerator FallDownCor(float height, bool isActiveAfterAnimation, Action action)
     {
         yield return new WaitUntil(() => !_isTransitionTime);
         _isTransitionTime = true;
 
         height = -Math.Abs(height);
-        float speed = 0f;
+        var speed = initialSpeed;
         var yTransition = transform.position.y + height;
-
+        
+        action?.Invoke();
         while (transform.position.y > yTransition)
         {
             transform.position += Vector3.down * Time.deltaTime * speed;
-            speed += 0.98f;
+            speed += acceleration;
             yield return null;
         }
         
@@ -81,23 +99,36 @@ public class PlayerAnimationControl : MonoBehaviour
 
     private IEnumerator ParabolicTransitionCor(Vector3 targetPosition)
     {
-        StartCoroutine(LookAtGivenObjectCor(targetPosition));
-        
         yield return new WaitUntil(() => !_isTransitionTime);
+        yield return LookAtGivenObjectCor(targetPosition);
         _isTransitionTime = true;
-        
-        const float speed = 2f;
-        Func<float, float, float> parabola = (x, dist) =>
-            -Mathf.Pow(x - dist / 2, 2) / (dist / 2) + dist / 2;
-        var startPosition = transform.position;
-        var totalDistance = (targetPosition - startPosition).magnitude;
-        while ((transform.position - targetPosition).magnitude > .1f)
+
+        const float height = 10f;
+        const int count = 10;
+        var startPos = transform.position;
+        var endPos = targetPosition;
+        var midPos = (startPos - endPos) / 2;
+        midPos.y += height;
+
+        for (var i = 0; i < count; i++)
         {
-            var x = Mathf.Lerp(transform.position.x, targetPosition.x, Time.deltaTime * speed);
-            var z = Mathf.Lerp(transform.position.z, targetPosition.z, Time.deltaTime * speed);
-            var y = parabola(Vector2.Distance(startPosition, new Vector2(z, x)), totalDistance);
-            y += transform.position.y;
-            transform.position = new Vector3(x, y, z);
+             
+        }
+
+        _isTransitionTime = false;
+    }
+
+    private IEnumerator DirectTransitionCor(Vector3 targetPosition)
+    {
+        yield return new WaitUntil(() => !_isTransitionTime);
+        yield return LookAtGivenObjectCor(targetPosition);
+
+        _isTransitionTime = true;
+
+        var velocity = Vector3.zero;
+        while ((transform.position - targetPosition).magnitude > .01f)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, directTransitionTime);
 
             yield return null;
         }
@@ -107,41 +138,17 @@ public class PlayerAnimationControl : MonoBehaviour
         _isTransitionTime = false;
     }
 
-    private IEnumerator DirectTransitionCor(Vector3 targetPosition)
-    {
-        lock (this)
-        {
-            yield return new WaitUntil(() => !_isTransitionTime);
-            yield return LookAtGivenObjectCor(targetPosition);
-            
-            _isTransitionTime = true;
-
-            var velocity = Vector3.zero;
-            while ((transform.position - targetPosition).magnitude > .01f)
-            {
-                transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, .05f);
-
-                yield return null;
-            }
-
-            transform.position = targetPosition;
-
-            _isTransitionTime = false;
-        }
-    }
-    
     private IEnumerator LookAtGivenObjectCor(Vector3 target)
     {
         yield return new WaitUntil(() => !_isTransitionTime);
         _isTransitionTime = true;
-
-        const float speed = 30f;
+        
         var rotationY = transform.localEulerAngles.y;
         var endRotationY = Quaternion.LookRotation(target - transform.position).eulerAngles.y;
 
         while (Mathf.Abs(rotationY - endRotationY) > .01f)
         {
-            rotationY = Mathf.Lerp(rotationY, endRotationY, Time.deltaTime * speed);
+            rotationY = Mathf.Lerp(rotationY, endRotationY, Time.deltaTime * rotationSpeed);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotationY, transform.eulerAngles.z);
 
             yield return null;

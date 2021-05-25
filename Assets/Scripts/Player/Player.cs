@@ -143,21 +143,21 @@ public class Player : MonoBehaviour
         {
             if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
             {
-                _animationControl.FallDown(attachedTile.PositionForPlayer.y - 100f, false);
+                _animationControl
+                    .FallDown(attachedTile.PositionForPlayer.y - 100f, false, AudioManager.InvokeDeathSound);
                 attachedTile.RemovePlayer();
             }
             IsAlive = false;
-            AudioManager.InvokeDeathSound();
             return;
         }
 
         if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
         {
-            _animationControl.FallDown(attachedTile.PositionForPlayer.y - 100f);
+            _animationControl
+                .FallDown(attachedTile.PositionForPlayer.y - 100f, action: AudioManager.InvokeDeathSound);
             attachedTile.RemovePlayer();
         }
         spawnPoint.PlacePlayer(this, ETransitionType.Spawn);
-        AudioManager.InvokeDeathSound();
         EndTurn();
     }
     

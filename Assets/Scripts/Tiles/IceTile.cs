@@ -8,6 +8,9 @@
         var animator = player.GetComponent<PlayerAnimationControl>();
         var underneathTile = player.attachedTile.LowestTileFromUnderneath;
         var destinationTile = GetTileFromOppositeDirection(underneathTile);
+        
+        if(animator) 
+            animator.DirectTransition(PositionForPlayer);
 
         if (destinationTile == null)
         {
