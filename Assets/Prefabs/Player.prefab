@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 253605907}
   - component: {fileID: 253605908}
   - component: {fileID: 253605909}
+  - component: {fileID: 4627842698435154363}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -144,3 +145,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &4627842698435154363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8794557037143398825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 30
+  directTransitionTime: 0.05
+  respawnSpeed: 0.2
+  initialSpeed: 0
+  acceleration: 0.98

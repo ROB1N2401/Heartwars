@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6668309, g: 0.7249395, b: 0.8000448, a: 1}
+  m_IndirectSpecularColor: {r: 0.6317936, g: 0.69963586, b: 0.786611, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1137,7 +1137,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 96733821}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 110401984}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1515315b12103bc449e4c2f12a1bde57, type: 3}
@@ -1313,6 +1313,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 98357101}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &110401984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8794557037143398825, guid: 12797b0b9e8fe9f418d6a438e15aa4a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 96733821}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &110401985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110401984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 30
+  directTransitionTime: 0.05
+  respawnSpeed: 0.2
+  initialSpeed: 0
+  acceleration: 0.98
 --- !u!1001 &117159309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1850,7 +1873,18 @@ MonoBehaviour:
   spriteIdle: {fileID: 21300000, guid: 44f2426a6b12fe34a85a95bf9b408a6e, type: 3}
   selectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 548298075}
+        m_MethodName: SelectNewBlueprint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deselectionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -4167,7 +4201,18 @@ MonoBehaviour:
   spriteIdle: {fileID: 21300000, guid: e636c7548e0400040b00e04be5c7ca32, type: 3}
   selectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 548298075}
+        m_MethodName: SelectNewBlueprint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deselectionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5846,6 +5891,7 @@ GameObject:
   - component: {fileID: 548298067}
   - component: {fileID: 548298068}
   - component: {fileID: 548298073}
+  - component: {fileID: 548298075}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -5879,27 +5925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastOffset: {x: 0, y: -0.02, z: 0}
-  blueprints:
-  - blueprintPrefab: {fileID: 7069068485134100718, guid: 7d26199aa0308d347b44466ce9b99d04,
-      type: 3}
-    tileType: 1
-    keyThatSelectsTile: 122
-  - blueprintPrefab: {fileID: 796004207678323586, guid: f753e2118c9397a44bde6ec3e9590e28,
-      type: 3}
-    tileType: 2
-    keyThatSelectsTile: 120
-  - blueprintPrefab: {fileID: 796004207678323586, guid: 0b56b274131523948af0b092500ef977,
-      type: 3}
-    tileType: 3
-    keyThatSelectsTile: 99
-  - blueprintPrefab: {fileID: 796004207678323586, guid: 7a27f9962965c914d9ea5ba44594cea2,
-      type: 3}
-    tileType: 5
-    keyThatSelectsTile: 118
-  - blueprintPrefab: {fileID: 796004207678323586, guid: 620d1eb94a52f7245bd9d93f19faad3e,
-      type: 3}
-    tileType: 4
-    keyThatSelectsTile: 98
 --- !u!114 &548298069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5926,6 +5951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modeTabManagerRef: {fileID: 936059172}
+  _inventoryTabManagerRef: {fileID: 1194308805}
 --- !u!4 &548298071
 Transform:
   m_ObjectHideFlags: 0
@@ -5982,6 +6008,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e90cef7f104924c982b83ffb26da0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &548298075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548298066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42afa74061e22f346bd24f739bd84bef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueprints:
+  - blueprintPrefab: {fileID: 7069068485134100718, guid: 7d26199aa0308d347b44466ce9b99d04,
+      type: 3}
+    tileType: 1
+  - blueprintPrefab: {fileID: 796004207678323586, guid: f753e2118c9397a44bde6ec3e9590e28,
+      type: 3}
+    tileType: 2
+  - blueprintPrefab: {fileID: 796004207678323586, guid: 0b56b274131523948af0b092500ef977,
+      type: 3}
+    tileType: 3
+  - blueprintPrefab: {fileID: 796004207678323586, guid: 7a27f9962965c914d9ea5ba44594cea2,
+      type: 3}
+    tileType: 5
+  - blueprintPrefab: {fileID: 796004207678323586, guid: 620d1eb94a52f7245bd9d93f19faad3e,
+      type: 3}
+    tileType: 4
 --- !u!1001 &549756875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6193,7 +6247,18 @@ MonoBehaviour:
   spriteIdle: {fileID: 21300000, guid: c097026d3bbcd1540ba09b7a05d1d9da, type: 3}
   selectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 548298075}
+        m_MethodName: SelectNewBlueprint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deselectionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -7837,7 +7902,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 732784119}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1519909432}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1515315b12103bc449e4c2f12a1bde57, type: 3}
@@ -9588,7 +9653,18 @@ MonoBehaviour:
   spriteIdle: {fileID: 21300000, guid: 89fd72c650ce22541a4234f4a80cbc2c, type: 3}
   selectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 548298075}
+        m_MethodName: SelectNewBlueprint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deselectionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -12761,7 +12837,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 920, y: 104.05878}
+  m_SizeDelta: {x: 920, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1194308805
 MonoBehaviour:
@@ -16166,6 +16242,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1512125843}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1519909432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8794557037143398825, guid: 12797b0b9e8fe9f418d6a438e15aa4a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 732784119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1519909433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 30
+  directTransitionTime: 0.05
+  respawnSpeed: 0.2
+  initialSpeed: 0
+  acceleration: 0.98
 --- !u!1 &1543576178
 GameObject:
   m_ObjectHideFlags: 0
@@ -17408,7 +17507,18 @@ MonoBehaviour:
   spriteIdle: {fileID: 21300000, guid: 68e65aed2e42ccc4fbe4b5067a3d50f0, type: 3}
   selectionEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 548298075}
+        m_MethodName: SelectNewBlueprint
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deselectionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -18705,6 +18815,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222376495304023268, guid: 25e99edf17ba8dd42a7344f2154108c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4222376495304023269, guid: 25e99edf17ba8dd42a7344f2154108c9,
         type: 3}

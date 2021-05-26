@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Floor Mode",
+                    "name": "Select Floor",
                     "type": "Button",
                     "id": "fe8153f1-2df5-46d6-9207-f14e6c9061b0",
                     "expectedControlType": "Button",
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Wall Mode",
+                    "name": "Select Wall",
                     "type": "Button",
                     "id": "3a999a1f-d274-4122-bcc2-2021578fe72e",
                     "expectedControlType": "Button",
@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Ice Mode",
+                    "name": "Select Ice",
                     "type": "Button",
                     "id": "e2ece5d1-1ae1-4666-95b5-3d36441a66fb",
                     "expectedControlType": "Button",
@@ -62,7 +62,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Coloured Tile Mode",
+                    "name": "Select Camp",
                     "type": "Button",
                     "id": "ef0bf8a2-98fa-4a12-a58f-6b49d1b354a4",
                     "expectedControlType": "Button",
@@ -70,7 +70,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "P Trampoline Mode",
+                    "name": "Select Trampoline",
                     "type": "Button",
                     "id": "4b574a3f-d6cf-4a39-9784-263d59fda33a",
                     "expectedControlType": "Button",
@@ -138,7 +138,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "P Ice Mode",
+                    "action": "Select Ice",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -149,7 +149,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "P Coloured Tile Mode",
+                    "action": "Select Camp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -160,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "P Trampoline Mode",
+                    "action": "Select Trampoline",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -182,7 +182,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "P Floor Mode",
+                    "action": "Select Floor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -193,7 +193,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "P Wall Mode",
+                    "action": "Select Wall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
