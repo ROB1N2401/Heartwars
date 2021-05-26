@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Tile : MonoBehaviour
     {
         _animationControl = GetComponent<TransitionControl>();
         
+        RotateRandomly();
+        
         var rayToTheUp = new Ray(transform.position, Vector3.up);
         var rayToTheBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -47,7 +50,17 @@ public class Tile : MonoBehaviour
         if (_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
             throw new ApplicationException($"Reference of a neighbour is set to itself inside {gameObject.name}");
     }
-    
+
+    protected virtual void RotateRandomly()
+    {
+        int[] rotationAnglesPool = new int[6];
+        for (int angle = 0, i = 0; angle < 360 && i < rotationAnglesPool.Length; angle += 60, i++) 
+            rotationAnglesPool[i] = angle;
+
+        var randomAngle = rotationAnglesPool[Random.Range(0, rotationAnglesPool.Length)];
+        transform.Rotate(0, randomAngle, 0, Space.World);
+    }
+
     //todo debug
     protected void OnDrawGizmos()
     {
