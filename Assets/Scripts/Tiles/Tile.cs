@@ -23,14 +23,17 @@ public class Tile : MonoBehaviour
     protected internal (Tile aboveTile, Tile underTile) _neighbourTiles;
     protected TransitionControl _animationControl; 
     
+    private static readonly int[] _rotationAnglesPool = {60, 120, 180, 240, 300};
+    
     /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
+        //Rotates tile in a random direction
+        transform.Rotate(0,  _rotationAnglesPool[Random.Range(0, _rotationAnglesPool.Length)], 0, Space.World);
+        
         _animationControl = GetComponent<TransitionControl>();
-        
-        RotateRandomly();
-        
+
         var rayToTheUp = new Ray(transform.position, Vector3.up);
         var rayToTheBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -50,17 +53,7 @@ public class Tile : MonoBehaviour
         if (_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
             throw new ApplicationException($"Reference of a neighbour is set to itself inside {gameObject.name}");
     }
-
-    protected virtual void RotateRandomly()
-    {
-        int[] rotationAnglesPool = new int[6];
-        for (int angle = 0, i = 0; angle < 360 && i < rotationAnglesPool.Length; angle += 60, i++) 
-            rotationAnglesPool[i] = angle;
-
-        var randomAngle = rotationAnglesPool[Random.Range(0, rotationAnglesPool.Length)];
-        transform.Rotate(0, randomAngle, 0, Space.World);
-    }
-
+    
     //todo debug
     protected void OnDrawGizmos()
     {
