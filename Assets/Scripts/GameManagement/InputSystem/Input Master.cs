@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Input Master.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/GameManagement/InputSystem/Input Master.inputactions'
 
 using System;
 using System.Collections;
@@ -51,7 +51,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""P Floor Mode"",
+                    ""name"": ""Select Floor"",
                     ""type"": ""Button"",
                     ""id"": ""fe8153f1-2df5-46d6-9207-f14e6c9061b0"",
                     ""expectedControlType"": ""Button"",
@@ -59,7 +59,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""P Wall Mode"",
+                    ""name"": ""Select Wall"",
                     ""type"": ""Button"",
                     ""id"": ""3a999a1f-d274-4122-bcc2-2021578fe72e"",
                     ""expectedControlType"": ""Button"",
@@ -67,7 +67,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""P Ice Mode"",
+                    ""name"": ""Select Ice"",
                     ""type"": ""Button"",
                     ""id"": ""e2ece5d1-1ae1-4666-95b5-3d36441a66fb"",
                     ""expectedControlType"": ""Button"",
@@ -75,7 +75,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""P Coloured Tile Mode"",
+                    ""name"": ""Select Camp"",
                     ""type"": ""Button"",
                     ""id"": ""ef0bf8a2-98fa-4a12-a58f-6b49d1b354a4"",
                     ""expectedControlType"": ""Button"",
@@ -83,7 +83,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""P Trampoline Mode"",
+                    ""name"": ""Select Trampoline"",
                     ""type"": ""Button"",
                     ""id"": ""4b574a3f-d6cf-4a39-9784-263d59fda33a"",
                     ""expectedControlType"": ""Button"",
@@ -151,7 +151,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""P Ice Mode"",
+                    ""action"": ""Select Ice"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -162,7 +162,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""P Coloured Tile Mode"",
+                    ""action"": ""Select Camp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -173,7 +173,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""P Trampoline Mode"",
+                    ""action"": ""Select Trampoline"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -195,7 +195,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""P Floor Mode"",
+                    ""action"": ""Select Floor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -206,7 +206,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""P Wall Mode"",
+                    ""action"": ""Select Wall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -238,11 +238,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Main_DestructionMode = m_Main.FindAction("Destruction Mode", throwIfNotFound: true);
         m_Main_PlacementMode = m_Main.FindAction("Placement Mode", throwIfNotFound: true);
         m_Main_PushingMode = m_Main.FindAction("Pushing Mode", throwIfNotFound: true);
-        m_Main_PFloorMode = m_Main.FindAction("P Floor Mode", throwIfNotFound: true);
-        m_Main_PWallMode = m_Main.FindAction("P Wall Mode", throwIfNotFound: true);
-        m_Main_PIceMode = m_Main.FindAction("P Ice Mode", throwIfNotFound: true);
-        m_Main_PColouredTileMode = m_Main.FindAction("P Coloured Tile Mode", throwIfNotFound: true);
-        m_Main_PTrampolineMode = m_Main.FindAction("P Trampoline Mode", throwIfNotFound: true);
+        m_Main_SelectFloor = m_Main.FindAction("Select Floor", throwIfNotFound: true);
+        m_Main_SelectWall = m_Main.FindAction("Select Wall", throwIfNotFound: true);
+        m_Main_SelectIce = m_Main.FindAction("Select Ice", throwIfNotFound: true);
+        m_Main_SelectCamp = m_Main.FindAction("Select Camp", throwIfNotFound: true);
+        m_Main_SelectTrampoline = m_Main.FindAction("Select Trampoline", throwIfNotFound: true);
         m_Main_UndoAction = m_Main.FindAction("Undo Action", throwIfNotFound: true);
     }
 
@@ -297,11 +297,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Main_DestructionMode;
     private readonly InputAction m_Main_PlacementMode;
     private readonly InputAction m_Main_PushingMode;
-    private readonly InputAction m_Main_PFloorMode;
-    private readonly InputAction m_Main_PWallMode;
-    private readonly InputAction m_Main_PIceMode;
-    private readonly InputAction m_Main_PColouredTileMode;
-    private readonly InputAction m_Main_PTrampolineMode;
+    private readonly InputAction m_Main_SelectFloor;
+    private readonly InputAction m_Main_SelectWall;
+    private readonly InputAction m_Main_SelectIce;
+    private readonly InputAction m_Main_SelectCamp;
+    private readonly InputAction m_Main_SelectTrampoline;
     private readonly InputAction m_Main_UndoAction;
     public struct MainActions
     {
@@ -311,11 +311,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @DestructionMode => m_Wrapper.m_Main_DestructionMode;
         public InputAction @PlacementMode => m_Wrapper.m_Main_PlacementMode;
         public InputAction @PushingMode => m_Wrapper.m_Main_PushingMode;
-        public InputAction @PFloorMode => m_Wrapper.m_Main_PFloorMode;
-        public InputAction @PWallMode => m_Wrapper.m_Main_PWallMode;
-        public InputAction @PIceMode => m_Wrapper.m_Main_PIceMode;
-        public InputAction @PColouredTileMode => m_Wrapper.m_Main_PColouredTileMode;
-        public InputAction @PTrampolineMode => m_Wrapper.m_Main_PTrampolineMode;
+        public InputAction @SelectFloor => m_Wrapper.m_Main_SelectFloor;
+        public InputAction @SelectWall => m_Wrapper.m_Main_SelectWall;
+        public InputAction @SelectIce => m_Wrapper.m_Main_SelectIce;
+        public InputAction @SelectCamp => m_Wrapper.m_Main_SelectCamp;
+        public InputAction @SelectTrampoline => m_Wrapper.m_Main_SelectTrampoline;
         public InputAction @UndoAction => m_Wrapper.m_Main_UndoAction;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
@@ -338,21 +338,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @PushingMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPushingMode;
                 @PushingMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPushingMode;
                 @PushingMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPushingMode;
-                @PFloorMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPFloorMode;
-                @PFloorMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPFloorMode;
-                @PFloorMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPFloorMode;
-                @PWallMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPWallMode;
-                @PWallMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPWallMode;
-                @PWallMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPWallMode;
-                @PIceMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPIceMode;
-                @PIceMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPIceMode;
-                @PIceMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPIceMode;
-                @PColouredTileMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPColouredTileMode;
-                @PColouredTileMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPColouredTileMode;
-                @PColouredTileMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPColouredTileMode;
-                @PTrampolineMode.started -= m_Wrapper.m_MainActionsCallbackInterface.OnPTrampolineMode;
-                @PTrampolineMode.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnPTrampolineMode;
-                @PTrampolineMode.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnPTrampolineMode;
+                @SelectFloor.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectFloor;
+                @SelectFloor.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectFloor;
+                @SelectFloor.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectFloor;
+                @SelectWall.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectWall;
+                @SelectWall.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectWall;
+                @SelectWall.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectWall;
+                @SelectIce.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectIce;
+                @SelectIce.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectIce;
+                @SelectIce.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectIce;
+                @SelectCamp.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectCamp;
+                @SelectCamp.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectCamp;
+                @SelectCamp.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectCamp;
+                @SelectTrampoline.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectTrampoline;
+                @SelectTrampoline.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectTrampoline;
+                @SelectTrampoline.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSelectTrampoline;
                 @UndoAction.started -= m_Wrapper.m_MainActionsCallbackInterface.OnUndoAction;
                 @UndoAction.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnUndoAction;
                 @UndoAction.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnUndoAction;
@@ -372,21 +372,21 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @PushingMode.started += instance.OnPushingMode;
                 @PushingMode.performed += instance.OnPushingMode;
                 @PushingMode.canceled += instance.OnPushingMode;
-                @PFloorMode.started += instance.OnPFloorMode;
-                @PFloorMode.performed += instance.OnPFloorMode;
-                @PFloorMode.canceled += instance.OnPFloorMode;
-                @PWallMode.started += instance.OnPWallMode;
-                @PWallMode.performed += instance.OnPWallMode;
-                @PWallMode.canceled += instance.OnPWallMode;
-                @PIceMode.started += instance.OnPIceMode;
-                @PIceMode.performed += instance.OnPIceMode;
-                @PIceMode.canceled += instance.OnPIceMode;
-                @PColouredTileMode.started += instance.OnPColouredTileMode;
-                @PColouredTileMode.performed += instance.OnPColouredTileMode;
-                @PColouredTileMode.canceled += instance.OnPColouredTileMode;
-                @PTrampolineMode.started += instance.OnPTrampolineMode;
-                @PTrampolineMode.performed += instance.OnPTrampolineMode;
-                @PTrampolineMode.canceled += instance.OnPTrampolineMode;
+                @SelectFloor.started += instance.OnSelectFloor;
+                @SelectFloor.performed += instance.OnSelectFloor;
+                @SelectFloor.canceled += instance.OnSelectFloor;
+                @SelectWall.started += instance.OnSelectWall;
+                @SelectWall.performed += instance.OnSelectWall;
+                @SelectWall.canceled += instance.OnSelectWall;
+                @SelectIce.started += instance.OnSelectIce;
+                @SelectIce.performed += instance.OnSelectIce;
+                @SelectIce.canceled += instance.OnSelectIce;
+                @SelectCamp.started += instance.OnSelectCamp;
+                @SelectCamp.performed += instance.OnSelectCamp;
+                @SelectCamp.canceled += instance.OnSelectCamp;
+                @SelectTrampoline.started += instance.OnSelectTrampoline;
+                @SelectTrampoline.performed += instance.OnSelectTrampoline;
+                @SelectTrampoline.canceled += instance.OnSelectTrampoline;
                 @UndoAction.started += instance.OnUndoAction;
                 @UndoAction.performed += instance.OnUndoAction;
                 @UndoAction.canceled += instance.OnUndoAction;
@@ -409,11 +409,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDestructionMode(InputAction.CallbackContext context);
         void OnPlacementMode(InputAction.CallbackContext context);
         void OnPushingMode(InputAction.CallbackContext context);
-        void OnPFloorMode(InputAction.CallbackContext context);
-        void OnPWallMode(InputAction.CallbackContext context);
-        void OnPIceMode(InputAction.CallbackContext context);
-        void OnPColouredTileMode(InputAction.CallbackContext context);
-        void OnPTrampolineMode(InputAction.CallbackContext context);
+        void OnSelectFloor(InputAction.CallbackContext context);
+        void OnSelectWall(InputAction.CallbackContext context);
+        void OnSelectIce(InputAction.CallbackContext context);
+        void OnSelectCamp(InputAction.CallbackContext context);
+        void OnSelectTrampoline(InputAction.CallbackContext context);
         void OnUndoAction(InputAction.CallbackContext context);
     }
 }

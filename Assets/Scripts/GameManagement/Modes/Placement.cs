@@ -3,22 +3,12 @@ using UnityEngine;
 
 public class Placement : Mode
 {
-    [Serializable]
-    private class TileBlueprintEntry
-    {
-        public GameObject blueprintPrefab;
-        public ETileType tileType;
-        public KeyCode keyThatSelectsTile;
-    }
-
-    [SerializeField] private TileBlueprintEntry[] blueprints;
-
     private TileBlueprintEntry _selectedBlueprintEntry;
     private GameObject _blueprintInstance;
 
-    private void Awake()
+    private void Start()
     {
-        _selectedBlueprintEntry = blueprints[0];
+        _selectedBlueprintEntry = TilesManager.Instance.Blueprints[0];
         _blueprintInstance = Instantiate(_selectedBlueprintEntry.blueprintPrefab);
         _blueprintInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
         _blueprintInstance.SetActive(false);
@@ -63,19 +53,16 @@ public class Placement : Mode
     /// <param name="baseTile">Tile upon which preview will be shown</param>
     private void DrawSelectedBlueprint(Tile baseTile)
     {
-        foreach (var blueprintEntry in blueprints)
-        {
-            if (Input.GetKey(blueprintEntry.keyThatSelectsTile))
-            {
-                Destroy(_blueprintInstance);
-                _selectedBlueprintEntry = blueprintEntry;
-                _blueprintInstance = Instantiate(_selectedBlueprintEntry.blueprintPrefab);
-                _blueprintInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
-                _blueprintInstance.SetActive(false);
-            }
-        }
-        
         _blueprintInstance.transform.position = baseTile.transform.position + baseTile.TileAbovePositionOffset;
         _blueprintInstance.SetActive(true);
+    }
+
+    public void ReselectBlueprint(int id_in)
+    {
+        Destroy(_blueprintInstance);
+        _selectedBlueprintEntry = TilesManager.Instance.Blueprints[id_in];
+        _blueprintInstance = Instantiate(_selectedBlueprintEntry.blueprintPrefab);
+        _blueprintInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
+        _blueprintInstance.SetActive(false);
     }
 }
