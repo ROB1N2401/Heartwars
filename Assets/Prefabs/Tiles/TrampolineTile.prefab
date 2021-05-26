@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4651317082143564405}
   - component: {fileID: 704358439891139790}
   - component: {fileID: 2463538373428412111}
+  - component: {fileID: 5093018623403964262}
   m_Layer: 9
   m_Name: TrampolineTile
   m_TagString: Untagged
@@ -129,5 +130,23 @@ MonoBehaviour:
   tileData: {fileID: 11400000, guid: 83fda0caa54111d46b88ceb7b38314a1, type: 2}
   tileSide: 0
   destructionIgnoreSides: 
+  movementIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0.02, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}
+--- !u!114 &5093018623403964262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7772089332642910705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 30
+  directTransitionTime: 0.05
+  respawnSpeed: 0.2
+  initialSpeed: 0
+  acceleration: 0.98

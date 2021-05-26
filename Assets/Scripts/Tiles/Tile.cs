@@ -20,11 +20,14 @@ public class Tile : MonoBehaviour
 
     protected Player _attachedPlayer;
     protected internal (Tile aboveTile, Tile underTile) _neighbourTiles;
+    protected TransitionControl _animationControl; 
     
     /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
+        _animationControl = GetComponent<TransitionControl>();
+        
         var rayToTheUp = new Ray(transform.position, Vector3.up);
         var rayToTheBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -154,30 +157,47 @@ public class Tile : MonoBehaviour
         
         _neighbourTiles.aboveTile = tileToAdd;
         tileToAdd._neighbourTiles.underTile = this;
+        
+        // var animator = tileToAdd.GetComponent<TransitionControl>();
+        // if (animator != null)
+        // { 
+        //     tileToAdd.gameObject.SetActive(true);
+        //     animator.Respawn(transform.position + tileAbovePositionOffset, 20f);
+        //     AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
+        //     return;
+        // }
 
-        tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
         tileToAdd.gameObject.SetActive(true);
         AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
+        tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
     }
-    
+
     /// <summary>Hides tile (if possible)</summary>
     public virtual void DestroyTile(Player player)
     {
-        if(_neighbourTiles.aboveTile != null)
+        if (_neighbourTiles.aboveTile != null)
             return;
-        
+
         var underTile = _neighbourTiles.underTile;
-        
-        if(underTile != null)
+
+        if (underTile != null)
             underTile._neighbourTiles.aboveTile = null;
 
         _neighbourTiles.aboveTile = null;
         _neighbourTiles.underTile = null;
-        
+
+        // if (_animationControl != null)
+        // {
+        //     _animationControl.Fly(20, Vector3.up, 
+        //         () => AudioManager.InvokeDestructionSound(TileData.TileType), 
+        //         () => gameObject.SetActive(false));
+        //     return;
+        // }
+
         gameObject.SetActive(false);
         AudioManager.InvokeDestructionSound(TileData.TileType);
     }
-    
+
     /// <summary>Places given player above current tile</summary>
     /// <param name="player">Player that will be placed above</param>
     public virtual void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
@@ -190,7 +210,7 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
-        var animator = player.GetComponent<PlayerAnimationControl>();
+        var animator = player.GetComponent<TransitionControl>();
 
         if (animator != null)
         {
@@ -200,7 +220,7 @@ public class Tile : MonoBehaviour
                     animator.DirectTransition(PositionForPlayer);
                     break;
                 case ETransitionType.Spawn:
-                    animator.Respawn(PositionForPlayer, PositionForPlayer.y + 10f);
+                    animator.Respawn(PositionForPlayer, 10f);
                     break;
             }
         }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationControl : MonoBehaviour
+public class TransitionControl : MonoBehaviour
 {
     [Header("Rotation options")]
     [SerializeField] [Min(.0001f)] private float rotationSpeed = 30f;
@@ -43,10 +43,12 @@ public class PlayerAnimationControl : MonoBehaviour
             yield return null;
         }
     }
+    
+    public void Respawn(Vector3 targetPosition, float startHeight) => _animationQueue.Enqueue(RespawnCor(targetPosition, startHeight));
 
-    public void Respawn(Vector3 targetPosition, float startHeight) => 
-        _animationQueue.Enqueue(RespawnCor(targetPosition, startHeight));
-
+    public void RespawnWithoutAnimationQueue(Vector3 targetPosition, float startHeight) =>
+        StartCoroutine(RespawnCor(targetPosition, startHeight));
+    
     public void Fly(float yOffset, Vector3 direction, Action preAction = null, Action afterAction = null) =>
         _animationQueue.Enqueue(FlyCor(yOffset, direction, preAction, afterAction));
 
@@ -78,6 +80,9 @@ public class PlayerAnimationControl : MonoBehaviour
 
     private IEnumerator FlyCor(float offset, Vector3 direction, Action preAction, Action afterAction)
     {
+        //todo debug
+        print("Fly");
+        
         yield return new WaitUntil(() => !_isTransitionTime);
         _isTransitionTime = true;
 

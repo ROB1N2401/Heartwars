@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
-[RequireComponent(typeof(PlayerAnimationControl))]
+[RequireComponent(typeof(TransitionControl))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
@@ -20,11 +20,11 @@ public class Player : MonoBehaviour
     public ESide Side => side;
 
     private PlayerInventory _playerInventory;
-    private PlayerAnimationControl _animationControl;
+    private TransitionControl _animationControl;
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
-        _animationControl = GetComponent<PlayerAnimationControl>();
+        _animationControl = GetComponent<TransitionControl>();
         if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint == null)
             throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
         spawnPoint.tileSide = side;

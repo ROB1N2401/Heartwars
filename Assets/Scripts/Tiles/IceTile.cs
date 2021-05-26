@@ -5,7 +5,7 @@
         if (player == null)
             return;
 
-        var animator = player.GetComponent<PlayerAnimationControl>();
+        var animator = player.GetComponent<TransitionControl>();
         var underneathTile = player.attachedTile.LowestTileFromUnderneath;
         var destinationTile = GetTileFromOppositeDirection(underneathTile);
         

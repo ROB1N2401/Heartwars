@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2869046650059881447}
   - component: {fileID: 1445883128}
   - component: {fileID: 1822163298151239967}
+  - component: {fileID: -5224086139310549029}
   m_Layer: 9
   m_Name: Wall Tile
   m_TagString: Wall
@@ -114,7 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileData: {fileID: 11400000, guid: bd7bdf9402842c04d9f26c09bee659e1, type: 2}
   tileSide: 0
-  buildingIgnoreSides: 
+  destructionIgnoreSides: 
+  movementIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0, z: 0}
 --- !u!64 &1822163298151239967
@@ -131,3 +133,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5076798556035486163, guid: cbef8b077ec81e44fac34f9517163d67, type: 3}
+--- !u!114 &-5224086139310549029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796004207678323586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 30
+  directTransitionTime: 0.05
+  respawnSpeed: 0.2
+  initialSpeed: 0
+  acceleration: 0.98
