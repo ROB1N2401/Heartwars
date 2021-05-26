@@ -158,6 +158,7 @@ public class Tile : MonoBehaviour
         _neighbourTiles.aboveTile = tileToAdd;
         tileToAdd._neighbourTiles.underTile = this;
         
+        //todo add animations
         // var animator = tileToAdd.GetComponent<TransitionControl>();
         // if (animator != null)
         // { 
@@ -186,6 +187,7 @@ public class Tile : MonoBehaviour
         _neighbourTiles.aboveTile = null;
         _neighbourTiles.underTile = null;
 
+        //todo add animations
         // if (_animationControl != null)
         // {
         //     _animationControl.Fly(20, Vector3.up, 

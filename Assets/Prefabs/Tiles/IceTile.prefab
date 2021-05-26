@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -1270017203560200784}
   - component: {fileID: -829587054220822472}
   - component: {fileID: 2654858854315316934}
-  - component: {fileID: 4708520920748744139}
   m_Layer: 9
   m_Name: IceTile
   m_TagString: Untagged
@@ -133,20 +132,3 @@ MonoBehaviour:
   movementIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0.05, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}
---- !u!114 &4708520920748744139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6942776103765952007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 30
-  directTransitionTime: 0.05
-  respawnSpeed: 0.2
-  initialSpeed: 0
-  acceleration: 0.98

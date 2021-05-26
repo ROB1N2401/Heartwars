@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 205477878696169856}
   - component: {fileID: 5445044846110641979}
   - component: {fileID: 4866429110331894699}
-  - component: {fileID: -5143843947542422068}
   m_Layer: 9
   m_Name: SideTile
   m_TagString: Untagged
@@ -133,20 +132,3 @@ MonoBehaviour:
   movementIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0.02, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}
---- !u!114 &-5143843947542422068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2993432660312187396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c69332c196ddc642a6aa8fea1f025ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 30
-  directTransitionTime: 0.05
-  respawnSpeed: 0.2
-  initialSpeed: 0
-  acceleration: 0.98
