@@ -24,13 +24,18 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
     public static AudioManager instance;
-    private string sceneName;
+    AudioSource audioSource;
+    public AudioClip CountryRoads;
+
     public string currentScene;
+    private string sceneName;
     private string lastScene;
     private string currentSong;
-    private bool musicCanChange;
-    private bool firstSong = true; //Why this bool exists is explained in the StopSound function
     public bool shouldRandomizePitch;
+    private bool firstSong = true; //Why this bool exists is explained in the StopSound function
+    private bool firstTimeRunning; //This needs to exist as a separate bool
+    private bool musicCanChange;
+    private bool isPlayingTheGame;
     private int randomizeSounds;
 
     public void Awake()
@@ -59,6 +64,8 @@ public class AudioManager : MonoBehaviour
 
         musicCanChange = false;
         shouldRandomizePitch = false;
+        isPlayingTheGame = false;
+        firstTimeRunning = true;
     }
 
     public void Update()
@@ -85,7 +92,14 @@ public class AudioManager : MonoBehaviour
             musicCanChange = true;
         }
 
-        if (musicCanChange)
+        if (firstTimeRunning)
+        {
+            PlaySong("PlaceIce1");
+            StopSound("PlaceIce1");
+            firstTimeRunning = false;
+        }
+
+        if (musicCanChange && !firstTimeRunning)
         {
             if (this.currentScene == "Menu")
             {
