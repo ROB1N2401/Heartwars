@@ -8,10 +8,12 @@ public class AnimationControl : MonoBehaviour
 {
     public static AnimationControl Instance { get; private set; }
 
-    [Tooltip("The name of an animator boolean parameter. Case sensitive")]
+    [SerializeField] private AudioSource source;
     [SerializeField] private string outTriggerName;
     [SerializeField] private string inTriggerName;
-    [SerializeField] [Min(0)] private float delayTime;
+    [SerializeField] [Min(0)] private float animationDelay;
+    [SerializeField] [Min(0)] private float soundDelay;
+
 
     private TextMeshProUGUI _tmProRef; //Text Box containing announcement, should be the first child in the hierarchy
     private Animator _animatorRef;
@@ -37,7 +39,10 @@ public class AnimationControl : MonoBehaviour
     public void RollAnnouncementOut(Player player_in)
     {
         if (_firstTime)
+        {
             _animatorRef.enabled = true;
+            source.Play();
+        }
 
         StartCoroutine(StartAnimation(player_in));
     }
@@ -49,13 +54,18 @@ public class AnimationControl : MonoBehaviour
         if(!_firstTime)
         {
             ActivateClip(outTriggerName);
+            source.Play();
         }
         else
             _firstTime = false;
 
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(animationDelay);
 
         ActivateClip(inTriggerName);
+
+        yield return new WaitForSeconds(soundDelay);
+
+        source.Play();
     }
 
     private void ActivateClip(string triggerName_in)
