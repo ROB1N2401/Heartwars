@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TrampolineTile : Tile
 {
-    public override void PlacePlayer(Player player)
+    public override void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
         if(player == null)
             return;
@@ -24,7 +24,7 @@ public class TrampolineTile : Tile
             {
                 var tileOnPath = path[i].HighestTileFromAbove;
 
-                if (tileOnPath.TileData.IsWalkable || tileOnPath.TileData.TileType == ETileType.Void)
+                if ((tileOnPath.TileData.IsWalkable || tileOnPath.TileData.TileType == ETileType.Void) && !tileOnPath.IsPlayerOnTile)
                 {
                     destinationTile = tileOnPath;
                     break;
@@ -43,6 +43,10 @@ public class TrampolineTile : Tile
             return;
         }
 
+        var animator = player.GetComponent<TransitionControl>();
+        if(animator != null)
+            animator.DirectTransition(destinationTile.PositionForPlayer);
+        
         destinationTile.PlacePlayer(player); 
     }
 

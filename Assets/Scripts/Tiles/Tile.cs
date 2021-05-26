@@ -14,19 +14,22 @@ public class Tile : MonoBehaviour
     
     public TileData TileData => tileData;
     public Player AttachedPlayer => _attachedPlayer;
-    public Vector3 PlayerPositionOffset => playerPositionOffset;
+    public Vector3 PositionForPlayer => playerPositionOffset + transform.position;
     public Vector3 TileAbovePositionOffset => tileAbovePositionOffset;
+    public bool IsPlayerOnTile => _attachedPlayer != null;
 
-    protected bool IsPlayerOnTile => _attachedPlayer != null;
     protected Player _attachedPlayer;
     protected internal (Tile aboveTile, Tile underTile) _neighbourTiles;
+    protected TransitionControl _animationControl; 
     
     /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
-        var rayToTheUp = new Ray(transform.position, -transform.forward);
-        var rayToTheBottom = new Ray(transform.position, transform.forward);
+        _animationControl = GetComponent<TransitionControl>();
+        
+        var rayToTheUp = new Ray(transform.position, Vector3.up);
+        var rayToTheBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
         
         if (Physics.Raycast(rayToTheUp, out hit, 5f))
@@ -48,8 +51,8 @@ public class Tile : MonoBehaviour
     //todo debug
     protected void OnDrawGizmos()
     {
-        var rayToTheUp = new Ray(transform.position, -transform.forward);
-        var rayToTheBottom = new Ray(transform.position, transform.forward);
+        var rayToTheUp = new Ray(transform.position, Vector3.up);
+        var rayToTheBottom = new Ray(transform.position, Vector3.down);
         Gizmos.color = Color.magenta;
         
         Gizmos.DrawRay(rayToTheUp);
@@ -154,33 +157,52 @@ public class Tile : MonoBehaviour
         
         _neighbourTiles.aboveTile = tileToAdd;
         tileToAdd._neighbourTiles.underTile = this;
+        
+        //todo add animations
+        // var animator = tileToAdd.GetComponent<TransitionControl>();
+        // if (animator != null)
+        // { 
+        //     tileToAdd.gameObject.SetActive(true);
+        //     animator.Respawn(transform.position + tileAbovePositionOffset, 20f);
+        //     AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
+        //     return;
+        // }
 
-        tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
         tileToAdd.gameObject.SetActive(true);
         AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
+        tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
     }
-    
+
     /// <summary>Hides tile (if possible)</summary>
     public virtual void DestroyTile(Player player)
     {
-        if(_neighbourTiles.aboveTile != null)
+        if (_neighbourTiles.aboveTile != null)
             return;
-        
+
         var underTile = _neighbourTiles.underTile;
-        
-        if(underTile != null)
+
+        if (underTile != null)
             underTile._neighbourTiles.aboveTile = null;
 
         _neighbourTiles.aboveTile = null;
         _neighbourTiles.underTile = null;
-        
+
+        //todo add animations
+        // if (_animationControl != null)
+        // {
+        //     _animationControl.Fly(20, Vector3.up, 
+        //         () => AudioManager.InvokeDestructionSound(TileData.TileType), 
+        //         () => gameObject.SetActive(false));
+        //     return;
+        // }
+
         gameObject.SetActive(false);
         AudioManager.InvokeDestructionSound(TileData.TileType);
     }
-    
+
     /// <summary>Places given player above current tile</summary>
     /// <param name="player">Player that will be placed above</param>
-    public virtual void PlacePlayer(Player player)
+    public virtual void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
         if(player == null)
             return;
@@ -190,13 +212,23 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
-        player.transform.position = transform.position + playerPositionOffset;
-        
-        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
+        var animator = player.GetComponent<TransitionControl>();
+
+        if (animator != null)
         {
-            player.Die();
-            RemovePlayer();
+            switch (transitionType)
+            {
+                case ETransitionType.Walk:
+                    animator.DirectTransition(PositionForPlayer);
+                    break;
+                case ETransitionType.Spawn:
+                    animator.Respawn(PositionForPlayer, 10f);
+                    break;
+            }
         }
+
+        if (tileSide != ESide.Neutral && tileSide != player.Side || tileData.TileType == ETileType.Void)
+            player.Die();
     }
 
     /// <summary>Removes all attachments from this tile relative to player</summary>

@@ -26,6 +26,10 @@ public class SideTile : Tile
             if (!tileData.IsDestroyable)
                 isPlayerAbleToDestroyDueToItsSide = destructionIgnoreSides.Contains(player.Side);
         }
+
+        //todo reduce hardcode
+        if (tileData.TileType != ETileType.Spawn && tileSide == player.Side)
+            isPlayerAbleToDestroyDueToItsSide = true;
         
         return isPlayerAbleToDestroyDueToTileType &&
                isPlayerAbleToDestroyDueToItsSide &&

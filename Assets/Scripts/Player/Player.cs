@@ -2,6 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
+[RequireComponent(typeof(TransitionControl))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
@@ -19,9 +20,11 @@ public class Player : MonoBehaviour
     public ESide Side => side;
 
     private PlayerInventory _playerInventory;
+    private TransitionControl _animationControl;
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
+        _animationControl = GetComponent<TransitionControl>();
         if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint == null)
             throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
         spawnPoint.tileSide = side;
@@ -85,9 +88,8 @@ public class Player : MonoBehaviour
             return;
         
         topTile.PlacePlayer(this);
-
-        SubtractActivePoints(playerData.PointsForMovementTaken);
         
+        SubtractActivePoints(playerData.PointsForMovementTaken);
         AudioManager.InvokeWalkingSound();
     }
     
@@ -109,7 +111,9 @@ public class Player : MonoBehaviour
         destinationTile = destinationTile.HighestTileFromAbove;
 
         if (destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void)
+        {
             destinationTile.PlacePlayer(playerToPush);
+        }
     }
 
     /// <summary>Method that sets the conditions for player when its turn begins</summary>
@@ -135,22 +139,48 @@ public class Player : MonoBehaviour
 
         PointsLeftForTheTurn = playerData.PointsForMovementTaken;
 
-        if (attachedTile != null)
-            attachedTile.RemovePlayer();
         if (spawnPoint == null || spawnPoint.isActiveAndEnabled == false)
         {
-            gameObject.SetActive(false);
+            void PreAction() => AudioManager.InvokeDeathSound();
+            void AfterAction() => gameObject.SetActive(false);
+            
+            if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
+            {
+                _animationControl
+                    .Fly( 100f, Vector3.down, PreAction, AfterAction);
+                attachedTile.RemovePlayer();
+            }
+            else
+            {
+                //todo replace with flying up animation
+                _animationControl
+                    .Fly(100f, Vector3.up, PreAction, AfterAction);
+                attachedTile.RemovePlayer();
+            }
+
             IsAlive = false;
             PlayerManager.Instance.EliminatePlayer(this);
-            AudioManager.InvokeDeathSound();
             return;
         }
+        
+        if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
+        {
+            _animationControl
+                .Fly(100f, Vector3.down, preAction: AudioManager.InvokeDeathSound);
+            attachedTile.RemovePlayer();
+        }
+        else
+        {
+            //todo replace with flying up animation
+            _animationControl
+                .Fly(100f, Vector3.up, preAction: AudioManager.InvokeDeathSound);
+            attachedTile.RemovePlayer();
+        }
 
-        AudioManager.InvokeDeathSound();
-        MoveTo(spawnPoint);
+        spawnPoint.PlacePlayer(this, ETransitionType.Spawn);
         EndTurn();
     }
-    
+
     /// <summary>Subtracts points left for turn for current player</summary>
     /// <param name="pointsToSubtract">Amount of point to subtract</param>
     private void SubtractActivePoints(int pointsToSubtract)

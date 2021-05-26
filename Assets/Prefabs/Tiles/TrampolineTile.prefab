@@ -129,5 +129,6 @@ MonoBehaviour:
   tileData: {fileID: 11400000, guid: 83fda0caa54111d46b88ceb7b38314a1, type: 2}
   tileSide: 0
   destructionIgnoreSides: 
+  movementIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0.02, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}

@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileData: {fileID: 11400000, guid: 5aee909065d74f64b80bfbc0e4a92c91, type: 2}
   tileSide: 0
-  buildingIgnoreSides: 
+  destructionIgnoreSides: 
+  movementIgnoreSides: 
   playerPositionOffset: {x: 0, y: 0.05, z: 0}
   tileAbovePositionOffset: {x: 0, y: 0.1, z: 0}
