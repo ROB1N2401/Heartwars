@@ -104,9 +104,12 @@ public class Player : MonoBehaviour
 
         var destinationTile = playerToPush.attachedTile.LowestTileFromUnderneath
             .GetTileFromOppositeDirection(attachedTile.LowestTileFromUnderneath);
-        
-        if(destinationTile == null)
+
+        if (destinationTile == null)
+        {
             playerToPush.Die();
+            return;
+        }
 
         destinationTile = destinationTile.HighestTileFromAbove;
 
