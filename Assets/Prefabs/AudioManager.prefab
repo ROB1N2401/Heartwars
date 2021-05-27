@@ -1,0 +1,335 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4222376495304023268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4222376495304023270}
+  - component: {fileID: 4222376495304023269}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4222376495304023270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222376495304023268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.37115192, y: 5.2203465, z: -2.0387163}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4222376495304023269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222376495304023268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b095b43d9b9684c94cd6c91e6a005d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MovePiece1
+    clip: {fileID: 8300000, guid: b9f5166c927430645b78af4ec829114e, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece2
+    clip: {fileID: 8300000, guid: 02d4631839870c04cab0af03ee30ddf8, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece3
+    clip: {fileID: 8300000, guid: 1e9b1d9a80922d846a1c61c13e28a59f, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece4
+    clip: {fileID: 8300000, guid: 42da4cea66dc2e04fb28b843d8535395, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MovePiece5
+    clip: {fileID: 8300000, guid: cfb9b0f2917610d4886982d076424695, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround1
+    clip: {fileID: 8300000, guid: 9431784ba00a62841b4a0b6ac4ce8f99, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround2
+    clip: {fileID: 8300000, guid: 69e55168508c72b4dad234a56eca16be, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround3
+    clip: {fileID: 8300000, guid: 782b94244e675b74d9d00e13e71c3f64, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceGround4
+    clip: {fileID: 8300000, guid: 1426c0c08f8490248a8e33a8c704f703, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyGround1
+    clip: {fileID: 8300000, guid: 976203dc1c513c344abd60ec1903dffb, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyGround2
+    clip: {fileID: 8300000, guid: 4b2f2da3483be28419434f96b3f0c855, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyGround3
+    clip: {fileID: 8300000, guid: 48038086a4f948a4baa1b5e20aab919c, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyStone1
+    clip: {fileID: 8300000, guid: 537f3aa7a9133524891040af684edb64, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyStone2
+    clip: {fileID: 8300000, guid: 1759d9b85a559184e817d09a09e3a012, type: 3}
+    mix: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceIce1
+    clip: {fileID: 8300000, guid: 2b72b46933fb5204dbb6638ddc7abb21, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceIce2
+    clip: {fileID: 8300000, guid: c2aaf35a824763f428ca741af0b84905, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceIce3
+    clip: {fileID: 8300000, guid: 24eb8614c9afa0340ad9b7b956280993, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyIce1
+    clip: {fileID: 8300000, guid: f4eb71d2fd35ca749a88a6883467327a, type: 3}
+    mix: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyIce2
+    clip: {fileID: 8300000, guid: 7bffe38b43987d6418dbd82deaffc3da, type: 3}
+    mix: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyIce3
+    clip: {fileID: 8300000, guid: abce39548c58c0d47977a740640e31f4, type: 3}
+    mix: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiChangeMode1
+    clip: {fileID: 8300000, guid: 3e5c89f056a728f4289e6004c0405ca1, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiChangeMode2
+    clip: {fileID: 8300000, guid: c0c9f97ac74c2794bbcafdddfb1579fe, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiHoverButton
+    clip: {fileID: 8300000, guid: c3e0744790bec234395eba267323fe61, type: 3}
+    mix: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UiPressButton
+    clip: {fileID: 8300000, guid: 00a09e38bec78084c86bc6273d6bc40d, type: 3}
+    mix: {fileID: 0}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CountryRoads
+    clip: {fileID: 8300000, guid: 334a47cac17a0dd418b54bab224b80c2, type: 3}
+    mix: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Falling1
+    clip: {fileID: 8300000, guid: e21415074176b26479a24e265349582b, type: 3}
+    mix: {fileID: 0}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling2
+    clip: {fileID: 8300000, guid: e4d68d4d79c7c844f8b9acf8c2a15ab1, type: 3}
+    mix: {fileID: 0}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling3
+    clip: {fileID: 8300000, guid: 350f227e31215244aad7ac66a91067ce, type: 3}
+    mix: {fileID: 0}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LandsofMagic
+    clip: {fileID: 8300000, guid: 2a38e85fc7cb26b4ba27c3af7bdbe632, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Clash
+    clip: {fileID: 8300000, guid: 7be3dcffe1135f64fbe3ef7ebd13e58c, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: PlaceStone1
+    clip: {fileID: 8300000, guid: ac0975991401f5c48ba87d1abb11f90e, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceStone2
+    clip: {fileID: 8300000, guid: 46bfae92884fc0749bf8326fb1de27cf, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: StoneMagic
+    clip: {fileID: 8300000, guid: 6f8b93bafc43b564fb84b1e2eb9e3aba, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TheWatcher
+    clip: {fileID: 8300000, guid: f0c0010b539551842a9ee40cdc3afb6d, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingGodWisdom
+    clip: {fileID: 8300000, guid: 46bfae92884fc0749bf8326fb1de27cf, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingHillLegend
+    clip: {fileID: 8300000, guid: e4e4ca67d0e28d54db7b5ebc61593f4a, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingLifeLesson
+    clip: {fileID: 8300000, guid: 85814e7f745363c4698198c3c0c69026, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingMoonMelody
+    clip: {fileID: 8300000, guid: ac88d70569062f04d8b610666a6dd829, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingShieldMaiden
+    clip: {fileID: 8300000, guid: 70fc9655e581c054592c3c2c020dabca, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingWolfHowls
+    clip: {fileID: 8300000, guid: 1e58aa8ef36768f468171d834cff72cb, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WarriorsOfAvalon
+    clip: {fileID: 8300000, guid: 8415a4479676f784b9f7a1dc364b248f, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  currentScene: 
+  shouldRandomizePitch: 0
