@@ -10,10 +10,18 @@ public class ModeButton : TabButton
     [Header("Images")]
     [SerializeField] private Sprite spriteSelected;
 
+    private RectTransform _iconTransform; //icon holder object should always be the first child in button's ierarchy in order to work properly
+    private Vector2 _idlePos;
+    private Vector2 _pressedPos;
+    private Vector2 _spriteOffset = new Vector2(3.0f, -3.0f);
+
     // Start is called before the first frame update
     private void Start()
     {
-        ResetSprite();
+        _iconTransform = transform.GetChild(0).GetComponent<RectTransform>();
+        _idlePos = _iconTransform.anchoredPosition;
+        _pressedPos = _iconTransform.anchoredPosition + _spriteOffset;
+        ResetIcon();
     }
 
     protected override void OnSelect(TabButton tabButton_in)
@@ -26,7 +34,7 @@ public class ModeButton : TabButton
                     tabManagerRef.Deselect(tabManagerRef.SelectedTab);
 
                 tabManagerRef.SelectedTab = tabButton_in;
-                SetActiveSprite();
+                UpdateIcon();
                 tabButton_in.SelectionEvent.Invoke();
             }
         }
@@ -34,7 +42,7 @@ public class ModeButton : TabButton
 
     protected override void OnDeSelect(TabButton tabButton_in)
     {
-        ResetSprite();
+        ResetIcon();
         BrightenImage();
         tabButton_in.DeselectionEvent.Invoke();
     }
@@ -43,7 +51,7 @@ public class ModeButton : TabButton
     {
         if (this != tabManagerRef.SelectedTab)
         {
-            SetActiveSprite();
+     
             tabManagerRef.Select(this);
         }
     }
@@ -60,13 +68,15 @@ public class ModeButton : TabButton
             BrightenImage();
     }
 
-    public void ResetSprite()
+    public void ResetIcon()
     {
         imageRef.sprite = spriteIdle;
+        _iconTransform.anchoredPosition = _idlePos;
     }
 
-    public void SetActiveSprite()
+    public void UpdateIcon()
     {
         imageRef.sprite = spriteSelected;
+        _iconTransform.anchoredPosition = _pressedPos;
     }
 }

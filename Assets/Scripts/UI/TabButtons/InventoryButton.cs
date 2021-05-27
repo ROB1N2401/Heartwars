@@ -10,9 +10,12 @@ public class InventoryButton : TabButton
     [SerializeField] private Sprite spriteMask;
 
     private GameObject _highlightMask; //highlight mask object should always be the first child in button's ierarchy in order to work properly
+    private Image _defaultImage; //default image object should always be the second child in button's ierarchy in order to work properly
 
     void Start()
     {
+        _defaultImage = transform.GetChild(1).GetComponent<Image>();
+        _defaultImage.sprite = spriteIdle;
         _highlightMask = transform.GetChild(0).gameObject;
         _highlightMask.GetComponent<Image>().sprite = spriteMask;
         _highlightMask.SetActive(false);
