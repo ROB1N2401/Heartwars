@@ -73,11 +73,11 @@ public class SideTile : Tile
         {
             case ESide.Blue:
                 foreach (var renderer in _renderers) 
-                    renderer.material.color = Color.blue;
+                    renderer.material.color = new Color(0.1f, 0.1f, 0.75f);
                 break;
             case ESide.Green:
                 foreach (var renderer in _renderers) 
-                    renderer.material.color = Color.green;
+                    renderer.material.color = new Color(0.1f, 0.75f, 0.1f);
                 break;
             case ESide.Orange:
                 foreach (var renderer in _renderers) 
@@ -89,7 +89,7 @@ public class SideTile : Tile
                 break;
             case ESide.Red:
                 foreach (var renderer in _renderers) 
-                    renderer.material.color = Color.red;
+                    renderer.material.color = new Color(0.75f, 0.1f, 0.1f);
                 break;
             case ESide.Yellow:
                 foreach (var renderer in _renderers) 
