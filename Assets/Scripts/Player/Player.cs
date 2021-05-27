@@ -182,6 +182,8 @@ public class Player : MonoBehaviour
 
         spawnPoint.PlacePlayer(this, ETransitionType.Spawn);
         EndTurn();
+        if (this == PlayerManager.Instance.CurrentPlayer)
+            PlayerManager.Instance.StartNewTurn();
     }
 
     /// <summary>Subtracts points left for turn for current player</summary>

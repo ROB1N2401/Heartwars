@@ -6,14 +6,6 @@ public class Placement : Mode
     private TileBlueprintEntry _selectedBlueprintEntry;
     private GameObject _blueprintInstance;
 
-    private void Start()
-    {
-        _selectedBlueprintEntry = TilesManager.Instance.Blueprints[0];
-        _blueprintInstance = Instantiate(_selectedBlueprintEntry.blueprintPrefab);
-        _blueprintInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
-        _blueprintInstance.SetActive(false);
-    }
-
     private void OnDisable()
     {
         if(_blueprintInstance != null)
@@ -53,13 +45,18 @@ public class Placement : Mode
     /// <param name="baseTile">Tile upon which preview will be shown</param>
     private void DrawSelectedBlueprint(Tile baseTile)
     {
+        if(_blueprintInstance != null)
+        {
         _blueprintInstance.transform.position = baseTile.transform.position + baseTile.TileAbovePositionOffset;
         _blueprintInstance.SetActive(true);
+        }
     }
 
     public void ReselectBlueprint(int id_in)
     {
-        Destroy(_blueprintInstance);
+        if (_blueprintInstance != null)
+            Destroy(_blueprintInstance);
+
         _selectedBlueprintEntry = TilesManager.Instance.Blueprints[id_in];
         _blueprintInstance = Instantiate(_selectedBlueprintEntry.blueprintPrefab);
         _blueprintInstance.layer = LayerMask.NameToLayer("Ignore Raycast");
