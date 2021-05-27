@@ -69,7 +69,7 @@ public class TrampolineTile : Tile
 
         for (int i = 0; i < gap; i++)
         {
-            if (Physics.Raycast(rayToNextTile, out hit))
+            if (Physics.Raycast(rayToNextTile, out hit, 1f))
             {
                 var baseTileOnThePath = hit.transform.GetComponent<Tile>().LowestTileFromUnderneath;
                 if(baseTileOnThePath != null)

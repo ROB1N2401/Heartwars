@@ -24,14 +24,19 @@ public class Tile : MonoBehaviour
     protected TransitionControl _animationControl; 
     
     private static readonly int[] _rotationAnglesPool = {60, 120, 180, 240, 300};
+    // private static readonly int[] _rotationAnglesPool = {30, 90, 120, 150, 180, 210, 240, 270, 300, 330};
     
     /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
-        //Rotates tile in a random direction
-        transform.Rotate(0,  _rotationAnglesPool[Random.Range(0, _rotationAnglesPool.Length)], 0, Space.World);
-        
+        //Rotates children from current tile in a random direction
+        var randomRotationAngle = _rotationAnglesPool[Random.Range(0, _rotationAnglesPool.Length)];
+        print( GetComponentsInChildren<Transform>().Length);
+        foreach (Transform transformInChild in transform)
+            transformInChild.Rotate(0, randomRotationAngle, 0, Space.World);
+
+
         _animationControl = GetComponent<TransitionControl>();
 
         var rayToTheUp = new Ray(transform.position, Vector3.up);
@@ -263,7 +268,7 @@ public class Tile : MonoBehaviour
         var rayToTheOppositeTile = new Ray(positionOfTheBaseTile, directionOfTheOppositeTile);
         RaycastHit hit;
 
-        if (Physics.Raycast(rayToTheOppositeTile, out hit)) 
+        if (Physics.Raycast(rayToTheOppositeTile, out hit, 1f)) 
             return hit.transform.GetComponent<Tile>();
 
         return null;
