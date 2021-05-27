@@ -2,13 +2,12 @@
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
 public class SideTile : Tile
 {
     private Renderer[] _renderers;
     private void Awake()
     {
-        _renderers = GetComponentsInChildren<Renderer>();
+        _renderers = GetComponentsInChildren<Renderer>().Where(val => val.tag.Equals("Colorable")).ToArray();
         
         if(tileSide != ESide.Neutral)
             AssignSide(tileSide);
