@@ -296,5 +296,40 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: VikingLifeLesson
+    clip: {fileID: 8300000, guid: 85814e7f745363c4698198c3c0c69026, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingMoonMelody
+    clip: {fileID: 8300000, guid: ac88d70569062f04d8b610666a6dd829, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingShieldMaiden
+    clip: {fileID: 8300000, guid: 70fc9655e581c054592c3c2c020dabca, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingWolfHowls
+    clip: {fileID: 8300000, guid: 1e58aa8ef36768f468171d834cff72cb, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: WarriorsOfAvalon
+    clip: {fileID: 8300000, guid: 8415a4479676f784b9f7a1dc364b248f, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   currentScene: 
   shouldRandomizePitch: 0
