@@ -241,14 +241,14 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: LandsofMagic
-    clip: {fileID: 8300000, guid: 71e9881dd8943fa45bf8466e3a5ac473, type: 3}
+    clip: {fileID: 8300000, guid: 2a38e85fc7cb26b4ba27c3af7bdbe632, type: 3}
     mix: {fileID: 0}
     volume: 0.2
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Clash
-    clip: {fileID: 8300000, guid: 68ae9b77b39df9c4487ecdea7102aaa4, type: 3}
+    clip: {fileID: 8300000, guid: 7be3dcffe1135f64fbe3ef7ebd13e58c, type: 3}
     mix: {fileID: 0}
     volume: 0.2
     pitch: 1
@@ -265,6 +265,34 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 46bfae92884fc0749bf8326fb1de27cf, type: 3}
     mix: {fileID: 0}
     volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: StoneMagic
+    clip: {fileID: 8300000, guid: 6f8b93bafc43b564fb84b1e2eb9e3aba, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TheWatcher
+    clip: {fileID: 8300000, guid: f0c0010b539551842a9ee40cdc3afb6d, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingGodWisdom
+    clip: {fileID: 8300000, guid: 46bfae92884fc0749bf8326fb1de27cf, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: VikingHillLegend
+    clip: {fileID: 8300000, guid: e4e4ca67d0e28d54db7b5ebc61593f4a, type: 3}
+    mix: {fileID: 0}
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}

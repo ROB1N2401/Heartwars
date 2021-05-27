@@ -24,8 +24,11 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
     public static AudioManager instance;
+    AudioSource[] allMyAudioSources;
     AudioSource audioSource;
-    public AudioClip CountryRoads;
+    private string whatSongIsGonnaPlayNow;
+    private bool timeToSwitchSong;
+    private bool justEnteredScene;
 
     public string currentScene;
     private string sceneName;
@@ -62,10 +65,14 @@ public class AudioManager : MonoBehaviour
             s.source.outputAudioMixerGroup = s.mix;
         }
 
+        allMyAudioSources = GetComponents<AudioSource>();
+
         musicCanChange = false;
         shouldRandomizePitch = false;
         isPlayingTheGame = false;
         firstTimeRunning = true;
+        timeToSwitchSong = true;
+        justEnteredScene = false;
     }
 
     public void Update()
@@ -99,6 +106,99 @@ public class AudioManager : MonoBehaviour
             firstTimeRunning = false;
         }
 
+        if (isPlayingTheGame == true && !firstTimeRunning)
+        {
+            if (!musicCanChange)
+            {
+                if (!timeToSwitchSong)
+                {
+                    if (audioSource == null)
+                    {
+                        audioSource = allMyAudioSources[29];
+                        //Debug.Log("audioSource: " + audioSource.name);
+                    }
+                    if (!audioSource.isPlaying)
+                    {
+                        timeToSwitchSong = true;
+                    }
+                }
+                else if (timeToSwitchSong)
+                {
+                    var randomizeSounds = Random.Range(0, 10);
+                    switch (randomizeSounds)
+                    {
+                        case 0:
+                            audioSource = allMyAudioSources[29];
+                            //Debug.Log("audioSource: " + audioSource.name + "#1");
+                            whatSongIsGonnaPlayNow = "Clash";
+                            break;
+                        case 1:
+                            audioSource = allMyAudioSources[32];
+                            //Debug.Log("audioSource: " + audioSource.name + "#2");
+                            whatSongIsGonnaPlayNow = "StoneMagic";
+                            break;
+                        case 2:
+                            audioSource = allMyAudioSources[33];
+                            //Debug.Log("audioSource: " + audioSource.name + "#3");
+                            whatSongIsGonnaPlayNow = "TheWatcher";
+                            break;
+                        case 3:
+                            audioSource = allMyAudioSources[34];
+                            //Debug.Log("audioSource: " + audioSource.name + "#4");
+                            whatSongIsGonnaPlayNow = "VikingGodWisdom";
+                            break;
+                        case 4:
+                            audioSource = allMyAudioSources[35];
+                            //Debug.Log("audioSource: " + audioSource.name + "#5");
+                            whatSongIsGonnaPlayNow = "VikingHillLegend";
+                            break;
+                        case 5:
+                            audioSource = allMyAudioSources[36];
+                            //Debug.Log("audioSource: " + audioSource.name + "#6");
+                            whatSongIsGonnaPlayNow = "VikingLifeLesson";
+                            break;
+                        case 6:
+                            audioSource = allMyAudioSources[37];
+                            //Debug.Log("audioSource: " + audioSource.name + "#7");
+                            whatSongIsGonnaPlayNow = "VikingMoonMelody";
+                            break;
+                        case 7:
+                            audioSource = allMyAudioSources[38];
+                            //Debug.Log("audioSource: " + audioSource.name + "#9");
+                            whatSongIsGonnaPlayNow = "VikingShieldMaiden";
+                            break;
+                        case 8:
+                            audioSource = allMyAudioSources[39];
+                            //Debug.Log("audioSource: " + audioSource.name + "#9");
+                            whatSongIsGonnaPlayNow = "VikingWolfHowls";
+                            break;
+                        case 9:
+                            audioSource = allMyAudioSources[40];
+                            //Debug.Log("audioSource: " + audioSource.name + "#10");
+                            whatSongIsGonnaPlayNow = "WarriorsOfAvalon";
+                            break;
+                        case 10:
+                            break;
+                    }
+                    if (justEnteredScene)
+                    {
+                        StartCoroutine(fadeIn(whatSongIsGonnaPlayNow, 1f));
+                        justEnteredScene = false;
+                    }
+                    else
+                    {
+                        PlaySong(whatSongIsGonnaPlayNow);
+                    }
+                    //Debug.Log("Song '" + whatSongIsGonnaPlayNow + "' is currently playing");
+                    timeToSwitchSong = false;
+                }
+            }
+            else
+            {
+                isPlayingTheGame = false;
+            }
+        }
+
         if (musicCanChange && !firstTimeRunning)
         {
             if (this.currentScene == "Menu")
@@ -110,7 +210,8 @@ public class AudioManager : MonoBehaviour
             else if (this.currentScene == "Heartwars")
             {
                 StartCoroutine(fadeOut(currentSong, 1f));
-                StartCoroutine(fadeIn("Clash", 1f));
+                justEnteredScene = true;
+                isPlayingTheGame = true;
                 musicCanChange = false;
             }
             else if (this.currentScene == "Error")
@@ -118,6 +219,7 @@ public class AudioManager : MonoBehaviour
                 musicCanChange = false;
             }
         }
+
         lastScene = this.currentScene;
     }
 
@@ -136,6 +238,7 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.volume = startVolume;
+        currentSong = s.name;
     }
 
     IEnumerator fadeOut(string name, float fadeTime)
@@ -157,7 +260,7 @@ public class AudioManager : MonoBehaviour
     {
         instance.shouldRandomizePitch = true;
         var randomizeSounds = Random.Range(0, 3);
-        
+
         switch (randomizeSounds)
         {
             case 0:
@@ -182,7 +285,7 @@ public class AudioManager : MonoBehaviour
     {
         instance.shouldRandomizePitch = true;
         var randomizeSounds = Random.Range(0, 3);
-        
+
         switch (randomizeSounds)
         {
             case 0:
@@ -376,7 +479,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = 1f;
             s.source.Play();
         }
-        
+
     }
 
     public void PlaySong(string name)
@@ -390,7 +493,7 @@ public class AudioManager : MonoBehaviour
         currentSong = s.name;
         s.source.Play();
     }
-    
+
     public void StopSound(string sound)
     {
         Sound s = Array.Find(sounds, item => item.name == sound);
@@ -413,6 +516,4 @@ public class AudioManager : MonoBehaviour
 
         s.source.Stop();
     }
-
-    
 }
