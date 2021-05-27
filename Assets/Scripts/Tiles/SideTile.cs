@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class SideTile : Tile
 {
-    private Renderer _renderer;
+    private Renderer[] _renderers;
     private void Awake()
     {
-        _renderer = GetComponent<Renderer>();
+        _renderers = GetComponentsInChildren<Renderer>();
         
         if(tileSide != ESide.Neutral)
             AssignSide(tileSide);
@@ -73,22 +73,28 @@ public class SideTile : Tile
         switch (side)
         {
             case ESide.Blue:
-                _renderer.material.color = Color.blue;
+                foreach (var renderer in _renderers) 
+                    renderer.material.color = Color.blue;
                 break;
             case ESide.Green:
-                _renderer.material.color = Color.green;
+                foreach (var renderer in _renderers) 
+                    renderer.material.color = Color.green;
                 break;
             case ESide.Orange:
-                _renderer.material.color = new Color(255, 140, 0);
+                foreach (var renderer in _renderers) 
+                    renderer.material.color = new Color(255, 140, 0);
                 break;
             case ESide.Purple:
-                _renderer.material.color = new Color(144, 0, 255);
+                foreach (var renderer in _renderers) 
+                    renderer.material.color = new Color(144, 0, 255);
                 break;
             case ESide.Red:
-                _renderer.material.color = Color.red;
+                foreach (var renderer in _renderers) 
+                    renderer.material.color = Color.red;
                 break;
             case ESide.Yellow:
-                _renderer.material.color = Color.yellow;
+                foreach (var renderer in _renderers) 
+                    renderer.material.color = Color.yellow;
                 break;
         }
     }
