@@ -24,15 +24,13 @@ public class Tile : MonoBehaviour
     protected TransitionControl _animationControl; 
     
     private static readonly int[] _rotationAnglesPool = {60, 120, 180, 240, 300};
-    // private static readonly int[] _rotationAnglesPool = {30, 90, 120, 150, 180, 210, 240, 270, 300, 330};
-    
+
     /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
     /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
     protected virtual void Start()
     {
         //Rotates children from current tile in a random direction
         var randomRotationAngle = _rotationAnglesPool[Random.Range(0, _rotationAnglesPool.Length)];
-        print( GetComponentsInChildren<Transform>().Length);
         foreach (Transform transformInChild in transform)
             transformInChild.Rotate(0, randomRotationAngle, 0, Space.World);
 

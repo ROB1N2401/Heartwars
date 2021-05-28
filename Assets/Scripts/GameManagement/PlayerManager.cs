@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 
 
     //todo implement functionality to account for eliminated players
-    public void StartNewTurn()
+    public void StartNewTurn(float timeoutMillisecond = 0)
     {
         players[_currentIndex].EndTurn();
 
@@ -60,7 +60,7 @@ public class PlayerManager : MonoBehaviour
        
         _currentPlayer = players[_currentIndex];
 
-        _cameraControlRef.FocusCameraAboveObject(_currentPlayer.gameObject, 1500);
+        _cameraControlRef.FocusCameraAboveObject(_currentPlayer.gameObject, timeoutMillisecond);
 
         players[_currentIndex].StartTurn();
     }
