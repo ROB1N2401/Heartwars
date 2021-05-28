@@ -60,7 +60,7 @@ public class PlayerManager : MonoBehaviour
        
         _currentPlayer = players[_currentIndex];
 
-        _cameraControlRef.FocusCameraAboveObject(_currentPlayer.gameObject);
+        _cameraControlRef.FocusCameraAboveObject(_currentPlayer.gameObject, 1500);
 
         players[_currentIndex].StartTurn();
     }
