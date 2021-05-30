@@ -21,24 +21,15 @@ public class Tile : MonoBehaviour
 
     protected Player _attachedPlayer;
     protected internal (Tile aboveTile, Tile underTile) _neighbourTiles;
-    protected TransitionControl _animationControl; 
+    protected PlayerTransition Animation; 
     
     private static readonly int[] _rotationAnglesPool = {60, 120, 180, 240, 300};
-    // private static readonly int[] _rotationAnglesPool = {30, 90, 120, 150, 180, 210, 240, 270, 300, 330};
-    
-    /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
-    /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
-    protected virtual void Start()
+
+    protected virtual void Awake()
     {
-        //Rotates children from current tile in a random direction
-        var randomRotationAngle = _rotationAnglesPool[Random.Range(0, _rotationAnglesPool.Length)];
-        print( GetComponentsInChildren<Transform>().Length);
-        foreach (Transform transformInChild in transform)
-            transformInChild.Rotate(0, randomRotationAngle, 0, Space.World);
-
-
-        _animationControl = GetComponent<TransitionControl>();
-
+        if(!isActiveAndEnabled)
+            return;
+            
         var rayToTheUp = new Ray(transform.position, Vector3.up);
         var rayToTheBottom = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
@@ -55,8 +46,26 @@ public class Tile : MonoBehaviour
             _neighbourTiles.underTile = underTile;
         }
 
+        if (_neighbourTiles.underTile == this)
+            _neighbourTiles.underTile = null;
+        if (_neighbourTiles.aboveTile == this)
+            _neighbourTiles.aboveTile = null;
+        
         if (_neighbourTiles.underTile == this || _neighbourTiles.aboveTile == this)
             throw new ApplicationException($"Reference of a neighbour is set to itself inside {gameObject.name}");
+    }
+
+    /// <summary>Checks if there is any neighbour tiles above and under current tile with raycast</summary>
+    /// <exception cref="ApplicationException">Throws an exception if neighbour tiles referencing current tile</exception>
+    protected virtual void Start()
+    {
+        //Rotates children from current tile in a random direction
+        var randomRotationAngle = _rotationAnglesPool[Random.Range(0, _rotationAnglesPool.Length)];
+        foreach (Transform transformInChild in transform)
+            transformInChild.Rotate(0, randomRotationAngle, 0, Space.World);
+
+
+        Animation = GetComponent<PlayerTransition>();
     }
     
     //todo debug
@@ -169,19 +178,19 @@ public class Tile : MonoBehaviour
         _neighbourTiles.aboveTile = tileToAdd;
         tileToAdd._neighbourTiles.underTile = this;
         
-        //todo add animations
-        // var animator = tileToAdd.GetComponent<TransitionControl>();
-        // if (animator != null)
-        // { 
-        //     tileToAdd.gameObject.SetActive(true);
-        //     animator.Respawn(transform.position + tileAbovePositionOffset, 20f);
-        //     AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
-        //     return;
-        // }
+        var destinationPosition = transform.position + tileAbovePositionOffset;
+        tileToAdd.transform.position = destinationPosition + Vector3.up * 20f;
 
-        tileToAdd.gameObject.SetActive(true);
-        AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
-        tileToAdd.transform.position = transform.position + tileAbovePositionOffset;
+        TileTransition.Instance.Fly(tileToAdd, destinationPosition, .2f,
+            () =>
+            {
+                tileToAdd.gameObject.SetActive(true);
+                AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
+            });
+
+        // tileToAdd.transform.position = destinationPosition;
+        // tileToAdd.gameObject.SetActive(true);
+        // AudioManager.InvokePlacementSound(tileToAdd.TileData.TileType);
     }
 
     /// <summary>Hides tile (if possible)</summary>
@@ -198,17 +207,14 @@ public class Tile : MonoBehaviour
         _neighbourTiles.aboveTile = null;
         _neighbourTiles.underTile = null;
 
-        //todo add animations
-        // if (_animationControl != null)
-        // {
-        //     _animationControl.Fly(20, Vector3.up, 
-        //         () => AudioManager.InvokeDestructionSound(TileData.TileType), 
-        //         () => gameObject.SetActive(false));
-        //     return;
-        // }
+        var destinationPosition = transform.position + Vector3.up * 20f;
 
-        gameObject.SetActive(false);
-        AudioManager.InvokeDestructionSound(TileData.TileType);
+        TileTransition.Instance.Fly(this, destinationPosition, .5f,
+            () => AudioManager.InvokeDestructionSound(TileData.TileType), 
+            () => gameObject.SetActive(false));
+        
+        // gameObject.SetActive(false);
+        // AudioManager.InvokeDestructionSound(TileData.TileType);
     }
 
     /// <summary>Places given player above current tile</summary>
@@ -223,7 +229,7 @@ public class Tile : MonoBehaviour
         
         _attachedPlayer = player;
         player.attachedTile = this;
-        var animator = player.GetComponent<TransitionControl>();
+        var animator = player.GetComponent<PlayerTransition>();
 
         if (animator != null)
         {

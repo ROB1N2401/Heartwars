@@ -5,8 +5,9 @@ using UnityEngine;
 public class SideTile : Tile
 {
     private Renderer[] _renderers;
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         _renderers = GetComponentsInChildren<Renderer>().Where(val => val.tag.Equals("Colorable")).ToArray();
         
         if(tileSide != ESide.Neutral)
@@ -51,7 +52,7 @@ public class SideTile : Tile
         
         gameObject.SetActive(false);
 
-        if (player != null) 
+        if (player != null && tileData.TileType != ETileType.Spawn) 
             AssignSide(player.Side);
 
         AudioManager.InvokeDestructionSound(TileData.TileType);

@@ -1,51 +1,53 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
 public class HueChange : MonoBehaviour
 {
-    public bool randomize = true;
-    public bool invert;
-    public float speed;
-    public float hue;
-    public float sat;
-    public float bri;
-    private Image rend;
+    [SerializeField] private bool randomize;
+    [SerializeField] private float speed;
+    private float hue;
+    private float sat;
+    private float bri;
+    private Image _image;
+    private Renderer _renderer;
 
     void Start()
     {
-        rend = GetComponent<Image>();
+        _image = GetComponent<Image>();
+        _renderer = GetComponent<Renderer>();
+
         if (randomize)
         {
             hue = Random.Range(0f, 1f);
         }
         sat = 1;
         bri = 1;
-        speed = 2;
-        rend.color = Color.HSVToRGB(hue, sat, bri);
+
+        if(_image != null)
+            _image.color = Color.HSVToRGB(hue, sat, bri);
+        if(_renderer != null)
+            _renderer.material.color = Color.HSVToRGB(hue, sat, bri);
     }
 
     void Update()
     {
-        Color.RGBToHSV(rend.color, out hue, out sat, out bri);
-        if (invert)
+        if(_image != null)
+            Color.RGBToHSV(_image.color, out hue, out sat, out bri);
+        
+        if(_renderer != null)
+            Color.RGBToHSV(_renderer.material.color, out hue, out sat, out bri);
+        
+        hue += speed / 10000;
+        if (hue >=1)
         {
-            hue -= speed / 10000;
-            if (hue <=0)
-            {
-                hue = 0.99f;
-            }
+            hue = 0;
         }
-        else
-        {
-            hue += speed / 10000;
-            if (hue >=1)
-            {
-                hue = 0;
-            }
-        }
-        rend.color = Color.HSVToRGB(hue, sat, bri);
+
+        if (_image != null) 
+            _image.color = Color.HSVToRGB(hue, sat, bri);
+
+        if(_renderer != null)
+            _renderer.material.color = Color.HSVToRGB(hue, sat, bri);
     }
 }

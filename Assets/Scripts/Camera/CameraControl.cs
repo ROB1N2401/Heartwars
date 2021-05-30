@@ -37,7 +37,7 @@ public class CameraControl : MonoBehaviour
         RotateCamera();
     }
 
-    public void FocusCameraAboveObject(GameObject focusObject)
+    public void FocusCameraAboveObject(GameObject focusObject, float timeoutMilliseconds = 0)
     {
         if(focusObject == null)
             return;
@@ -46,12 +46,15 @@ public class CameraControl : MonoBehaviour
         var xDistance = Mathf.Tan(transform.eulerAngles.x) * cameraPositionY;
         var endPos = focusObject.transform.position + Vector3.back * xDistance + Vector3.up * cameraPositionY;
 
-        StartCoroutine(SmoothTransition(endPos, 0));
+        StartCoroutine(SmoothTransition(endPos, 0, timeoutMilliseconds));
     }
 
-    private IEnumerator SmoothTransition(Vector3 endPos, float endRotationY)
+    private IEnumerator SmoothTransition(Vector3 endPos, float endRotationY, float timeoutMilliseconds)
     {
         yield return new WaitUntil(() => _isControllable);
+        if(timeoutMilliseconds > 0)
+            yield return new WaitForSeconds(timeoutMilliseconds / 1000);
+        
         _isControllable = false;
         var yRotation = transform.eulerAngles.y;
         const float speed = 8f;

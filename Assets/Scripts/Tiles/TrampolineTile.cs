@@ -7,12 +7,14 @@ public class TrampolineTile : Tile
     {
         if(player == null)
             return;
-        
+
+        var particlesRef = GetComponent<ParticleSystem>();
         var path = GetPathOfTilesToTheOppositeTileWithGap(player.attachedTile, 3);
         Tile destinationTile = this;
 
         if (path.Count < 3)
         {
+            particlesRef.Play();
             player.Die();
             return;
         }
@@ -33,6 +35,7 @@ public class TrampolineTile : Tile
         }
         else
         {
+            particlesRef.Play();
             player.Die();
             return;
         }
@@ -43,10 +46,11 @@ public class TrampolineTile : Tile
             return;
         }
 
-        var animator = player.GetComponent<TransitionControl>();
+        var animator = player.GetComponent<PlayerTransition>();
         if(animator != null)
             animator.DirectTransition(destinationTile.PositionForPlayer);
-        
+
+        particlesRef.Play();
         destinationTile.PlacePlayer(player); 
     }
 

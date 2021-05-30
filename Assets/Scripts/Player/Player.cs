@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInventory))]
-[RequireComponent(typeof(TransitionControl))]
+[RequireComponent(typeof(PlayerTransition))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
@@ -20,11 +20,11 @@ public class Player : MonoBehaviour
     public ESide Side => side;
 
     private PlayerInventory _playerInventory;
-    private TransitionControl _animationControl;
+    private PlayerTransition _animation;
     private void Start()
     {
         _playerInventory = GetComponent<PlayerInventory>();
-        _animationControl = GetComponent<TransitionControl>();
+        _animation = GetComponent<PlayerTransition>();
         if(spawnPoint.TileData.TileType != ETileType.Spawn || spawnPoint == null)
             throw new ArgumentException("SpawnPoint has to be Spawn type, be non null and should have the same side as player");
         spawnPoint.tileSide = side;
@@ -75,6 +75,10 @@ public class Player : MonoBehaviour
 
         _playerInventory.AddTile(topTile);
         topTile.DestroyTile(this);
+
+        //todo: find a way to decouple this method from player's logic
+        if (topTile.TileData.TileType == ETileType.Bonus || topTile.TileData.TileType == ETileType.Spawn)
+            BonusTab.Instance.UpdateBonusTab();
 
         SubtractActivePoints(topTile.TileData.PointsToDestroy);
     }
@@ -149,14 +153,14 @@ public class Player : MonoBehaviour
             
             if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
             {
-                _animationControl
+                _animation
                     .Fly( 100f, Vector3.down, PreAction, AfterAction);
                 attachedTile.RemovePlayer();
             }
             else
             {
                 //todo replace with flying up animation
-                _animationControl
+                _animation
                     .Fly(100f, Vector3.up, PreAction, AfterAction);
                 attachedTile.RemovePlayer();
             }
@@ -168,14 +172,14 @@ public class Player : MonoBehaviour
         
         if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
         {
-            _animationControl
+            _animation
                 .Fly(100f, Vector3.down, preAction: AudioManager.InvokeDeathSound);
             attachedTile.RemovePlayer();
         }
         else
         {
             //todo replace with flying up animation
-            _animationControl
+            _animation
                 .Fly(100f, Vector3.up, preAction: AudioManager.InvokeDeathSound);
             attachedTile.RemovePlayer();
         }
@@ -183,7 +187,7 @@ public class Player : MonoBehaviour
         spawnPoint.PlacePlayer(this, ETransitionType.Spawn);
         EndTurn();
         if (this == PlayerManager.Instance.CurrentPlayer)
-            PlayerManager.Instance.StartNewTurn();
+            PlayerManager.Instance.StartNewTurn(1500);
     }
 
     /// <summary>Subtracts points left for turn for current player</summary>

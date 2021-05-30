@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalkable: 1
   isDestroyable: 1
-  pointsToDestroy: 1
+  pointsToDestroy: 2
   tileType: 3
   isPlaceable: 1
   isAllowedToBuildTilesAbove: 0
-  pointsToPlace: 1
+  pointsToPlace: 2
   bonusPoints: 0
