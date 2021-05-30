@@ -128,14 +128,14 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: DestroyStone1
+  - name: DestroyTempoline1
     clip: {fileID: 8300000, guid: 537f3aa7a9133524891040af684edb64, type: 3}
     mix: {fileID: 0}
     volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: DestroyStone2
+  - name: DestroyTempoline2
     clip: {fileID: 8300000, guid: 1759d9b85a559184e817d09a09e3a012, type: 3}
     mix: {fileID: 0}
     volume: 0.6
@@ -328,6 +328,41 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8415a4479676f784b9f7a1dc364b248f, type: 3}
     mix: {fileID: 0}
     volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceTempoline1
+    clip: {fileID: 8300000, guid: f3fa7ac7d5a290d43a1878d3244a8e2f, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceTempoline2
+    clip: {fileID: 8300000, guid: fc5ca61b4465f54409d15494da74de32, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlaceTempoline3
+    clip: {fileID: 8300000, guid: 3c6b7a99b8281094382a97f31aae3e37, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyStone1
+    clip: {fileID: 8300000, guid: 9e30ade6d8baab14baa6cb194ca3df94, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DestroyStone2
+    clip: {fileID: 8300000, guid: b1f062971e221e3438e50dff4dfb6975, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}

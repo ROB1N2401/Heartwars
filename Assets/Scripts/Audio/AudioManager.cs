@@ -329,7 +329,18 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Wall:
-                AudioManager.instance.PlaySound("PlaceStone1");
+                instance.randomizeSounds = Random.Range(0, 2);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("PlaceStone1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("PlaceStone2");
+                        break;
+                    case 2:
+                        break;
+                }
                 break;
             case ETileType.Ice:
                 instance.randomizeSounds = Random.Range(0, 3);
@@ -349,6 +360,21 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Trampoline:
+                instance.randomizeSounds = Random.Range(0, 3);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("PlaceTempoline1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("PlaceTempoline2");
+                        break;
+                    case 2:
+                        AudioManager.instance.PlaySound("PlaceTempoline3");
+                        break;
+                    case 3:
+                        break;
+                }
                 break;
             case ETileType.SideBlock:
                 instance.randomizeSounds = Random.Range(0, 4);
@@ -434,6 +460,18 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Trampoline:
+                instance.randomizeSounds = Random.Range(0, 2);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyTempoline1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyTempoline2");
+                        break;
+                    case 2:
+                        break;
+                }
                 break;
             case ETileType.SideBlock:
                 instance.randomizeSounds = Random.Range(0, 3);
@@ -453,6 +491,18 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Spawn:
+                instance.randomizeSounds = Random.Range(0, 2);
+                switch (instance.randomizeSounds)
+                {
+                    case 0:
+                        AudioManager.instance.PlaySound("DestroyTempoline1");
+                        break;
+                    case 1:
+                        AudioManager.instance.PlaySound("DestroyTempoline2");
+                        break;
+                    case 2:
+                        break;
+                }
                 break;
             case ETileType.Bonus:
                 break;
