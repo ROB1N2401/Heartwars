@@ -366,5 +366,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: DestroyCastle
+    clip: {fileID: 8300000, guid: 1549d4e9e00255946a566151d552cb6e, type: 3}
+    mix: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   currentScene: 
   shouldRandomizePitch: 0

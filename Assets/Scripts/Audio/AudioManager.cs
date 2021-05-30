@@ -491,18 +491,19 @@ public class AudioManager : MonoBehaviour
                 }
                 break;
             case ETileType.Spawn:
-                instance.randomizeSounds = Random.Range(0, 2);
-                switch (instance.randomizeSounds)
-                {
-                    case 0:
-                        AudioManager.instance.PlaySound("DestroyTempoline1");
-                        break;
-                    case 1:
-                        AudioManager.instance.PlaySound("DestroyTempoline2");
-                        break;
-                    case 2:
-                        break;
-                }
+                //instance.randomizeSounds = Random.Range(0, 2);
+                //switch (instance.randomizeSounds)
+                //{
+                //    case 0:
+                //        AudioManager.instance.PlaySound("DestroyTempoline1");
+                //        break;
+                //    case 1:
+                //        AudioManager.instance.PlaySound("DestroyTempoline2");
+                //        break;
+                //    case 2:
+                //        break;
+                //}
+                AudioManager.instance.PlaySong("DestroyCastle");
                 break;
             case ETileType.Bonus:
                 break;
