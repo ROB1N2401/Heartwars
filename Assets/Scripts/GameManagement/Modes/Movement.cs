@@ -23,7 +23,9 @@ public class Movement : Mode
                 return;
             var outline = tile.GetComponent<Outline>();
 
-            if (_adjacentTiles.Contains(tile) && !PlayerManager.Instance.CurrentPlayer.GetComponent<TransitionControl>().IsTransitionTime)
+            if (_adjacentTiles.Contains(tile) &&
+                !TileTransition.Instance.IsTransitioning && 
+                !PlayerManager.Instance.CurrentPlayer.GetComponent<PlayerTransition>().IsTransitionTime)
             {
                if(outline != null)
                    outline.enabled = true;

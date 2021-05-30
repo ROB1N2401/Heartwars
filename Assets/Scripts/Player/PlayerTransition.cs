@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransitionControl : MonoBehaviour
+public class PlayerTransition : MonoBehaviour
 {
     [Header("Rotation options")]
     [SerializeField] [Min(.0001f)] private float rotationSpeed = 30f;
@@ -78,11 +78,8 @@ public class TransitionControl : MonoBehaviour
         _isTransitionTime = false;
     }
 
-    private IEnumerator FlyCor(float offset, Vector3 direction, Action preAction, Action afterAction)
+    private IEnumerator FlyCor(float offset, Vector3 direction, Action preAction = null, Action afterAction = null)
     {
-        //todo debug
-        print("Fly");
-        
         yield return new WaitUntil(() => !_isTransitionTime);
         _isTransitionTime = true;
 

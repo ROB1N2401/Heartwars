@@ -29,7 +29,7 @@ public class Pushing : Mode
             if(playerToPush == null)
                 return;
 
-            var transitionControl = playerToPush.GetComponent<TransitionControl>();
+            var transitionControl = playerToPush.GetComponent<PlayerTransition>();
             bool isTransitionTimeForOppositePlayer = false;
             if (transitionControl != null)
                 isTransitionTimeForOppositePlayer = transitionControl.IsTransitionTime;

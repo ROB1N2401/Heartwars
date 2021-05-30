@@ -43,7 +43,7 @@ public class TrampolineTile : Tile
             return;
         }
 
-        var animator = player.GetComponent<TransitionControl>();
+        var animator = player.GetComponent<PlayerTransition>();
         if(animator != null)
             animator.DirectTransition(destinationTile.PositionForPlayer);
         
