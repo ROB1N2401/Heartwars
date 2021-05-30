@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: WallTile
   m_EditorClassIdentifier: 
   isWalkable: 0
-  side: 0
   isDestroyable: 1
-  pointsToDestroy: 4
+  pointsToDestroy: 2
   tileType: 2
   isPlaceable: 1
   isAllowedToBuildTilesAbove: 0
-  pointsToPlace: 4
+  pointsToPlace: 2
   bonusPoints: 0
