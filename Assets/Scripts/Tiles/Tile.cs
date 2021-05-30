@@ -221,8 +221,6 @@ public class Tile : MonoBehaviour
     /// <param name="player">Player that will be placed above</param>
     public virtual void PlacePlayer(Player player, ETransitionType transitionType = ETransitionType.Walk)
     {
-        //todo debug
-        print($"under: {_neighbourTiles.underTile} above: {_neighbourTiles.aboveTile} neighbour above: {LowestTileFromUnderneath._neighbourTiles.aboveTile}");
         if(player == null)
             return;
 

@@ -11,10 +11,6 @@
         
         if(animator) 
             animator.DirectTransition(PositionForPlayer);
-
-        //todo debug
-        print($"Ice tile opposite tile {destinationTile}");
-        print($"under: {_neighbourTiles.underTile} above: {_neighbourTiles.aboveTile} neighbour above: {LowestTileFromUnderneath._neighbourTiles.aboveTile}");
         
         if (destinationTile == null)
         {
@@ -23,9 +19,6 @@
         }
 
         destinationTile = destinationTile.HighestTileFromAbove;
-        
-        //todo debug
-        print($"Ice tile opposite tile {destinationTile}");
 
         if ((destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void) && !destinationTile.IsPlayerOnTile)
             destinationTile.PlacePlayer(player);
