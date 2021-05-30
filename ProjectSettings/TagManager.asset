@@ -7,6 +7,7 @@ TagManager:
   - Void
   - Floor
   - Wall
+  - Colorable
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Foundation
   - Built
   - Player
-  - 
+  - PostProcessing
   - 
   - 
   - 
