@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class HueChange : MonoBehaviour
 {
-    public bool randomize = true;
-    public bool invert;
-    public float speed;
-    public float hue;
-    public float sat;
-    public float bri;
+    [SerializeField] private bool randomize;
+    [SerializeField] private bool invert;
+    [SerializeField] private float speed;
+    private float hue;
+    private float sat;
+    private float bri;
     private Image rend;
 
     void Start()
@@ -30,22 +30,13 @@ public class HueChange : MonoBehaviour
     void Update()
     {
         Color.RGBToHSV(rend.color, out hue, out sat, out bri);
-        if (invert)
+
+        hue += speed / 10000;
+        if (hue >=1)
         {
-            hue -= speed / 10000;
-            if (hue <=0)
-            {
-                hue = 0.99f;
-            }
+            hue = 0;
         }
-        else
-        {
-            hue += speed / 10000;
-            if (hue >=1)
-            {
-                hue = 0;
-            }
-        }
+        
         rend.color = Color.HSVToRGB(hue, sat, bri);
     }
 }

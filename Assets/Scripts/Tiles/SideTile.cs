@@ -51,7 +51,7 @@ public class SideTile : Tile
         
         gameObject.SetActive(false);
 
-        if (player != null) 
+        if (player != null && tileData.TileType != ETileType.Spawn) 
             AssignSide(player.Side);
 
         AudioManager.InvokeDestructionSound(TileData.TileType);

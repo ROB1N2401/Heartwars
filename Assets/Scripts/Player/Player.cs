@@ -76,6 +76,10 @@ public class Player : MonoBehaviour
         _playerInventory.AddTile(topTile);
         topTile.DestroyTile(this);
 
+        //todo: find a way to decouple this method from player's logic
+        if (topTile.TileData.TileType == ETileType.Bonus || topTile.TileData.TileType == ETileType.Spawn)
+            BonusTab.Instance.UpdateBonusTab();
+
         SubtractActivePoints(topTile.TileData.PointsToDestroy);
     }
     

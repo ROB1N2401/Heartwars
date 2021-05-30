@@ -60,6 +60,8 @@ public class PlayerManager : MonoBehaviour
        
         _currentPlayer = players[_currentIndex];
 
+        BonusTab.Instance.UpdateBonusTab();
+
         _cameraControlRef.FocusCameraAboveObject(_currentPlayer.gameObject, timeoutMillisecond);
 
         players[_currentIndex].StartTurn();

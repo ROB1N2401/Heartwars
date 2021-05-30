@@ -77,4 +77,12 @@ public class PlayerInventory : MonoBehaviour
         
         return _items[itemType].Pop();
     }
+
+    public List<Tile> GetAllTilesOfAGivenType(ETileType type)
+    {
+        if (!_items.ContainsKey(type))
+            return null;
+
+        return _items[type].ToList();
+    }
 }
