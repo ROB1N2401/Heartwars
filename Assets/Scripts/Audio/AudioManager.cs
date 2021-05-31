@@ -303,7 +303,6 @@ public class AudioManager : MonoBehaviour
     public static void InvokePlacementSound(ETileType type)
     {
         AudioManager.instance.shouldRandomizePitch = true;
-        Debug.Log("Played sound " + type);
         switch (type)
         {
             case ETileType.Void:
@@ -406,7 +405,6 @@ public class AudioManager : MonoBehaviour
     public static void InvokeDestructionSound(ETileType type)
     {
         AudioManager.instance.shouldRandomizePitch = true;
-        Debug.Log("Played sound " + type);
         switch (type)
         {
             case ETileType.Void:

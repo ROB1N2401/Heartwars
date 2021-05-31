@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,11 +68,8 @@ public class BonusTab : MonoBehaviour
         {
             var playerInventoryRef = PlayerManager.Instance.CurrentPlayer.GetComponent<PlayerInventory>();
             List<Tile> spawnTiles = playerInventoryRef.GetAllTilesOfAGivenType(ETileType.Spawn);
-            foreach(Tile tile in spawnTiles)
-            {
-                Debug.Log(tile.tileSide);
+            foreach(Tile tile in spawnTiles) 
                 InstantiateSpawnBonus(tile.tileSide);
-            }
         }
 
         if (PlayerManager.Instance.CurrentPlayer.HasSuchItemInInventory(ETileType.Bonus))

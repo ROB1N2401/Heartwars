@@ -1,10 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkyboxControl : MonoBehaviour
 {
-    public float RotateSpeed = 1.2f;
+    [SerializeField] private float RotateSpeed = 1.2f;
 
-    void Update() => RenderSettings.skybox.SetFloat("_Rotation", Time.time * RotateSpeed);
+    private Material _skyboxCopy;
+    
+    private void Start() => _skyboxCopy = Instantiate(RenderSettings.skybox);
+
+    private void Update()
+    {
+        _skyboxCopy.SetFloat("_Rotation", Time.time * RotateSpeed);
+        RenderSettings.skybox = _skyboxCopy;
+    }
 }
