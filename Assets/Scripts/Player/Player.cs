@@ -103,14 +103,13 @@ public class Player : MonoBehaviour
     {
         if(playerToPush == null || PointsLeftForTheTurn < playerData.PointsForPushTaken)
             return;
-        
-        SubtractActivePoints(playerData.PointsForPushTaken);
 
         var destinationTile = playerToPush.attachedTile.LowestTileFromUnderneath
             .GetTileFromOppositeDirection(attachedTile.LowestTileFromUnderneath);
 
         if (destinationTile == null)
         {
+            SubtractActivePoints(playerData.PointsForPushTaken);
             playerToPush.Die();
             return;
         }
@@ -119,6 +118,7 @@ public class Player : MonoBehaviour
 
         if (destinationTile.TileData.IsWalkable || destinationTile.TileData.TileType == ETileType.Void)
         {
+            SubtractActivePoints(playerData.PointsForPushTaken);
             destinationTile.PlacePlayer(playerToPush);
         }
     }
