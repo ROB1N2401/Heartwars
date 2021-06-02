@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerTransition : MonoBehaviour
 {
+    [Header("Unexpected behaviour preventions")]
+    [SerializeField] [Min(0)] private float additionalTimeAfterWhichAnimationStopsInSeconds = 3;
+    
     [Header("Rotation options")]
     [SerializeField] [Min(.0001f)] private float rotationSpeed = 30f;
     
@@ -63,6 +66,7 @@ public class PlayerTransition : MonoBehaviour
         yield return new WaitUntil(() => !_isTransitionTime);
         _isTransitionTime = true;
 
+        var endTimeForAnimation = Time.time + respawnSpeed + additionalTimeAfterWhichAnimationStopsInSeconds;
         var velocity = Vector3.zero;
         transform.position = targetPosition + Vector3.up * startHeight;
         
@@ -70,6 +74,8 @@ public class PlayerTransition : MonoBehaviour
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, respawnSpeed);
             
+            if(Time.time > endTimeForAnimation)
+                break;
             yield return null;
         }
         
@@ -78,6 +84,8 @@ public class PlayerTransition : MonoBehaviour
         _isTransitionTime = false;
     }
 
+    
+    //todo added cooldown
     private IEnumerator FlyCor(float offset, Vector3 direction, Action preAction = null, Action afterAction = null)
     {
         yield return new WaitUntil(() => !_isTransitionTime);
@@ -86,12 +94,18 @@ public class PlayerTransition : MonoBehaviour
         offset = Mathf.Abs(offset);
         var speed = initialSpeed;
         var finalPos = transform.position + direction.normalized * offset;
+        var distance = (finalPos - transform.position).magnitude;
+        var endTimeForAnimation = Time.time + distance / (initialSpeed <= 0 ? 1 : initialSpeed) + additionalTimeAfterWhichAnimationStopsInSeconds;
         
         preAction?.Invoke();
         while ((finalPos - transform.position).magnitude > 1f)
         {
             transform.position += direction.normalized * (Time.deltaTime * speed);
             speed += acceleration;
+            
+            if(Time.time > endTimeForAnimation)
+                break;
+            
             yield return null;
         }
         afterAction?.Invoke();
@@ -106,11 +120,14 @@ public class PlayerTransition : MonoBehaviour
 
         _isTransitionTime = true;
 
+        var endTimeForAnimation = Time.time + directTransitionTime + additionalTimeAfterWhichAnimationStopsInSeconds;
         var velocity = Vector3.zero;
         while ((transform.position - targetPosition).magnitude > .01f)
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, directTransitionTime);
 
+            if(Time.time > endTimeForAnimation)
+                break;
             yield return null;
         }
 
@@ -142,6 +159,7 @@ public class PlayerTransition : MonoBehaviour
         // _isTransitionTime = false;
     }
 
+    //todo add timeout
     private IEnumerator LookAtGivenObjectCor(Vector3 target)
     {
         yield return new WaitUntil(() => !_isTransitionTime);
@@ -149,12 +167,16 @@ public class PlayerTransition : MonoBehaviour
         
         var rotationY = transform.localEulerAngles.y;
         var endRotationY = Quaternion.LookRotation(target - transform.position).eulerAngles.y;
-
+        var endTimeForAnimation = Time.time + (endRotationY - transform.position.y) / respawnSpeed + additionalTimeAfterWhichAnimationStopsInSeconds;
+        
         while (Mathf.Abs(rotationY - endRotationY) > .01f)
         {
             rotationY = Mathf.Lerp(rotationY, endRotationY, Time.deltaTime * rotationSpeed);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotationY, transform.eulerAngles.z);
 
+            if(Time.time > endTimeForAnimation)
+                break;
+            
             yield return null;
         }
         
