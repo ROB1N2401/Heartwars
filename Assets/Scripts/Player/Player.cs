@@ -154,14 +154,14 @@ public class Player : MonoBehaviour
             if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
             {
                 _animation
-                    .Fly( 100f, Vector3.down, PreAction, AfterAction);
+                    .Fly(25f, Vector3.down, PreAction, AfterAction);
                 attachedTile.RemovePlayer();
             }
             else
             {
                 //todo replace with flying up animation
                 _animation
-                    .Fly(100f, Vector3.up, PreAction, AfterAction);
+                    .Fly(25f, Vector3.up, PreAction, AfterAction);
                 attachedTile.RemovePlayer();
             }
 
@@ -173,14 +173,14 @@ public class Player : MonoBehaviour
         if (attachedTile != null && attachedTile.TileData.TileType == ETileType.Void)
         {
             _animation
-                .Fly(100f, Vector3.down, preAction: AudioManager.InvokeDeathSound);
+                .Fly(25f, Vector3.down, preAction: AudioManager.InvokeDeathSound);
             attachedTile.RemovePlayer();
         }
         else
         {
             //todo replace with flying up animation
             _animation
-                .Fly(100f, Vector3.up, preAction: AudioManager.InvokeDeathSound);
+                .Fly(25f, Vector3.up, preAction: AudioManager.InvokeDeathSound);
             attachedTile.RemovePlayer();
         }
 
